@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'simple_votings.urls'
+ROOT_URLCONF = 'GCW.urls'
 
 TEMPLATES = [
     {
@@ -62,7 +62,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'simple_votings.wsgi.application'
+WSGI_APPLICATION = 'GCW.wsgi.application'
 
 
 # Database
