@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from django.core.validators import RegexValidator
 
 import PIL
@@ -33,13 +36,14 @@ class Profile(models.Model):
 
     telegram = models.CharField(null=True, 
                                 blank=True, 
-                                unique=True
+                                #unique=True,
+                                max_length=64
                                )
     
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
     phone = models.CharField(validators=[phoneNumberRegex], 
                              max_length=16, 
-                             unique=True, 
+                             #unique=True, 
                              null=True, 
                              blank=True, 
                             )
