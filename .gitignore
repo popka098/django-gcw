@@ -3,6 +3,8 @@
 
 main/migrations
 
+.vscode/
+
 ### Django ###
 *.log
 *.pot
