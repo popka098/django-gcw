@@ -27,23 +27,32 @@ class Profile(models.Model):
         return os.path.join("avatars/", new_filename)
 
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, 
+        on_delete=models.CASCADE,
+        default="",
+    )
     
-    icon = models.ImageField(null=True,
-                             blank=True, 
-                             upload_to=path_file
-                            )
+    icon = models.ImageField(
+        null=True,
+        blank=True, 
+        upload_to=path_file,
+    )
 
-    telegram = models.CharField(null=True, 
-                                blank=True, 
-                                #unique=True,
-                                max_length=64
-                               )
+    telegram = models.CharField(
+        null=True, 
+        blank=True,
+        default="", 
+        #unique=True,
+        max_length=64
+    )
     
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
-    phone = models.CharField(validators=[phoneNumberRegex], 
-                             max_length=16, 
-                             #unique=True, 
-                             null=True, 
-                             blank=True, 
-                            )
+    phone = models.CharField(
+        validators=[phoneNumberRegex], 
+        max_length=16, 
+        #unique=True, 
+        null=True, 
+        blank=True, 
+        default="",
+    )

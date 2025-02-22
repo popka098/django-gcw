@@ -116,6 +116,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = f"{BASE_DIR}/static"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -128,3 +129,6 @@ LOGOUT_REDIRECT_URL = '/'
 # Проверка тех, кто ленится указать корректный SECRET_KEY
 if SECRET_KEY == 'Insert secret key here and uncomment this variable':
     raise RuntimeError('Сначала укажите SECRET_KEY. Подробности - в settings.py')
+
+
+#DEFAULT_AUTO_FIELD='django.db.models.AutoField'
