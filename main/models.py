@@ -13,6 +13,10 @@ import uuid
 class Profile(models.Model):
     """
     Доп. таблица к пользователю
+    :param user: Пользователь 
+    :param icon: Аватрка
+    :param telegram: Телеграм (без @)
+    :param phone: Номер телефона
     """
     def path_file(instance, filename):
         """

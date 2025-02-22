@@ -3,6 +3,13 @@ from django.db import models
 # Create your models here.
 
 class Task(models.Model):
+    """
+    Абстрактная модель для задания
+    :param Word: Слово
+    :param Context_Before: Контекст перед словом
+    :param Pass: Слово с пропуском
+    :param Context_After: Контекст после слова
+    """
     Word = models.CharField(
         max_length=256, 
         blank=False,
