@@ -16,11 +16,11 @@ urlpatterns = [
     path('login/', main_views.login_page, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
-    path('training/task9/', training_views, {"task": 9}, name="task9"),
-    path('training/task10/', training_views, {"task": 10}, name="task10"),
-    path('training/task11/', training_views, {"task": 11}, name="task11"),
-    path('training/task12/', training_views, {"task": 12}, name="task12"),
-    path('training/task15/', training_views, {"task": 15}, name="task15"),
+    path('training/task9/', training_views.training, {"task": 9}, name="task9"),
+    path('training/task10/', training_views.training, {"task": 10}, name="task10"),
+    path('training/task11/', training_views.training, {"task": 11}, name="task11"),
+    path('training/task12/', training_views.training, {"task": 12}, name="task12"),
+    path('training/task15/', training_views.training, {"task": 15}, name="task15"),
 ]
 urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
