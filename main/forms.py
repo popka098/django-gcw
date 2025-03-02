@@ -6,24 +6,21 @@ from django.contrib.auth.forms import UserCreationForm
 from PIL import Image
 
 class LoginForm(forms.Form):
-    """
-    Форма для аунтентификации и логина пользователя
-    :param username: имя пользователя
-    :param password: пароль
-    """
-    username = forms.CharField(label="Имя пользователя", required=True)
-    password = forms.CharField(label="Пароль", required=True, widget=forms.PasswordInput)
+    username = forms.CharField(label='Логин')
+    password = forms.CharField(widget=forms.PasswordInput,label='Пароль')
 
-    def __init__(self, *args, **kwargs):
-        super(LoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'sign-in2-textinput1 thq-input thq-body-large'})
-        self.fields['password'].widget.attrs.update({'class': 'sign-in2-textinput2 thq-input thq-body-large'})
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput)
 
-class RegForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'sign-in2-textinput1 thq-input thq-body-large'})
-        self.fields['password1'].widget.attrs.update({'class': 'sign-in2-textinput2 thq-input thq-body-large'})
-        self.fields['password2'].widget.attrs.update({'class': 'sign-in2-textinput2 thq-input thq-body-large'})
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Пароли не совпадают')
+        return cd['password2']
 
 

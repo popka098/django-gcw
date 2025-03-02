@@ -1,24 +1,11 @@
-{% extends 'base/base.html' %}
-
+{% extends "base/base.html" %}
 
 {% block content %}
-    <h1>Rgistration</h1>
-    <hr>
-
-    <form method="POST">
+    <h1>Создание аккаунта</h1>
+    <p>Пожалуйста, создайте акканут:</p>
+    <form action="." method="post">
+        {{ user_form.as_p }}
         {% csrf_token %}
-
-        {% for item in form %}
-            <label>{{ item.label }}:</label><br>
-            {{ item }}
-        {% endfor %}
-
-        <input type="submit" value="Зарегестрироваться">
-
+        <p><input type="submit" value="Создать"></p>
     </form>
-
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
-
 {% endblock %}

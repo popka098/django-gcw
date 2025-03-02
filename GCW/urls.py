@@ -16,9 +16,10 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
 ]
-urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
 
 handler404 = "main.views.not_found"
 handler500 = "main.views.not_found_500"
+
+urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 

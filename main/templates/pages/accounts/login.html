@@ -1,26 +1,11 @@
-{% extends 'base/base.html' %}
-
-
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
 {% block content %}
-    <h1>Авторизация</h1>
-    <hr>
-
-    <form method="POST">
-       {% csrf_token %}
-       {{ form.as_p }}
-       <button type="submit">Войти</button>
-   </form>
-
-   {% if messages %}
-       {% for message in messages %}
-           <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-       {% endfor %}
-   {% endif %}
-
-   <h1>
-        {% if form.errors %}
-            {{ form.errors }} <br>
-        {% endif %}
-    </h1>
+    <h1>Вход</h1>
+    <p>Пожалуйста, используйте следующую форму для входа:</p>
+    <form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Войти"></p>
+    </form>
 {% endblock %}
-
