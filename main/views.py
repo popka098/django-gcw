@@ -15,3 +15,5 @@ def login_page(request: WSGIRequest):
 
 def registration_page(request: WSGIRequest):
     raise NotImplementedError
+def theory_page(request: WSGIRequest):
+    return render(request, 'pages/theory.html')
