@@ -36,7 +36,15 @@ const words = [
 var rand_item = words[Math.floor(Math.random()*words.length)]; // рандом
 console.log(rand_item);
 
+
+var next_words = [];
+for (var i = 0; i < 10; i++)
+{
+    next_words.push(words[Math.floor(Math.random()*words.length)]);
+}
+
 window.addEventListener("keydown", run);
+var compl = "";
 function run(e)
 {
     const key = e.key;
@@ -45,5 +53,7 @@ function run(e)
         return;
     }
     
-
+    compl += key;
+    console.log(compl);
+    el_compl.innerHTML = compl;
 }
