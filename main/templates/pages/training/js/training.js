@@ -1,6 +1,8 @@
-function isLetter(str) {
-    return str.length === 1 && str.match(/[а-я]/i);
-}
+
+
+
+
+import { Run } from "./run_class";
 
 var el_compl = document.getElementById("compl"); // элемент с пройденными словами
 var el_next = document.getElementById("next"); // элемент с предстоящими словами
@@ -25,46 +27,8 @@ const words = [
         Context_After: "мельница",
     },
 ]; // тестовые слова
-const char_amount = 50;
 
-var next_words = [];
-for (var i = 0; i < 10; i++) {
-    next_words.push(words[Math.floor(Math.random() * words.length)]);
-}
+var runner = new Run(words, el_compl, el_next);
 
-window.addEventListener("keydown", run);
-var compl = ""; // все напечатанное
-var cur_compl = ""; // текущее напечатанное слово
-function run(e) {
-    const key = e.key;
-    if (!(isLetter(key) || key == " " || e.code == "Backspace")) {
-        // проверка на необходимый символ
-        return;
-    }
+window.addEventListener("keydown", runner.run);
 
-    if (key == " ") {
-        // проверка введенного слова cur_compl на правильность
-        if (cur_compl == next_words) {
-            next_words = next_words.slice(1);
-            next_words.push(words[Math.floor(Math.random() * words.length)]);
-            cur_compl = "";
-        }
-
-        el_compl.innerHTML = compl;
-        compl += key;
-        return;
-    }
-
-    if (e.code == "Backspace") {
-        // удаление символов
-        compl = compl.slice(0, -1);
-        cur_compl = cur_compl.slice(0, -1);
-        el_compl.innerHTML = compl;
-        return;
-    }
-
-    // ограничение возможного ввода при предопределенных символах (символы кроме .)
-    compl += key;
-    cur_compl += key;
-    el_compl.innerHTML = compl;
-}
