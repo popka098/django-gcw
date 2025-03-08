@@ -44,6 +44,14 @@ function run(e) {
 
     if (key == " ") {
         // проверка введенного слова cur_compl на правильность
+        if (cur_compl == next_words) {
+            next_words = next_words.slice(1);
+            next_words.push(words[Math.floor(Math.random() * words.length)]);
+            cur_compl = "";
+        }
+
+        el_compl.innerHTML = compl;
+        compl += key;
         return;
     }
 
