@@ -33,8 +33,8 @@ for (var i = 0; i < 10; i++) {
 }
 
 window.addEventListener("keydown", run);
-var compl = "";
-var cur_compl = "";
+var compl = ""; // все напечатанное
+var cur_compl = ""; // текущее напечатанное слово
 function run(e) {
     const key = e.key;
     if (!(isLetter(key) || key == " " || e.code == "Backspace")) {
@@ -49,12 +49,14 @@ function run(e) {
 
     if (e.code == "Backspace") {
         // удаление символов
+        compl = compl.slice(0, -1);
+        cur_compl = cur_compl.slice(0, -1);
+        el_compl.innerHTML = compl;
         return;
     }
 
-    // сделать ограничение возможного ввода при предопределенных символах (символы кроме .)
+    // ограничение возможного ввода при предопределенных символах (символы кроме .)
     compl += key;
     cur_compl += key;
-    console.log(compl);
     el_compl.innerHTML = compl;
 }
