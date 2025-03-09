@@ -2,16 +2,12 @@
 
 класс основного поведения при вводе и выводе
 */
-function isLetter(str) {
-    return str.length === 1 && str.match(/[а-я]/i);
-}
-
 const char_amount = 50;
+let el_compl = document.getElementById("compl"); // элемент с пройденными словами
+let el_next = document.getElementById("next"); // элемент с предстоящими словами
+
 export class Run {
     constructor(words, el_compl, el_next) {
-        this.el_compl = el_compl;
-        this.el_next = el_next;
-
         this.words = words; // все слова
         this.next_words = []; // очаредь слов
         for (var i = 0; i < 10; i++) {
@@ -25,6 +21,7 @@ export class Run {
     }
 
     run(e) {
+        console.log("RUN");
         const key = e.key;
         if (!(isLetter(key) || key == " " || e.code == "Backspace")) {
             // проверка на необходимый символ
@@ -46,25 +43,27 @@ export class Run {
         // ограничение возможного ввода при предопределенных символах (символы кроме .)
         this.compl += key;
         this.cur_compl += key;
-        this.el_compl.innerHTML = compl;
+        el_compl.innerHTML = this.compl;
     }
 
     key_backspace() {
-        this.compl = compl.slice(0, -1);
-        this.cur_compl = cur_compl.slice(0, -1);
-        this.el_compl.innerHTML = compl;
+        this.compl = this.compl.slice(0, -1);
+        this.cur_compl = this.cur_compl.slice(0, -1);
+        el_compl.innerHTML = this.compl;
         return;
     }
 
     key_space() {
         if (cur_compl == next_words) {
-            this.next_words = next_words.slice(1);
-            this.next_words.push(words[Math.floor(Math.random() * words.length)]);
+            this.next_words = this.next_words.slice(1);
+            this.next_words.push(
+                this.words[Math.floor(Math.random() * this.words.length)]
+            );
             this.cur_compl = "";
         }
 
-        this.el_compl.innerHTML = compl;
+        el_compl.innerHTML = this.compl;
         this.compl += key;
         return;
     }
-};
+}

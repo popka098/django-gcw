@@ -1,11 +1,11 @@
-
-
-
+function isLetter(str) {
+    return str.length === 1 && str.match(/[а-я]/i);
+}
 
 import { Run } from "./run_class";
 
-var el_compl = document.getElementById("compl"); // элемент с пройденными словами
-var el_next = document.getElementById("next"); // элемент с предстоящими словами
+let el_compl = document.getElementById("compl"); // элемент с пройденными словами
+let el_next = document.getElementById("next"); // элемент с предстоящими словами
 
 const words = [
     {
@@ -31,4 +31,5 @@ const words = [
 var runner = new Run(words, el_compl, el_next);
 
 window.addEventListener("keydown", runner.run);
+
 
