@@ -8,4 +8,7 @@
         {% csrf_token %}
         <p><input type="submit" value="Войти"></p>
     </form>
+    <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">
+        Войти с Google
+      </a>
 {% endblock %}

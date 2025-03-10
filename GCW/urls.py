@@ -1,10 +1,9 @@
 from django.contrib import admin
-from django.urls import path
-
-from main import views as main_views
-from django.contrib.auth import views as auth_views
-
+from django.urls import path, include
 from django.conf import settings
+from main import views as main_views
+from django.contrib.auth import views as auth_views, logout
+
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -14,6 +13,9 @@ urlpatterns = [
     path('registration/', main_views.registration_page, name='registration'),
     path('login/', main_views.login_page, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('', include('social_django.urls', namespace='social')),
+    path('logout/', logout, {'next_page': settings.LOGOUT_REDIRECT_URL},
+    name='logout'),
 
 ]
 
