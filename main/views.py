@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
+
 def gen_base_context(request: WSGIRequest, pagename: str):
     """
     генерирует базовый контекст из названия страницы, пользователя и его аватарки
@@ -52,6 +53,7 @@ def login_page(request):
         form = LoginForm()
     return render(request, 'pages/accounts/login.html', {'form': form})
 
+
 def registration_page(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -64,10 +66,16 @@ def registration_page(request):
         user_form = UserRegistrationForm()
     return render(request, 'pages/accounts/registration.html', {'user_form': user_form})
 
+
+@login_required
+def profile_page(request):
+    context = gen_base_context(request, 'profile')
+    return render(request, 'pages/accounts/profile.html', context)
+
+
 def logout_view(request):
     logout(request)
     return redirect('pages/index.html')
-
 
 
 def not_found(request: WSGIRequest, exception):
@@ -77,6 +85,7 @@ def not_found(request: WSGIRequest, exception):
     :type request: WSGIRequest
     """
     return render(request, "pages/ErrorsAndExceptions/404_page.html", status=404)
+
 
 def not_found_500(request: WSGIRequest):
     """
