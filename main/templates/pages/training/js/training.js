@@ -1,7 +1,3 @@
-
-
-
-
 // инициализация констант и переменных
 const char_amount = 50;
 let el_compl = document.getElementById("compl"); // элемент с пройденными словами
@@ -62,6 +58,9 @@ function key_space(key) {
     cur_compl = "";
 
     compl += key;
+    if (compl.length > char_amount) {
+        compl = compl.slice(-char_amount);
+    }
     el_compl.innerHTML = compl;
     return;
 }
@@ -69,6 +68,10 @@ function key_space(key) {
 function input(key) {
     compl += key;
     cur_compl += key;
+
+    if (compl.length > char_amount) {
+        compl = compl.slice(-char_amount);
+    }
     el_compl.innerHTML = compl;
     return;
 }
