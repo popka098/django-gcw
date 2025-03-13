@@ -27,6 +27,7 @@ let next_words = []; // очаредь слов
 for (var i = 0; i < 10; i++) {
     next_words.push(words[Math.floor(Math.random() * words.length)]);
 }
+console.log(next_words);
 
 let compl = ""; // все напечатанное
 let cur_compl = ""; // текущее напечатанное слово
@@ -56,16 +57,21 @@ function key_space(key) {
     next_words = next_words.slice(1);
     next_words.push(words[Math.floor(Math.random() * words.length)]);
     cur_compl = "";
+    console.log(next_words);
 
     compl += key;
     if (compl.length > char_amount) {
         compl = compl.slice(-char_amount);
     }
     el_compl.innerHTML = compl;
+    cur_compl = "";
     return;
 }
 
 function input(key) {
+    if (key != next_words[0]["Pass"][cur_compl.length] && next_words[0]["Pass"][cur_compl.length] != ".") {
+        return;
+    }
     compl += key;
     cur_compl += key;
 
@@ -76,6 +82,7 @@ function input(key) {
     return;
 }
 
+window.addEventListener("keydown", run);
 function run(e) {
     const key = e.key;
     if (!isLetter(key) && key != " " && e.code != "Backspace") {
@@ -100,4 +107,3 @@ function run(e) {
     return;
 }
 
-window.addEventListener("keydown", run);
