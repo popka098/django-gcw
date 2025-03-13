@@ -41,12 +41,13 @@ function isLetter(str) {
     return str.length === 1 && str.match(/[а-я]/i);
 }
 
-function key_backspace(key) {
-    console.log("B");
+function key_backspace() {
+    if (cur_compl.length < 1) {
+        console.log("BF");
+        return;
+    }
+
     compl = compl.slice(0, -1);
-
-    console.log(compl);
-
     cur_compl = cur_compl.slice(0, -1);
     el_compl.innerHTML = compl;
     return;
@@ -54,15 +55,14 @@ function key_backspace(key) {
 
 function key_space(key) {
     if (cur_compl == next_words) {
-        next_words = next_words.slice(1);
-        next_words.push(
-            words[Math.floor(Math.random() * words.length)]
-        );
-        cur_compl = "";
+    } else {
     }
+    next_words = next_words.slice(1);
+    next_words.push(words[Math.floor(Math.random() * words.length)]);
+    cur_compl = "";
 
-    el_compl.innerHTML = compl;
     compl += key;
+    el_compl.innerHTML = compl;
     return;
 }
 
@@ -77,7 +77,7 @@ function run(e) {
     const key = e.key;
     if (!isLetter(key) && key != " " && e.code != "Backspace") {
         // проверка на необходимый символ
-        console.log("F")
+        console.log("F");
         return;
     }
 
@@ -89,7 +89,7 @@ function run(e) {
 
     if (e.code == "Backspace") {
         // удаление символов
-        key_backspace(key);
+        key_backspace();
         return;
     }
 
@@ -98,5 +98,3 @@ function run(e) {
 }
 
 window.addEventListener("keydown", run);
-
-
