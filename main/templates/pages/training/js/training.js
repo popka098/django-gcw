@@ -38,7 +38,7 @@ for (let i = 0; i < next_words.length; i++) {
 	next_inp += " "
 }
 next_inp = next_inp.slice(0, char_amount);
-console.log(next_inp)
+el_next.innerHTML = next_inp;
 
 function update_next_inp_front() {}
 function update_next_inp_back() {}
@@ -56,6 +56,8 @@ function key_backspace() {
     compl = compl.slice(0, -1);
     cur_compl = cur_compl.slice(0, -1);
     el_compl.innerHTML = compl;
+	update_next_inp_back();
+	el_next.innerHTML = next_inp;
     return;
 }
 
@@ -74,6 +76,9 @@ function key_space(key) {
     }
     el_compl.innerHTML = compl;
     cur_compl = "";
+
+	update_next_inp_front();
+	el_next.innerHTML = next_inp;
     return;
 }
 
@@ -91,6 +96,8 @@ function input(key) {
         compl = compl.slice(-char_amount);
     }
     el_compl.innerHTML = compl;
+	update_next_inp_front();
+	el_next.innerHTML = next_inp;
     return;
 }
 
