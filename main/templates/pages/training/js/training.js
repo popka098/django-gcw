@@ -33,6 +33,15 @@ let compl = ""; // все напечатанное
 let cur_compl = ""; // текущее напечатанное слово
 
 let next_inp = ""; // отображение следующих слов
+for (let i = 0; i < next_words.length; i++) {
+    next_inp += next_words[i]["Pass"];
+	next_inp += " "
+}
+next_inp = next_inp.slice(0, char_amount);
+console.log(next_inp)
+
+function update_next_inp_front() {}
+function update_next_inp_back() {}
 
 function isLetter(str) {
     return str.length === 1 && str.match(/[а-я]/i);
@@ -69,7 +78,10 @@ function key_space(key) {
 }
 
 function input(key) {
-    if (key != next_words[0]["Pass"][cur_compl.length] && next_words[0]["Pass"][cur_compl.length] != ".") {
+    if (
+        key != next_words[0]["Pass"][cur_compl.length] &&
+        next_words[0]["Pass"][cur_compl.length] != "."
+    ) {
         return;
     }
     compl += key;
@@ -82,8 +94,8 @@ function input(key) {
     return;
 }
 
-window.addEventListener("keydown", run);
-function run(e) {
+window.addEventListener("keydown", controller);
+function controller(e) {
     const key = e.key;
     if (!isLetter(key) && key != " " && e.code != "Backspace") {
         // проверка на необходимый символ
@@ -106,4 +118,3 @@ function run(e) {
     input(key);
     return;
 }
-
