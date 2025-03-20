@@ -34,8 +34,20 @@ let cur_compl = ""; // текущее напечатанное слово
 
 let next_inp = ""; // отображение следующих слов
 for (let i = 0; i < next_words.length; i++) {
+    if (next_words[i]["Context_Before"] != "") {
+        next_inp += "(";
+        next_inp += next_words[i]["Context_Before"];
+        next_inp += ")";
+        next_inp += " ";
+    }
     next_inp += next_words[i]["Pass"];
 	next_inp += " "
+    if (next_words[i]["Context_After"] != "") {
+        next_inp += "(";
+        next_inp += next_words[i]["Context_After"];
+        next_inp += ")";
+        next_inp += " ";
+    }
 }
 next_inp = next_inp.slice(0, char_amount);
 el_next.innerHTML = next_inp;
