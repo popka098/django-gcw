@@ -33,6 +33,7 @@ let compl = ""; // все напечатанное
 let cur_compl = ""; // текущее напечатанное слово
 
 let next_inp = ""; // отображение следующих слов
+let last_inp = "";
 for (let i = 0; i < next_words.length; i++) {
     if (next_words[i]["Context_Before"] != "") {
         next_inp += "(";
@@ -52,7 +53,9 @@ for (let i = 0; i < next_words.length; i++) {
 next_inp = next_inp.slice(0, char_amount);
 el_next.innerHTML = next_inp;
 
-function update_next_inp_front() {}
+function update_next_inp_front() {
+    next_inp = next_inp.slice(1);
+}
 function update_next_inp_back() {}
 
 function isLetter(str) {
