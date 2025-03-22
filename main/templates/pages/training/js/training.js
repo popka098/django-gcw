@@ -34,21 +34,26 @@ let cur_compl = ""; // текущее напечатанное слово
 
 let next_inp = ""; // отображение следующих слов
 let last_inp = "";
+
+function plus_next_words(w) {
+    if (w["Context_Before"] != "") {
+        next_inp += "(";
+        next_inp += w["Context_Before"];
+        next_inp += ")";
+        next_inp += " ";
+    }
+    next_inp += w["Pass"];
+    next_inp += " "
+    if (w["Context_After"] != "") {
+        next_inp += "(";
+        next_inp += w["Context_After"];
+        next_inp += ")";
+        next_inp += " ";
+    }
+}
+
 for (let i = 0; i < next_words.length; i++) {
-    if (next_words[i]["Context_Before"] != "") {
-        next_inp += "(";
-        next_inp += next_words[i]["Context_Before"];
-        next_inp += ")";
-        next_inp += " ";
-    }
-    next_inp += next_words[i]["Pass"];
-	next_inp += " "
-    if (next_words[i]["Context_After"] != "") {
-        next_inp += "(";
-        next_inp += next_words[i]["Context_After"];
-        next_inp += ")";
-        next_inp += " ";
-    }
+    plus_next_words(next_words[i]);
 }
 el_next.innerHTML = next_inp.slice(0, char_amount);
 
@@ -83,8 +88,10 @@ function key_space(key) {
     }
     next_words = next_words.slice(1);
     next_words.push(words[Math.floor(Math.random() * words.length)]);
+    plus_next_words(next_words[next_words.length - 1]);
     cur_compl = "";
     console.log(next_words);
+    console.log(next_inp);
 
     compl += key;
     if (compl.length > char_amount) {
