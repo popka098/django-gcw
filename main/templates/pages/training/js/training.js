@@ -50,13 +50,14 @@ for (let i = 0; i < next_words.length; i++) {
         next_inp += " ";
     }
 }
-next_inp = next_inp.slice(0, char_amount);
-el_next.innerHTML = next_inp;
+el_next.innerHTML = next_inp.slice(0, char_amount);
 
 function update_next_inp_front() {
     next_inp = next_inp.slice(1);
 }
-function update_next_inp_back() {}
+function update_next_inp_back() {
+    next_inp = next_words[0]["Pass"][cur_compl.length - 1] + next_inp;
+}
 
 function isLetter(str) {
     return str.length === 1 && str.match(/[а-я]/i);
@@ -68,11 +69,11 @@ function key_backspace() {
         return;
     }
 
+	update_next_inp_back();
+	el_next.innerHTML = next_inp.slice(0, char_amount);
     compl = compl.slice(0, -1);
     cur_compl = cur_compl.slice(0, -1);
     el_compl.innerHTML = compl;
-	update_next_inp_back();
-	el_next.innerHTML = next_inp;
     return;
 }
 
@@ -93,7 +94,7 @@ function key_space(key) {
     cur_compl = "";
 
 	update_next_inp_front();
-	el_next.innerHTML = next_inp;
+	el_next.innerHTML = next_inp.slice(0, char_amount);
     return;
 }
 
@@ -112,7 +113,7 @@ function input(key) {
     }
     el_compl.innerHTML = compl;
 	update_next_inp_front();
-	el_next.innerHTML = next_inp;
+	el_next.innerHTML = next_inp.slice(0, char_amount);
     return;
 }
 
