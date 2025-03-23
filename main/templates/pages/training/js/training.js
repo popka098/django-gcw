@@ -83,6 +83,12 @@ function key_backspace() {
 }
 
 function key_space(key) {
+    if (cur_compl.length < next_words[0]["Word"].length - 1) {
+        console.log("space_barrier");
+        return;
+    }    
+
+
     if (cur_compl == next_words) {
     } else {
     }
