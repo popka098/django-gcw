@@ -35,7 +35,7 @@ let cur_compl = ""; // текущее напечатанное слово
 let next_inp = ""; // отображение следующих слов
 let last_inp = "";
 
-function plus_next_words(w) {
+function plus_next_inp(w) {
     if (w["Context_Before"] != "") {
         next_inp += "(";
         next_inp += w["Context_Before"];
@@ -43,7 +43,7 @@ function plus_next_words(w) {
         next_inp += " ";
     }
     next_inp += w["Pass"];
-    next_inp += " "
+    next_inp += " ";
     if (w["Context_After"] != "") {
         next_inp += "(";
         next_inp += w["Context_After"];
@@ -53,7 +53,7 @@ function plus_next_words(w) {
 }
 
 for (let i = 0; i < next_words.length; i++) {
-    plus_next_words(next_words[i]);
+    plus_next_inp(next_words[i]);
 }
 el_next.innerHTML = next_inp.slice(0, char_amount);
 
@@ -74,8 +74,8 @@ function key_backspace() {
         return;
     }
 
-	update_next_inp_back();
-	el_next.innerHTML = next_inp.slice(0, char_amount);
+    update_next_inp_back();
+    el_next.innerHTML = next_inp.slice(0, char_amount);
     compl = compl.slice(0, -1);
     cur_compl = cur_compl.slice(0, -1);
     el_compl.innerHTML = compl;
@@ -86,22 +86,37 @@ function key_space(key) {
     if (cur_compl == next_words) {
     } else {
     }
-    next_words = next_words.slice(1);
-    next_words.push(words[Math.floor(Math.random() * words.length)]);
-    plus_next_words(next_words[next_words.length - 1]);
-    cur_compl = "";
-    console.log(next_words);
-    console.log(next_inp);
-
     compl += key;
+
+    if (next_words[0]["Context_After"] != "") {
+        compl += next_inp.slice(0, next_words[0]["Context_After"].length + 3);
+        compl += " ";
+        next_inp = next_inp.slice(next_words[0]["Context_After"].length + 3);
+    }
+
+    next_words = next_words.slice(1); // добавление новыйх слов в очаредь
+    next_words.push(words[Math.floor(Math.random() * words.length)]);
+    plus_next_inp(next_words[next_words.length - 1]);
+    
+    if (next_words[0]["Context_Before"] != "") {
+        compl += next_inp.slice(0, next_words[0]["Context_Before"].length + 3);
+        compl += " ";
+        next_inp = next_inp.slice(next_words[0]["Context_Before"].length + 3);
+    }
+    
+    console.log(next_words); // вывод для дебага
+    console.log(next_inp);
+    
+    cur_compl = ""; // обновление и обнуление переменных
     if (compl.length > char_amount) {
         compl = compl.slice(-char_amount);
     }
     el_compl.innerHTML = compl;
-    cur_compl = "";
 
-	update_next_inp_front();
-	el_next.innerHTML = next_inp.slice(0, char_amount);
+    update_next_inp_front();
+    el_next.innerHTML = next_inp.slice(0, char_amount);
+
+
     return;
 }
 
@@ -119,8 +134,8 @@ function input(key) {
         compl = compl.slice(-char_amount);
     }
     el_compl.innerHTML = compl;
-	update_next_inp_front();
-	el_next.innerHTML = next_inp.slice(0, char_amount);
+    update_next_inp_front();
+    el_next.innerHTML = next_inp.slice(0, char_amount);
     return;
 }
 
