@@ -61,7 +61,13 @@ function plus_next_inp(w) {
 for (let i = 0; i < next_words.length; i++) {
     plus_next_inp(next_words[i]);
 }
+if (next_words[0]["Context_Before"] != "") {
+    compl += next_inp.slice(0, next_words[0]["Context_Before"].length + 3);
+    compl += " ";
+    next_inp = next_inp.slice(next_words[0]["Context_Before"].length + 3);
+}
 el_next.innerHTML = next_inp.slice(0, char_amount);
+el_compl.innerHTML = compl;
 
 function update_next_inp_front() {
     next_inp = next_inp.slice(1);
@@ -93,7 +99,6 @@ function key_space(key) {
         console.log("space_barrier");
         return;
     }    
-
 
     if (cur_compl == next_words) {
     } else {
