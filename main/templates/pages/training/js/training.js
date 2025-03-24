@@ -21,7 +21,7 @@ const words = [
         Context_After: "",
     },
     {
-        Word: "ветраяная",
+        Word: "ветряная",
         Context_Before: "",
         Pass: "ветр.ная",
         Context_After: "мельница",
@@ -47,7 +47,6 @@ if (words_queue[0]["Context_Before"] != "") {
 element_next.innerHTML = next_input_view.slice(0, char_amount);
 element_compl.innerHTML = compl;
 
-
 // вспомогательные функции
 function plus_next_inp(w) {
     if (w["Context_Before"] != "") {
@@ -67,14 +66,24 @@ function plus_next_inp(w) {
 }
 
 function move_context_before() {
-    compl += next_input_view.slice(0, words_queue[0]["Context_Before"].length + 3);
+    compl += next_input_view.slice(
+        0,
+        words_queue[0]["Context_Before"].length + 3
+    );
     compl += " ";
-    next_input_view = next_input_view.slice(words_queue[0]["Context_Before"].length + 3);
+    next_input_view = next_input_view.slice(
+        words_queue[0]["Context_Before"].length + 3
+    );
 }
 function move_context_after() {
-    compl += next_input_view.slice(0, words_queue[0]["Context_After"].length + 3);
+    compl += next_input_view.slice(
+        0,
+        words_queue[0]["Context_After"].length + 3
+    );
     compl += " ";
-    next_input_view = next_input_view.slice(words_queue[0]["Context_After"].length + 3);
+    next_input_view = next_input_view.slice(
+        words_queue[0]["Context_After"].length + 3
+    );
 }
 
 function update_word_queue() {
@@ -87,13 +96,13 @@ function update_next_inp_front() {
     next_input_view = next_input_view.slice(1);
 }
 function update_next_inp_back() {
-    next_input_view = words_queue[0]["Pass"][current_word.length - 1] + next_input_view;
+    next_input_view =
+        words_queue[0]["Pass"][current_word.length - 1] + next_input_view;
 }
 
 function isLetter(str) {
     return str.length === 1 && str.match(/[а-я]/i);
 }
-
 
 // основные функции при вводе
 function key_backspace() {
@@ -106,12 +115,11 @@ function key_backspace() {
 
     compl = compl.slice(0, -1);
     current_word = current_word.slice(0, -1);
-    
+
     element_next.innerHTML = next_input_view.slice(0, char_amount);
     element_compl.innerHTML = compl;
     return;
 }
-
 
 function key_space(key) {
     if (current_word.length < words_queue[0]["Word"].length - 1) {
@@ -120,7 +128,9 @@ function key_space(key) {
     }
 
     if (current_word == words_queue[0]["Word"]) {
+        console.log("Correct!");
     } else {
+        console.log("Fail!");
     }
     compl += key;
 
@@ -149,7 +159,6 @@ function key_space(key) {
     return;
 }
 
-
 function input(key) {
     if (
         key != words_queue[0]["Pass"][current_word.length] &&
@@ -169,11 +178,10 @@ function input(key) {
     return;
 }
 
-
 // контроллер ¯\_(ツ)_/¯
 window.addEventListener("keydown", controller);
 function controller(e) {
-    const key = e.key;
+    const key = e.key.toLowerCase();
     if (!isLetter(key) && key != " " && e.code != "Backspace") {
         // проверка на необходимый символ
         console.log("F");
