@@ -1,69 +1,39 @@
-/*
 
-класс основного поведения при вводе и выводе
-*/
-const char_amount = 50;
-let el_compl = document.getElementById("compl"); // элемент с пройденными словами
-let el_next = document.getElementById("next"); // элемент с предстоящими словами
 
-export class Run {
-    constructor(words, el_compl, el_next) {
-        this.words = words; // все слова
-        this.next_words = []; // очаредь слов
-        for (var i = 0; i < 10; i++) {
-            next_words.push(words[Math.floor(Math.random() * words.length)]);
-        }
 
-        this.compl = ""; // все напечатанное
-        this.cur_compl = ""; // текущее напечатанное слово
 
-        this.next_inp = ""; // отображение следующих слов
-    }
+let block = document.querySelector("div");
 
-    run(e) {
-        console.log("RUN");
-        const key = e.key;
-        if (!(isLetter(key) || key == " " || e.code == "Backspace")) {
-            // проверка на необходимый символ
-            return;
-        }
+/// перебирает слова
+function changeColorText(phrase) {
+    let arrWord = phrase.split(" ");
 
-        if (key == " ") {
-            // проверка введенного слова cur_compl на правильность
-            this.key_space;
-            return;
-        }
+    arrWord.forEach(function (item_word) {
+        getWord(item_word);
+    });
+}
 
-        if (e.code == "Backspace") {
-            // удаление символов
-            this.key_backspace;
-            return;
-        }
+///// вставьте любую фразу
+changeColorText("Какая то строка со словами");
 
-        // ограничение возможного ввода при предопределенных символах (символы кроме .)
-        this.compl += key;
-        this.cur_compl += key;
-        el_compl.innerHTML = this.compl;
-    }
+/// проверяет количество букв в слове и изменяет текст
+function getWord(word) {
+    let arr_letter = word.split("");
 
-    key_backspace() {
-        this.compl = this.compl.slice(0, -1);
-        this.cur_compl = this.cur_compl.slice(0, -1);
-        el_compl.innerHTML = this.compl;
-        return;
-    }
+    /// если число букв в слове больше пяти, то окрашивается в красный, если меньше или равно пяти, в зеленый.
+    if (arr_letter.length > 5) {
+        let span = document.createElement("span");
+        span.textContent = word + " ";
 
-    key_space() {
-        if (cur_compl == next_words) {
-            this.next_words = this.next_words.slice(1);
-            this.next_words.push(
-                this.words[Math.floor(Math.random() * this.words.length)]
-            );
-            this.cur_compl = "";
-        }
+        span.style.color = "red";
 
-        el_compl.innerHTML = this.compl;
-        this.compl += key;
-        return;
+        block.appendChild(span);
+    } else {
+        let span = document.createElement("span");
+        span.textContent = word + " ";
+
+        span.style.color = "green";
+
+        block.appendChild(span);
     }
 }

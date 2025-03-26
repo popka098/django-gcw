@@ -100,8 +100,38 @@ function update_next_inp_back() {
         words_queue[0]["Pass"][current_word.length - 1] + next_input_view;
 }
 
+function slice_completed() {
+    if (compl.length > char_amount) {
+        //compl = compl.slice(-char_amount);
+    }
+}
 function isLetter(str) {
     return str.length === 1 && str.match(/[а-я]/i);
+}
+
+function highlight_correct() {
+    let ind, len;
+    ind = words_queue[0]["Pass"].indexOf(".");
+    len = words_queue[0]["Pass"].length;
+
+    compl =
+        compl.slice(0, -(len - ind)) +
+        "<span style='color: green'>" +
+        compl.slice(-(len - ind), -(len - ind) + 1) +
+        "</span>" +
+        compl.slice(-(len - ind) + 1);
+}
+function highlight_incorrect() {
+    let ind, len;
+    ind = words_queue[0]["Pass"].indexOf(".");
+    len = words_queue[0]["Pass"].length;
+
+    compl =
+        compl.slice(0, -(len - ind)) +
+        "<span style='color: red'>" +
+        compl.slice(-(len - ind), -(len - ind) + 1) +
+        "</span>" +
+        compl.slice(-(len - ind) + 1);
 }
 
 // основные функции при вводе
@@ -129,8 +159,10 @@ function key_space(key) {
 
     if (current_word == words_queue[0]["Word"]) {
         console.log("Correct!");
+        highlight_correct();
     } else {
         console.log("Fail!");
+        highlight_incorrect();
     }
     compl += key;
 
@@ -145,12 +177,9 @@ function key_space(key) {
     }
 
     console.log(words_queue); // вывод для дебага
-    console.log(next_input_view);
 
     current_word = ""; // обновление и обнуление переменных
-    if (compl.length > char_amount) {
-        compl = compl.slice(-char_amount);
-    }
+    slice_completed();
     element_compl.innerHTML = compl;
 
     update_next_inp_front();
@@ -169,9 +198,7 @@ function input(key) {
     compl += key;
     current_word += key;
 
-    if (compl.length > char_amount) {
-        compl = compl.slice(-char_amount);
-    }
+    slice_completed();
     element_compl.innerHTML = compl;
     update_next_inp_front();
     element_next.innerHTML = next_input_view.slice(0, char_amount);
@@ -180,6 +207,7 @@ function input(key) {
 
 // контроллер ¯\_(ツ)_/¯
 window.addEventListener("keydown", controller);
+
 function controller(e) {
     const key = e.key.toLowerCase();
     if (!isLetter(key) && key != " " && e.code != "Backspace") {
