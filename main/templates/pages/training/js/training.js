@@ -3,7 +3,8 @@
 // инициализация констант и переменных
 
 // init
-const char_amount = 50;
+const char_amount_const = 50;
+let char_amount = char_amount_const;
 let element_compl = document.getElementById("compl"); // элемент с пройденными словами
 let element_next = document.getElementById("next"); // элемент с предстоящими словами
 
@@ -44,7 +45,7 @@ for (let i = 0; i < words_queue.length; i++) {
 if (words_queue[0]["Context_Before"] != "") {
     move_context_before();
 }
-element_next.innerHTML = next_input_view.slice(0, char_amount);
+element_next.innerHTML = next_input_view.slice(0, char_amount_const);
 element_compl.innerHTML = compl;
 
 // вспомогательные функции
@@ -102,7 +103,13 @@ function update_next_inp_back() {
 
 function slice_completed() {
     if (compl.length > char_amount) {
-        //compl = compl.slice(-char_amount);
+        if (compl.indexOf("<") <= compl.length - char_amount + 1) {
+            let tmp_ind = compl.indexOf(">", compl.indexOf(">") + 1) + 1;
+            char_amount -= tmp_ind;
+            compl = compl.slice(tmp_ind);
+        } else {
+            compl = compl.slice(-char_amount);
+        }
     }
 }
 function isLetter(str) {
@@ -114,11 +121,12 @@ function highlight_correct() {
     ind = words_queue[0]["Pass"].indexOf(".");
     len = words_queue[0]["Pass"].length;
 
+    char_amount += 34;
     compl =
         compl.slice(0, -(len - ind)) +
-        "<span style='color: green'>" +
+        "<span style='color: green'>" + // 27
         compl.slice(-(len - ind), -(len - ind) + 1) +
-        "</span>" +
+        "</span>" + // 7
         compl.slice(-(len - ind) + 1);
 }
 function highlight_incorrect() {
@@ -126,11 +134,12 @@ function highlight_incorrect() {
     ind = words_queue[0]["Pass"].indexOf(".");
     len = words_queue[0]["Pass"].length;
 
+    char_amount += 32;
     compl =
         compl.slice(0, -(len - ind)) +
-        "<span style='color: red'>" +
+        "<span style='color: red'>" + // 25
         compl.slice(-(len - ind), -(len - ind) + 1) +
-        "</span>" +
+        "</span>" + // 7
         compl.slice(-(len - ind) + 1);
 }
 
@@ -146,7 +155,7 @@ function key_backspace() {
     compl = compl.slice(0, -1);
     current_word = current_word.slice(0, -1);
 
-    element_next.innerHTML = next_input_view.slice(0, char_amount);
+    element_next.innerHTML = next_input_view.slice(0, char_amount_const);
     element_compl.innerHTML = compl;
     return;
 }
@@ -183,7 +192,7 @@ function key_space(key) {
     element_compl.innerHTML = compl;
 
     update_next_inp_front();
-    element_next.innerHTML = next_input_view.slice(0, char_amount);
+    element_next.innerHTML = next_input_view.slice(0, char_amount_const);
 
     return;
 }
@@ -201,7 +210,7 @@ function input(key) {
     slice_completed();
     element_compl.innerHTML = compl;
     update_next_inp_front();
-    element_next.innerHTML = next_input_view.slice(0, char_amount);
+    element_next.innerHTML = next_input_view.slice(0, char_amount_const);
     return;
 }
 
