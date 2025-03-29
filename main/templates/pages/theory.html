@@ -32,12 +32,21 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
             border: 2px solid #1e88e5; /* Граница контейнера */
+            position: relative; /* Для абсолютного позиционирования iframe */
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
             border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0; /* Начальная непрозрачность */
+            transition: opacity 0.5s ease; /* Плавный переход */
+        }
+        iframe.active {
+            opacity: 1; /* Полная непрозрачность для активного iframe */
         }
         .navigation {
             display: flex;
@@ -81,7 +90,11 @@
 
     <h1>Учебник</h1>
     <div class="pdf-container">
-        <iframe src="{% static 'pdf/file1.pdf' %}" id="pdfFrame"></iframe>
+        <iframe src="{% static 'pdf/file1.pdf' %}" id="pdfFrame0" class="active"></iframe>
+        <iframe src="{% static 'pdf/file2.pdf' %}" id="pdfFrame1"></iframe>
+        <iframe src="{% static 'pdf/file3.pdf' %}" id="pdfFrame2"></iframe>
+        <iframe src="{% static 'pdf/file4.pdf' %}" id="pdfFrame3"></iframe>
+        <iframe src="{% static 'pdf/file5.pdf' %}" id="pdfFrame4"></iframe>
     </div>
 
     <div class="navigation">
@@ -93,21 +106,26 @@
     </div>
 
     <script>
-        const pdfFiles = [
-            '{% static "pdf/file1.pdf" %}',
-            '{% static "pdf/file2.pdf" %}',
-            '{% static "pdf/file3.pdf" %}',
-            '{% static "pdf/file4.pdf" %}',
-            '{% static "pdf/file5.pdf" %}'
+        const pdfFrames = [
+            document.getElementById('pdfFrame0'),
+            document.getElementById('pdfFrame1'),
+            document.getElementById('pdfFrame2'),
+            document.getElementById('pdfFrame3'),
+            document.getElementById('pdfFrame4')
         ];
 
         function changePage(index) {
-            const pdfFrame = document.getElementById('pdfFrame');
-            pdfFrame.src = pdfFiles[index];
+            // Скрываем все iframe
+            pdfFrames.forEach((frame, i) => {
+                if (i === index) {
+                    frame.classList.add('active'); // Показываем выбранный iframe
+                } else {
+                    frame.classList.remove('active'); // Скрываем остальные
+                }
+            });
         }
     </script>
 
 </body>
 </html>
-
 
