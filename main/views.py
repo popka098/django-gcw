@@ -36,22 +36,26 @@ def index_page(request: WSGIRequest):
 
 
 def login_page(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd['username'], password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('index')
-                else:
-                    return HttpResponse('Такого аккаунта нет')
-            else:
-                return HttpResponse('Некоректные данные')
-    else:
-        form = LoginForm()
-    return render(request, 'pages/accounts/login.html', {'form': form})
+    context = {
+        "form": LoginForm()
+    }
+    if request.method == "GET":
+        return render(request, "pages/accounts/login.html", context)
+
+    form = LoginForm(request.POST)
+    context["form"] = form
+    if not form.is_valid():
+        return HttpResponse('Некоректные данные')
+
+    data = form.data
+    user = authenticate(username=data['username'], password=data['password'])
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return redirect('index')
+
+        return HttpResponse('Такого аккаунта нет')
+    return render(request, 'pages/accounts/login.html', context)
 
 
 def registration_page(request):
