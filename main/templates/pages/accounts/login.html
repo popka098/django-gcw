@@ -1,14 +1,64 @@
 {% extends "base/base.html" %}
 {% block title %}Log-in{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/global.css' %}">
+{% endblock %}
+
 {% block content %}
-    <h1>Вход</h1>
-    <p>Пожалуйста, используйте следующую форму для входа:</p>
-    <form action="." method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Войти"></p>
-    </form>
-    <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">
-        Войти с Google
-      </a>
+
+	<div class="div">
+		<header>
+    		<img class="account-circle-icon" alt="" src="account_circle.svg" id="accountCircleIcon">
+
+    		<img class="settings-icon" alt="" src="settings.svg">
+
+    		<img class="award-icon" alt="" src="Award.svg">
+
+    		<img class="layers-icon" alt="" src="Layers.svg" id="layersIcon">
+
+    		<img class="logo-icon" alt="" src="Frame 2 1.png">
+		</header>
+
+			<div class="login-form">
+
+				<div class="input-field_1"></div>
+
+				<div class="login-text">Логин / Эл.Почта</div>
+
+				<div class="input-field_2"></div>
+
+				<div class="password-text">Пароль</div>
+			</div>
+			<div class="main-login">Вход</div>
+			<div class="log-in-text">
+				<span>Нет аккаунта? </span>
+				<span class="span">Регистрация</span>
+			</div>
+
+			<div class="sing-in-button">
+				<div class="sing-in-text">Войти</div>
+			</div>
+
+  	</div>
+
+
+
+
+  	<script>
+    		var accountCircleIcon = document.getElementById("accountCircleIcon");
+    		if(accountCircleIcon) {
+      			accountCircleIcon.addEventListener("click", function (e) {
+        				// Add your code here
+      			});
+    		}
+
+    		var layersIcon = document.getElementById("layersIcon");
+    		if(layersIcon) {
+      			layersIcon.addEventListener("click", function (e) {
+        				// Add your code here
+      			});
+    		}</script>
 {% endblock %}
