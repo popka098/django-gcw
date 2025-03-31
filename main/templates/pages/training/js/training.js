@@ -3,7 +3,7 @@
 // инициализация констант и переменных
 
 // init
-const char_amount_const = 50;
+const char_amount_const = 500;
 let char_amount = char_amount_const;
 let element_compl = document.getElementById("compl"); // элемент с пройденными словами
 let element_next = document.getElementById("next"); // элемент с предстоящими словами

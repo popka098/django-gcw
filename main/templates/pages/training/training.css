@@ -1,0 +1,28 @@
+
+
+/*
+body {
+    display: flex; 
+    justify-content: center; // Центрируем содержимое по горизонтали 
+    align-items: center; // Центрируем содержимое по вертикали 
+    height: 100vh; // Высота на весь экран 
+    margin: 0; // Убираем отступы 
+}
+*/
+.container {
+    display: flex;
+    width: 100%; /* Ширина контейнера на весь экран */
+    position: relative; /* Для абсолютного позиционирования спанов */
+}
+#compl {
+    position: absolute;
+    left: 50%; /* Сдвигаем влево на 50% ширины контейнера */
+    transform: translateX(-100%); /* Сдвигаем влево на ширину элемента */
+    white-space: nowrap; /* Запрещаем перенос текста */
+}
+#next {
+    position: absolute;
+    right: 50%; /* Сдвигаем вправо на 50% ширины контейнера */
+    transform: translateX(100%); /* Сдвигаем вправо на ширину элемента */
+    white-space: nowrap; /* Запрещаем перенос текста */
+}

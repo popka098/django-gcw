@@ -1,11 +1,17 @@
 {% extends 'base/base.html' %}
-
+<head>
+    <link rel="stylesheet" href="training.css">
+</head>
 
 {% block content %}
     <h1>{{ pagename }}</h1>
     <hr>
 
-    <span id="compl"></span><span id="next" style="color: lightslategray;"></span>
+    <div class="container">
+        <span id="compl"></span>
+        <span id="next" style="color: lightslategray;"></span>
+    </div>
+    <br>
 
     <hr>
    {% if messages %}
@@ -22,4 +28,3 @@
 {% endblock %}
 
 <script charset="utf-8" type="text/javascript" src="js/training.js"></script>
-
