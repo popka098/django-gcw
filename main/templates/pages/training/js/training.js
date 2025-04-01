@@ -3,6 +3,8 @@
 // инициализация констант и переменных
 
 // init
+const space_node = document.createTextNode(" ");
+
 const char_amount_const = 500;
 let char_amount = char_amount_const;
 let element_compl = document.getElementById("compl"); // элемент с пройденными словами
@@ -49,6 +51,7 @@ element_next.innerHTML = next_input_view.slice(0, char_amount_const);
 element_compl.innerHTML = compl;
 
 // вспомогательные функции
+
 function plus_next_inp(w) {
     if (w["Context_Before"] != "") {
         next_input_view += "(";
@@ -218,6 +221,8 @@ function input(key) {
 window.addEventListener("keydown", controller);
 
 function controller(e) {
+    console.clear();
+
     const key = e.key.toLowerCase();
     if (!isLetter(key) && key != " " && e.code != "Backspace") {
         // проверка на необходимый символ
@@ -228,15 +233,18 @@ function controller(e) {
     if (key == " ") {
         // проверка введенного слова cur_compl на правильность
         key_space(key);
-        return;
+        // return;
     }
 
     if (e.code == "Backspace") {
         // удаление символов
         key_backspace();
-        return;
+        // return;
     }
 
     input(key);
+
+    console.log(compl);
+    console.log(next_input_view);
     return;
 }
