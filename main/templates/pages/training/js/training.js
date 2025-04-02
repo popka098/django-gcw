@@ -164,7 +164,7 @@ function key_backspace() {
 }
 
 function key_space(key) {
-    if (current_word.length < words_queue[0]["Word"].length - 1) {
+    if (current_word.length < words_queue[0]["Word"].length) {
         console.log("space_barrier"); // не дает перейти на следующее слово пока не написано текущее
         return;
     }
@@ -229,11 +229,14 @@ function controller(e) {
         console.log("F");
         return;
     }
+    
+    input(key);
 
     if (key == " ") {
         // проверка введенного слова cur_compl на правильность
+        console.log(words_queue[0]["Word"].length);
         key_space(key);
-        // return;
+        return;
     }
 
     if (e.code == "Backspace") {
@@ -242,9 +245,7 @@ function controller(e) {
         // return;
     }
 
-    input(key);
-
-    console.log(compl);
-    console.log(next_input_view);
+    console.log(current_word);
+    console.log(current_word.length);
     return;
 }
