@@ -22,41 +22,36 @@
             font-size: 2.5rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Тень для заголовка */
         }
-        .pdf-container {
+        .container {
+            display: flex; /* Используем flexbox для размещения PDF и кнопок */
+            align-items: flex-start; /* Выравнивание по верхнему краю */
             width: 80%;
-            max-width: 900px;
+            max-width: 1500px;
+            margin-bottom: 30px;
+        }
+        .pdf-container {
+            flex: 1 ; /* Занимает доступное пространство */
             height: 700px;
             overflow: hidden;
             border-radius: 10px;
             background-color: #ffffff; /* Цвет фона контейнера */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
             border: 2px solid #1e88e5; /* Граница контейнера */
-            position: relative; /* Для абсолютного позиционирования iframe */
+            margin-right: 20px; /* Отступ между PDF и кнопками */
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
             border-radius: 10px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0; /* Начальная непрозрачность */
-            transition: opacity 0.5s ease; /* Плавный переход */
-        }
-        iframe.active {
-            opacity: 1; /* Полная непрозрачность для активного iframe */
         }
         .navigation {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            flex-direction: column; /* Кнопки в столбик */
         }
         button {
             padding: 12px 25px;
-            margin: 5px;
+            margin: 5px; /* Отступы между кнопками */
             border: none;
             border-radius: 5px;
             background-color: #1e88e5; /* Цвет кнопок */
@@ -74,58 +69,45 @@
             transform: translateY(0);
             box-shadow: none;
         }
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem; /* Уменьшение размера заголовка на маленьких экранах */
-            }
-            button {
-                width: 100%; /* Кнопки занимают всю ширину на маленьких экранах */
-                margin: 10px 0; /* Отступы между кнопками */
-            }
-        }
     </style>
     {% load static %}
 </head>
 <body>
 
     <h1>Учебник</h1>
-    <div class="pdf-container">
-        <iframe src="{% static 'pdf/file1.pdf' %}" id="pdfFrame0" class="active"></iframe>
-        <iframe src="{% static 'pdf/file2.pdf' %}" id="pdfFrame1"></iframe>
-        <iframe src="{% static 'pdf/file3.pdf' %}" id="pdfFrame2"></iframe>
-        <iframe src="{% static 'pdf/file4.pdf' %}" id="pdfFrame3"></iframe>
-        <iframe src="{% static 'pdf/file5.pdf' %}" id="pdfFrame4"></iframe>
-    </div>
+    <div class="container">
+        <div class="pdf-container">
+            <iframe src="{% static 'pdf/file1.pdf' %}" id="pdfFrame"></iframe>
+        </div>
 
-    <div class="navigation">
-        <button onclick="changePage(0)">Задание 9</button>
-        <button onclick="changePage(1)">Задание 10</button>
-        <button onclick="changePage(2)">Задание 11</button>
-        <button onclick="changePage(3)">Задание 12</button>
-        <button onclick="changePage(4)">Задание 15</button>
+        <div class="navigation">
+            <button onclick="changePage(0)">Задание 9</button>
+            <button onclick="changePage(1)">Задание 10</button>
+            <button onclick="changePage(2)">Задание 11</button>
+            <button onclick="changePage(3)">Задание 12</button>
+            <button onclick="changePage(4)">Задание 15</button>
+       <button onclick="goBack()">Назад</button> <!-- Кнопка "Назад" -->
+        </div>
     </div>
 
     <script>
-        const pdfFrames = [
-            document.getElementById('pdfFrame0'),
-            document.getElementById('pdfFrame1'),
-            document.getElementById('pdfFrame2'),
-            document.getElementById('pdfFrame3'),
-            document.getElementById('pdfFrame4')
+        const pdfFiles = [
+            '{% static "pdf/file1.pdf" %}',
+            '{% static "pdf/file2.pdf" %}',
+            '{% static "pdf/file3.pdf" %}',
+            '{% static "pdf/file4.pdf" %}',
+            '{% static "pdf/file5.pdf" %}'
         ];
 
         function changePage(index) {
-            // Скрываем все iframe
-            pdfFrames.forEach((frame, i) => {
-                if (i === index) {
-                    frame.classList.add('active'); // Показываем выбранный iframe
-                } else {
-                    frame.classList.remove('active'); // Скрываем остальные
-                }
-            });
+            const pdfFrame = document.getElementById('pdfFrame');
+            pdfFrame.src = pdfFiles[index];
+        }
+
+        function goBack() {
+            window.history.back(); // Возвращает на предыдущую страницу
         }
     </script>
 
 </body>
 </html>
-
