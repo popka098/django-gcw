@@ -8,6 +8,7 @@ const char_amount_const = 500;
 let element_compl = document.getElementById("compl"); // элемент с пройденными словами
 let element_next = document.getElementById("next"); // элемент с предстоящими словами
 let element_start = document.getElementById("start"); // элемент с надписью Press space to start
+let element_timer = document.getElementById("timer");
 
 element_compl.style.display = "none";
 element_next.style.display = "none";
@@ -35,7 +36,7 @@ const words = [
     },
 ]; // тестовые слова
 let words_queue = []; // очаредь слов
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
     words_queue.push(words[Math.floor(Math.random() * words.length)]);
 }
 console.log(words_queue);
@@ -53,6 +54,11 @@ if (words_queue[0]["Context_Before"] != "") {
 }
 element_next.innerHTML = next_input_view.slice(0, char_amount_const);
 element_compl.innerHTML = compl;
+
+let mistake_counter = 0;
+let success_counter = 0;
+let timer = 0; // seconds
+let timerID = 0;
 
 // вспомогательные функции
 
@@ -93,6 +99,24 @@ function move_context_after() {
         words_queue[0]["Context_After"].length + 3
     );
 }
+
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10);
+    var hours = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - hours * 3600) / 60);
+    var seconds = sec_num - hours * 3600 - minutes * 60;
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    return hours + ":" + minutes + ":" + seconds;
+};
 
 function update_word_queue() {
     words_queue = words_queue.slice(1); // добавление новыйх слов в очаредь
@@ -168,9 +192,11 @@ function key_space(key) {
     if (current_word == words_queue[0]["Word"]) {
         console.log("Correct!");
         highlight_correct();
+        success_counter++;
     } else {
         console.log("Fail!");
         highlight_incorrect();
+        mistake_counter++;
     }
     compl += key;
 
@@ -199,7 +225,7 @@ function key_space(key) {
 function input(key) {
     if (
         (key != words_queue[0]["Pass"][current_word.length] &&
-        words_queue[0]["Pass"][current_word.length] != ".") ||
+            words_queue[0]["Pass"][current_word.length] != ".") ||
         !isLetter(key)
     ) {
         return;
@@ -230,6 +256,11 @@ function controller(e) {
             element_next.style.display = "block";
 
             is_started = true;
+
+            timerID = setInterval(function () {
+                timer++;
+                element_timer.innerHTML = (timer + "").toHHMMSS();
+            }, 1000);
         }
         return;
     }
