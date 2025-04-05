@@ -3,11 +3,16 @@
 // инициализация констант и переменных
 
 // init
-const space_node = document.createTextNode(" ");
-
 const char_amount_const = 500;
+
 let element_compl = document.getElementById("compl"); // элемент с пройденными словами
 let element_next = document.getElementById("next"); // элемент с предстоящими словами
+let element_start = document.getElementById("start"); // элемент с надписью Press space to start
+
+element_compl.style.display = "none";
+element_next.style.display = "none";
+
+let is_started = false;
 
 const words = [
     {
@@ -193,8 +198,9 @@ function key_space(key) {
 
 function input(key) {
     if (
-        key != words_queue[0]["Pass"][current_word.length] &&
-        words_queue[0]["Pass"][current_word.length] != "."
+        (key != words_queue[0]["Pass"][current_word.length] &&
+        words_queue[0]["Pass"][current_word.length] != ".") ||
+        !isLetter(key)
     ) {
         return;
     }
@@ -215,13 +221,18 @@ function controller(e) {
     console.clear();
 
     const key = e.key.toLowerCase();
-    if (!isLetter(key) && key != " " && e.code != "Backspace") {
-        // проверка на необходимый символ
-        console.log("F");
+
+    if (!is_started) {
+        if (key == " ") {
+            element_start.style.display = "none";
+
+            element_compl.style.display = "block";
+            element_next.style.display = "block";
+
+            is_started = true;
+        }
         return;
     }
-    
-    input(key);
 
     if (key == " ") {
         // проверка введенного слова cur_compl на правильность
@@ -235,6 +246,8 @@ function controller(e) {
         key_backspace();
         // return;
     }
+
+    input(key);
 
     console.log(current_word);
     console.log(current_word.length);

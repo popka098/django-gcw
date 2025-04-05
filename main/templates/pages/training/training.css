@@ -1,14 +1,13 @@
-
-
 /*
-body {
-    display: flex; 
-    justify-content: center; // Центрируем содержимое по горизонтали 
-    align-items: center; // Центрируем содержимое по вертикали 
-    height: 100vh; // Высота на весь экран 
-    margin: 0; // Убираем отступы 
-}
+
+
+
 */
+body {
+    overflow-x: hidden;
+}
+
+
 .container {
     display: flex;
     width: 100%; /* Ширина контейнера на весь экран */
@@ -21,13 +20,16 @@ body {
     white-space: pre; /* Запрещаем перенос текста */
 
 }
-/* #compl::after {
-    content: &nbsp;
-} */
-
 #next {
     position: absolute;
     right: 50%; /* Сдвигаем вправо на 50% ширины контейнера */
     transform: translateX(100%); /* Сдвигаем вправо на ширину элемента */
     white-space: pre; /* Запрещаем перенос текста */
+}
+
+#start {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
