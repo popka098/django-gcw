@@ -1,0 +1,182 @@
+{% extends 'base/base.html' %}
+
+{% block extra_css %}
+
+<style>
+  .card-container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: url('https://images.unsplash.com/photo-1604591259955-d154537b2157?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+    border-radius: 15px;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .payment-card {
+    position: relative;
+    z-index: 2;
+    margin-top: 150px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  .card-header {
+    background: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .card-logo {
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .form-control {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: all 0.3s;
+  }
+
+  .form-control:focus {
+    border-color: #6e8efb;
+    box-shadow: 0 0 0 0.25rem rgba(110, 142, 251, 0.25);
+  }
+
+  .btn-pay {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+  }
+
+  .btn-pay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+  }
+
+  .input-group-text {
+    background: transparent;
+    border-right: none;
+  }
+
+  .card-number-input {
+    border-left: none;
+  }
+
+  .card-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+  }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card-container">
+    <div class="card-bg"></div>
+    <div class="payment-card">
+      <div class="card-header">
+        <div class="d-flex align-items-center">
+          <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png" alt="Visa" class="card-logo">
+          <img src="https://cdn-icons-png.flaticon.com/512/196/196561.png" alt="Mastercard" class="card-logo">
+          <img src="https://cdn-icons-png.flaticon.com/512/196/196566.png" alt="Mir" class="card-logo">
+          <h5 class="mb-0 ms-auto">Оплата картой</h5>
+        </div>
+      </div>
+      <div class="card-body p-4">
+        <form id="paymentForm" method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="cardNumber" class="form-label">{{ cardNumber.label }}</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-credit-card"></i></span>
+              {{ cardNumber }}
+              <input type="text" class="form-control card-number-input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="cardName" class="form-label">{{ cardName.label }}</label>
+            {{ cardName }}
+            <input type="text" class="form-control" id="cardName" placeholder="IVAN IVANOV">
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="expiryDate" class="form-label">{{ expiryDate.label }}</label>
+              <div class="position-relative">
+                {{ expiryDate }}
+                <input type="text" class="form-control" id="expiryDate" placeholder="MM/ГГ" maxlength="5">
+                <i class="bi bi-calendar card-icon"></i>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="cvv" class="form-label">{{ cvv.label }}</label>
+              <div class="position-relative">
+                {{ cvv }}
+                <input type="password" class="form-control" id="cvv" placeholder="•••" maxlength="3">
+                <i class="bi bi-lock card-icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="amount" class="form-label">{{ amount.label }}</label>
+            <div class="input-group">
+              <span class="input-group-text">₽</span>
+              {{ amount }}
+              <input type="text" class="form-control" id="amount" placeholder="1000" value="1000" disabled>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-pay w-100 mt-2">
+            <i class="bi bi-lock-fill me-2"></i>Оплатить
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+.
+<script>
+    document.getElementById('cardNumber').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        let formatted = value.replace(/(\d{4})/g, '$1 ').trim();
+        e.target.value = formatted.substring(0, 19);
+    });
+    document.getElementById('expiryDate').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        e.target.value = value.substring(0, 5);
+    });
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        window.location.href = 'confirm.html';
+    });
+</script>
+
+{% endblock %}
