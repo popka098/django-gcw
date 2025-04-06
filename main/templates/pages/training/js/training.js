@@ -2,19 +2,8 @@
 
 // инициализация констант и переменных
 
-// init
-const char_amount_const = 500;
-
-let element_compl = document.getElementById("compl"); // элемент с пройденными словами
-let element_next = document.getElementById("next"); // элемент с предстоящими словами
-let element_start = document.getElementById("start"); // элемент с надписью Press space to start
-let element_timer = document.getElementById("timer");
-
-element_compl.style.display = "none";
-element_next.style.display = "none";
-
-let is_started = false;
-
+// получаемые данные
+let is_advanced = false; // куплена ли подписка
 const words = [
     {
         Word: "фланелевый",
@@ -35,6 +24,20 @@ const words = [
         Context_After: "мельница",
     },
 ]; // тестовые слова
+
+// init
+const char_amount_const = 500;
+
+let element_compl = document.getElementById("compl"); // элемент с пройденными словами
+let element_next = document.getElementById("next"); // элемент с предстоящими словами
+let element_start = document.getElementById("start"); // элемент с надписью Press space to start
+let element_timer = document.getElementById("timer");
+
+element_compl.style.display = "none";
+element_next.style.display = "none";
+
+let is_started = false;
+
 let words_queue = []; // очаредь слов
 for (let i = 0; i < 10; i++) {
     words_queue.push(words[Math.floor(Math.random() * words.length)]);
@@ -59,6 +62,7 @@ let mistake_counter = 0;
 let success_counter = 0;
 let timer = 0; // seconds
 let timerID = 0;
+let end_time = 30;
 
 // вспомогательные функции
 
@@ -159,11 +163,32 @@ function highlight_incorrect() {
     len = words_queue[0]["Pass"].length;
 
     compl =
-        compl.slice(0, -(len - ind)) +
-        "<span style='color: red'>" + // 25
-        compl.slice(-(len - ind), -(len - ind) + 1) +
-        "</span>" + // 7
-        compl.slice(-(len - ind) + 1);
+    compl.slice(0, -(len - ind)) +
+    "<span style='color: red'>" + // 25
+    compl.slice(-(len - ind), -(len - ind) + 1) +
+    "</span>" + // 7
+    compl.slice(-(len - ind) + 1);
+}
+
+function start() {
+    element_start.style.display = "none";
+
+    element_compl.style.display = "block";
+    element_next.style.display = "block";
+
+    is_started = true;
+
+    timerID = setInterval(timer_tick, 1000);
+}
+
+function timer_tick() {
+    timer++;
+    element_timer.innerHTML = (timer + "").toHHMMSS();
+
+    if (timer >= end_time) {
+        // redirect на статистику за эту сессию
+        console.log("ENDD")
+    }
 }
 
 // основные функции при вводе
@@ -250,17 +275,7 @@ function controller(e) {
 
     if (!is_started) {
         if (key == " ") {
-            element_start.style.display = "none";
-
-            element_compl.style.display = "block";
-            element_next.style.display = "block";
-
-            is_started = true;
-
-            timerID = setInterval(function () {
-                timer++;
-                element_timer.innerHTML = (timer + "").toHHMMSS();
-            }, 1000);
+            start();
         }
         return;
     }
@@ -284,3 +299,4 @@ function controller(e) {
     console.log(current_word.length);
     return;
 }
+
