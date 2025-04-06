@@ -9,17 +9,6 @@
 {% block content %}
 
 	<div class="div">
-		<header>
-    		<img class="account-circle-icon" alt="" src="account_circle.svg" id="accountCircleIcon">
-
-    		<img class="settings-icon" alt="" src="settings.svg">
-
-    		<img class="award-icon" alt="" src="Award.svg">
-
-    		<img class="layers-icon" alt="" src="Layers.svg" id="layersIcon">
-
-    		<img class="logo-icon" alt="" src="Frame 2 1.png">
-		</header>
 
 			<div class="login-form">
 
@@ -32,9 +21,9 @@
 				<div class="password-text">Пароль</div>
 			</div>
 			<div class="main-login">Вход</div>
-			<div class="log-in-text">
+			<div class="log-in-text" >
 				<span>Нет аккаунта? </span>
-				<span class="span">Регистрация</span>
+				<a href="{% url 'registration' %}" style="text-decoration: none;"><span class="span">Регистрация </span></a>
 			</div>
 
 			<div class="sing-in-button">

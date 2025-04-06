@@ -1,6 +1,8 @@
+{% load static %}
 <nav>
 
-    <a href="{% url 'index' %}">Goose Cycle Words</a>
+    <header class="header">
+    <a href="{% url 'index' %}"><img class="logo-icon" alt="" src="{% static 'img/login/Frame 2 1.png' %}"></a>
 
     <ul>
         {% block menu %}
@@ -24,12 +26,13 @@
                 {% endif %}
             </li>
             <li>
-                <a href="{% url 'profile' %}">Профиль</a>
+                <a href="{% url 'profile' %}"><img class="account-circle-icon" alt="" src="{% static 'img/login/account_circle.svg' %}" id="accountCircleIcon"></a>
             </li>
             <li>
                 <a href="{% url 'registration' %}">Регистрация</a>
             </li>
         {% endblock %}
     </ul>
+    </header>
 
 </nav>

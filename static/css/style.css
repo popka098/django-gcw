@@ -45,7 +45,7 @@
     width: 100%;
     position: relative;
     background-color: #f2eee5;
-    height: 1080px;
+    height: 900px;
     overflow: hidden;
     text-align: left;
     font-size: 28px;
@@ -112,6 +112,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: 600;
+    text-decoration: none;
 }
 .sing-in-button {
     position: absolute;
@@ -134,4 +135,8 @@ body{
     background-color: #F2EEE5;
     margin: 0;
     padding: 0;
+}
+.header {
+    width: 100%;
+    height: 100px;
 }
