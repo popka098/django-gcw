@@ -5,6 +5,7 @@ from django.core.handlers.wsgi import WSGIRequest
 
 words = ["привет", "пока", "база данных", "тестирование", "матвей", "сделай", "эту", "задачу", "пожалуйста"]
 
+
 def get_all_words(request: WSGIRequest):
     limit = -1
     if limit == -1:
