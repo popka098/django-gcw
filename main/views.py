@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from main.models import Profile
 from django.contrib.auth.models import User
 
-from main.forms import RegForm, LoginForm
+from main.forms import RegForm, LoginForm, PaymentForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -107,3 +107,21 @@ def not_found_500(request: WSGIRequest):
     :type request: WSGIRequest
     """
     return render(request, "pages/ErrorsAndExceptions/404_page.html", status=500)
+
+
+def data_entry_page(request: WSGIRequest):
+    """
+    Страница ввода данных карты
+    :param request: request-object
+    :type request: WSGIRequest
+    """
+    context = {
+        "cardNumber": PaymentForm["cardNumber"],
+        "cardName": PaymentForm.cardName,
+        "expiryDate": PaymentForm.expiryDate,
+        "cvv": PaymentForm.cvv,
+        "amout": PaymentForm.amount
+    }
+
+    return render(request, "pages/payment/data_entry_page.html", context=context)
+

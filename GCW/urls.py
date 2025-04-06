@@ -14,6 +14,7 @@ urlpatterns = [
     path('registration/', main_views.registration_page, name='registration'),
     path('login/', main_views.login_page, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('payment/data_entry', main_views.data_entry_page, name="data_entry")
 
 ]
 urlpatterns += static(settings.MEDIA_URL,
