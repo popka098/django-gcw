@@ -106,45 +106,40 @@
         <form id="paymentForm" method="POST">
           {% csrf_token %}
           <div class="mb-3">
-            <label for="cardNumber" class="form-label">{{ cardNumber.label }}</label>
+            <label for="cardNumber" class="form-label">{{ form.cardNumber.label }}</label>
             <div class="input-group">
               <span class="input-group-text"><i class="bi bi-credit-card"></i></span>
-              {{ cardNumber }}
-              <input type="text" class="form-control card-number-input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+              <input type="text" class="form-control card-number-input" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="cardName" class="form-label">{{ cardName.label }}</label>
-            {{ cardName }}
-            <input type="text" class="form-control" id="cardName" placeholder="IVAN IVANOV">
+            <label for="cardName" class="form-label">{{ form.cardName.label }}</label>
+            <input type="text" class="form-control" id="cardName" name="cardName" placeholder="IVAN IVANOV">
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="expiryDate" class="form-label">{{ expiryDate.label }}</label>
+              <label for="expiryDate" class="form-label">{{ form.expiryDate.label }}</label>
               <div class="position-relative">
-                {{ expiryDate }}
-                <input type="text" class="form-control" id="expiryDate" placeholder="MM/ГГ" maxlength="5">
+                <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/ГГ" maxlength="5">
                 <i class="bi bi-calendar card-icon"></i>
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="cvv" class="form-label">{{ cvv.label }}</label>
+              <label for="cvv" class="form-label">{{ form.cvv.label }}</label>
               <div class="position-relative">
-                {{ cvv }}
-                <input type="password" class="form-control" id="cvv" placeholder="•••" maxlength="3">
+                <input type="password" class="form-control" id="cvv" name="cvv" placeholder="•••" maxlength="3">
                 <i class="bi bi-lock card-icon"></i>
               </div>
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="amount" class="form-label">{{ amount.label }}</label>
+            <label for="amount" class="form-label">{{ form.amount.label }}</label>
             <div class="input-group">
               <span class="input-group-text">₽</span>
-              {{ amount }}
-              <input type="text" class="form-control" id="amount" placeholder="1000" value="1000" disabled>
+              <input type="text" class="form-control" id="amount" name="amount" placeholder="1000" value="1000" disabled>
             </div>
           </div>
 

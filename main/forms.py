@@ -33,7 +33,8 @@ class PaymentForm(forms.Form):
             'class': 'form-control card-number-input',
             'id': 'cardNumber',
             'placeholder': '1234 5678 9012 3456',
-            'maxlength': '19'
+            'maxlength': '19',
+            'type': 'text'
         }
     ))
     cardName = forms.CharField(label="Имя владельца", required=True, widget=forms.TextInput(
@@ -41,6 +42,7 @@ class PaymentForm(forms.Form):
             'class': 'form-control',
             'id': 'cardName',
             'placeholder': 'IVAN IVANOV',
+            'type': 'text'
         }
     ))
     expiryDate = forms.CharField(label="Срок действия", required=True, widget=forms.TextInput(
@@ -48,10 +50,11 @@ class PaymentForm(forms.Form):
             'class': 'form-control',
             'id': 'expiryDate',
             'placeholder': 'MM/ГГ',
-            'maxlength': '5'
+            'maxlength': '5',
+            'type': 'text'
         }
     ))
-    cvv = forms.CharField(label="CVV/CVC", required=True, widget=forms.TextInput(
+    cvv = forms.CharField(label="CVV/CVC", required=True, widget=forms.PasswordInput(
         attrs={
             'class': 'form-control',
             'id': 'cvv',
@@ -66,6 +69,7 @@ class PaymentForm(forms.Form):
             'placeholder': '1000',
             'maxlength': '3',
             'value': '1000',
+            'type': 'text'
         }
     ))
 

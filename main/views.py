@@ -116,12 +116,22 @@ def data_entry_page(request: WSGIRequest):
     :type request: WSGIRequest
     """
     context = {
-        "cardNumber": PaymentForm["cardNumber"],
-        "cardName": PaymentForm.cardName,
-        "expiryDate": PaymentForm.expiryDate,
-        "cvv": PaymentForm.cvv,
-        "amout": PaymentForm.amount
+        "form": PaymentForm(),
     }
+
+    # if request.method == "GET":
+    #     return render(request, "pages/payment/data_entry_page.html", context)
+    #
+    # form = PaymentForm(request.POST)
+    # a = form.data["cardName"]
+
+    # data = {
+    #     "cardNumber": PaymentForm["cardNumber"],
+    #     "cardName": PaymentForm.cardName,
+    #     "expiryDate": PaymentForm.expiryDate,
+    #     "cvv": PaymentForm.cvv,
+    #     "amout": PaymentForm.amount
+    # }
 
     return render(request, "pages/payment/data_entry_page.html", context=context)
 
