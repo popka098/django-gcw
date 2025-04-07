@@ -33,3 +33,7 @@ body {
     margin-right: auto;
     display: block;
 }
+
+#choose_time_button {
+    margin: auto;
+}

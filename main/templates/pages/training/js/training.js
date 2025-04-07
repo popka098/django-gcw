@@ -32,6 +32,7 @@ let element_compl = document.getElementById("compl"); // элемент с пр�
 let element_next = document.getElementById("next"); // элемент с предстоящими словами
 let element_start = document.getElementById("start"); // элемент с надписью Press space to start
 let element_timer = document.getElementById("timer");
+let element_choose_time_button = document.getElementById("choose_time_button");
 
 element_compl.style.display = "none";
 element_next.style.display = "none";
@@ -40,7 +41,7 @@ let is_started = false;
 
 let words_queue = []; // очаредь слов
 for (let i = 0; i < 10; i++) {
-    words_queue.push(words[Math.floor(Math.random() * words.length)]);
+    words_queue.push(get_next_word());
 }
 console.log(words_queue);
 
@@ -62,9 +63,25 @@ let mistake_counter = 0;
 let success_counter = 0;
 let timer = 0; // seconds
 let timerID = 0;
-let end_time = 30;
+let end_times = [120, 180, 300, 600];
+let end_time_ind = 0;
+
 
 // вспомогательные функции
+
+function change_time_end() {
+    if (!is_advanced) {
+        // redirect на покупку деняк
+        return;
+    }
+
+    end_time_ind++;
+    if (end_time_ind >= end_times.length) {
+        end_time_ind = 0;
+    }
+
+    element_choose_time_button.innerHTML = end_times[end_time_ind];
+}
 
 function plus_next_inp(w) {
     if (w["Context_Before"] != "") {
@@ -122,11 +139,15 @@ String.prototype.toHHMMSS = function () {
     return hours + ":" + minutes + ":" + seconds;
 };
 
+function get_next_word() {
+    return words[Math.floor(Math.random() * words.length)];
+}
 function update_word_queue() {
     words_queue = words_queue.slice(1); // добавление новыйх слов в очаредь
-    words_queue.push(words[Math.floor(Math.random() * words.length)]);
+    words_queue.push(get_next_word());
     plus_next_inp(words_queue[words_queue.length - 1]);
 }
+
 
 function update_next_inp_front() {
     next_input_view = next_input_view.slice(1);
@@ -185,7 +206,7 @@ function timer_tick() {
     timer++;
     element_timer.innerHTML = (timer + "").toHHMMSS();
 
-    if (timer >= end_time) {
+    if (timer >= end_times[end_time_ind]) {
         // redirect на статистику за эту сессию
         console.log("ENDD")
     }
