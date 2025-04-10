@@ -1,7 +1,9 @@
+from random import randint
 from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import render, redirect, get_object_or_404
-
-from main.models import Profile
+from django.template.defaultfilters import random
+import datetime
+from main.models import Profile, Payments
 from django.contrib.auth.models import User
 
 from main.forms import RegForm, LoginForm, PaymentForm
@@ -119,21 +121,40 @@ def data_entry_page(request: WSGIRequest):
         "form": PaymentForm(),
     }
 
-    # if request.method == "GET":
-    #     return render(request, "pages/payment/data_entry_page.html", context)
-    #
-    # form = PaymentForm(request.POST)
-    # a = form.data["cardName"]
+    if request.method == "GET":
+        return render(request, "pages/payment/data_entry_page.html", context)
 
-    # data = {
-    #     "cardNumber": PaymentForm["cardNumber"],
-    #     "cardName": PaymentForm.cardName,
-    #     "expiryDate": PaymentForm.expiryDate,
-    #     "cvv": PaymentForm.cvv,
-    #     "amout": PaymentForm.amount
-    # }
+    form = PaymentForm(request.POST)
 
-    return render(request, "pages/payment/data_entry_page.html", context=context)
+
+    number = randint(100000000, 999999999)
+
+    payment = Payments(
+        number=number,
+        date=datetime.date.today(),
+        amout=1000,
+        user = request.user
+    )
+
+    if form.is_valid():
+        payment.status = "Успешно"
+        payment.save()
+        context = {
+            "amount": payment.amount,
+            "number": payment.number,
+            "date": payment.date,
+            "status": "Успешно",
+        }
+        return redirect("pages/payment/success_payment.html", context)
+    payment.status = "Ошибка"
+    payment.save()
+    context = {
+        "number": payment.number,
+        "date": payment.date,
+        "status": "Ошибка",
+    }
+    return redirect("pages/payment/failed_payment.html", context)
+
 
 
 def failed_payment(request):

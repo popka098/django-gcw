@@ -47,3 +47,14 @@ class Profile(models.Model):
                              null=True, 
                              blank=True, 
                             )
+
+
+class Payments(models.Model):
+    """
+    База данных для хранения платежей
+    """
+    number = models.IntegerField(null=True)
+    date = models.DateField(null=True)
+    amount = models.IntegerField(null=True)
+    status = models.CharField(null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
