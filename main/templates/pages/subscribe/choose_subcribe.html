@@ -1,0 +1,40 @@
+{% block content %}
+    <form method="POST">
+    {% csrf_token %}
+        <input type="radio" name="period" id="one" value="month" checked>
+        <label for="one">1 месяц</label>
+        
+        <input type="radio" name="period" id="two" value="three_month">
+        <label for="two">3 месяца</label>
+        
+        <input type="radio" name="period" id="three" value="year">
+        <label for="three">1 год</label>
+        
+        <p id="amount">Цена: </p>
+        <input type="submit" value="Перейти к оплате">
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const prices = {
+                month: "1000 руб",
+                three_month: "2700 руб",
+                year: "9000 руб"
+            };
+            
+            const radioButtons = document.querySelectorAll('input[name="period"]');
+            const amountElement = document.getElementById('amount');
+            
+            function updatePrice() {
+                const selectedPeriod = document.querySelector('input[name="period"]:checked').value;
+                amountElement.textContent = `Цена: ${prices[selectedPeriod]}`;
+            }
+            
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', updatePrice);
+            });
+            
+            updatePrice();
+        });
+    </script>
+{% endblock %}
