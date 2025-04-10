@@ -4,15 +4,15 @@
     <form method="POST">
     {% csrf_token %}
     <label for="cardNumber" class="form-label">{{ form.cardNumber.label }}</label>
-    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+        {{ form.cardNumber }}
     <label for="cardName">{{ form.cardName.label }}</label>
-    <input type="text" id="cardName" name="cardName" placeholder="IVAN IVANOV">
+        {{ form.cardName }}
     <label for="expiryDate">{{ form.expiryDate.label }}</label>
-    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/ГГ" maxlength="5">
+        {{ form.expiryDate }}
     <label for="cvv">{{ form.cvv.label }}</label>
-    <input type="password" id="cvv" name="cvv" placeholder="•••" maxlength="3">
-    <label for="amount">{{ form.amount.label }}</label>
-    <input type="text" id="amount" name="amount" placeholder="1000" value="1000" disabled>
+        {{ form.cvv }}
+    <label for="amount">Сумма</label>
+        <p>{{ amount }}</p>
     <button type="submit">
             <i class="bi bi-lock-fill me-2"></i>Оплатить
     </button>
