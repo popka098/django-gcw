@@ -135,3 +135,10 @@ def data_entry_page(request: WSGIRequest):
 
     return render(request, "pages/payment/data_entry_page.html", context=context)
 
+
+def failed_payment(request):
+    return render(request, "pages/payment/failed_payment.html")
+
+
+def success_payment(request):
+    return render(request, "pages/payment/success_payment.html")
