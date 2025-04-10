@@ -1,7 +1,9 @@
-{% extends 'base/base.html' %}
-<head>
-    <link rel="stylesheet" href="training.css" />
-</head>
+{% extends 'base/base.html' %} 
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "css/training.css" %}" />
+{% endblock %} 
 
 {% block content %}
 <h1>{{ pagename }}</h1>
@@ -10,15 +12,16 @@
 
 <div class="container">
     <span id="timer">00:00:00</span>
-    <button type="button" id="choose_time_button" onclick="change_time_end()">120</button>
+    <button type="button" id="choose_time_button" onclick="change_time_end()">
+        120
+    </button>
 </div>
-
 
 <hr />
 <div class="container">
     <span id="start">Press space to start</span>
     <span id="compl"></span>
-    <span id="next" style="color: lightslategray;"></span>
+    <span id="next" style="color: lightslategray"></span>
 </div>
 <br />
 
@@ -28,10 +31,9 @@
 {% endfor %} {% endif %}
 
 <h1>
-    {% if form.errors %}
-    {{ form.errors }} <br />
+    {% if form.errors %} {{ form.errors }} <br />
     {% endif %}
 </h1>
+{% endblock %} {% block extra_js %}
+    <script charset="utf-8" type="text/javascript" src="{% static "js/training.js" %}"></script>
 {% endblock %}
-
-<script charset="utf-8" type="text/javascript" src="js/training.js"></script>
