@@ -48,6 +48,9 @@ class Profile(models.Model):
                              blank=True, 
                             )
 
+    subscribe = models.BooleanField(default=False)
+    period_subscribe = models.DateField(null=True)
+
 
 class Payments(models.Model):
     """
@@ -57,4 +60,4 @@ class Payments(models.Model):
     date = models.DateField(null=True)
     amount = models.IntegerField(null=True)
     status = models.CharField(null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
