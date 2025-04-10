@@ -15,8 +15,9 @@ urlpatterns = [
     path('login/', main_views.login_page, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('payment/data_entry', main_views.data_entry_page, name="data_entry"),
-    path('payment/success', main_views.success_payment, name="success"),
-    path('payment/failed', main_views.failed_payment, name="success"),
+    path('payment/success', main_views.success_payment_page, name="success"),
+    path('payment/failed', main_views.failed_payment_page, name="success"),
+    path('subscribe/choose', main_views.choose_subscriber_page, name="choose"),
 
 ]
 urlpatterns += static(settings.MEDIA_URL,
