@@ -209,15 +209,15 @@ async function init_words_queue() {
             "/api/get_random_words/" +
             task + "/" + 10;
 
-        const response = await fetch(apiUrl); // Замените на ваш URL
+        const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error('Сеть ответила с ошибкой: ' + response.status);
         }
         const data = await response.json();
         
-        // Проверяем, есть ли ключ "words" и является ли он массивом
+        // Проверяем, есть ли ключ words и массив ли он
         if (Array.isArray(data.words)) {
-            words_queue = data.words; // Сохраняем массив в глобальный массив
+            words_queue = data.words; // Сохраняем массив
         } else {
             console.error('Ключ "words" отсутствует или не является массивом');
         }
@@ -227,7 +227,7 @@ async function init_words_queue() {
 }
 
 function update_word_queue() {
-    words_queue = words_queue.slice(1); // добавление новыйх слов в очаредь
+    words_queue = words_queue.slice(1); // добавление новых слов в очаредь
     get_next_word().then(() => {
         plus_next_inp(words_queue[words_queue.length - 1]);
     });
