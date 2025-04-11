@@ -4,6 +4,13 @@
 
 // получаемые данные
 let is_advanced = false; // куплена ли подписка
+
+let task = window.location.href.slice(-2, -1) - 0;
+if (task != 9) {
+    task += 10;
+}
+console.log(task);
+
 const words = [
     {
         Word: "фланелевый",
@@ -24,7 +31,6 @@ const words = [
         Context_After: "мельница",
     },
 ]; // тестовые слова
-
 // init
 const char_amount_const = 500;
 
@@ -41,7 +47,8 @@ let is_started = false;
 
 let words_queue = []; // очаредь слов
 for (let i = 0; i < 10; i++) {
-    words_queue.push(get_next_word());
+    words_queue.push(get_next_word())
+    
 }
 console.log(words_queue);
 
@@ -65,7 +72,6 @@ let timer = 0; // seconds
 let timerID = 0;
 let end_times = [120, 180, 300, 600];
 let end_time_ind = 0;
-
 
 // вспомогательные функции
 
@@ -139,15 +145,55 @@ String.prototype.toHHMMSS = function () {
     return hours + ":" + minutes + ":" + seconds;
 };
 
-function get_next_word() {
-    return words[Math.floor(Math.random() * words.length)];
+async function get_next_word_api() {
+    const apiUrl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        "/api/get_random_word/" +
+        task;
+
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error("Ошибка при получении данных:", error);
+    }
 }
+async function get_next_word_api2() {
+    const result = await get_next_word_api(); // Ждем выполнения всех промисов
+    return result;
+}
+function get_next_word() {
+    get_next_word_api2()
+        .then((result) => {
+            if (result && typeof result === 'object') {
+                let word = {
+                    "Word": result.Word,
+                    "Context_Before": result.Context_Before,
+                    "Pass": result.Pass,
+                    "Context_After": result.Context_After
+                };
+                console.log(word);
+                return word;
+            }
+        })
+        .catch((error) => {
+            console.error("Ошибка:", error.message); // Обрабатываем ошибку
+        });
+}
+
 function update_word_queue() {
     words_queue = words_queue.slice(1); // добавление новыйх слов в очаредь
     words_queue.push(get_next_word());
     plus_next_inp(words_queue[words_queue.length - 1]);
 }
-
 
 function update_next_inp_front() {
     next_input_view = next_input_view.slice(1);
@@ -184,11 +230,11 @@ function highlight_incorrect() {
     len = words_queue[0]["Pass"].length;
 
     compl =
-    compl.slice(0, -(len - ind)) +
-    "<span style='color: red'>" + // 25
-    compl.slice(-(len - ind), -(len - ind) + 1) +
-    "</span>" + // 7
-    compl.slice(-(len - ind) + 1);
+        compl.slice(0, -(len - ind)) +
+        "<span style='color: red'>" + // 25
+        compl.slice(-(len - ind), -(len - ind) + 1) +
+        "</span>" + // 7
+        compl.slice(-(len - ind) + 1);
 }
 
 function start() {
@@ -208,7 +254,7 @@ function timer_tick() {
 
     if (timer >= end_times[end_time_ind]) {
         // redirect на статистику за эту сессию
-        console.log("ENDD")
+        console.log("ENDD");
     }
 }
 
@@ -320,4 +366,3 @@ function controller(e) {
     console.log(current_word.length);
     return;
 }
-
