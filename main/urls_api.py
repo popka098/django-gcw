@@ -12,7 +12,5 @@ from main.views_api import get_all_words
 
 urlpatterns = [
     path("get_all/", get_all_words),
-    # path("/get_all/", get_all_words),
-    # path("/get_all/", get_all_words),
 ]
 
