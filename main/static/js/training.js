@@ -185,7 +185,7 @@ function get_next_word() {
             }
         })
         .catch((error) => {
-            console.error("Ошибка:", error.message); // Обрабатываем ошибку
+            console.error("Ошибка:", error.message); 
         });
 }
 
