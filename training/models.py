@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework import serializers
 
 # Create your models here.
 
@@ -30,6 +31,25 @@ class Task(models.Model):
 
     class Meta:
         abstract = True
+
+
+class TaskSerializer(serializers.Serializer):
+    Word = serializers.CharField()
+    Context_Before = serializers.CharField()
+    Pass = serializers.CharField()
+    Context_After = serializers.CharField()
+    class Meta:
+        fields = [
+            "Word",
+            "Context_Before",
+            "Pass",
+            "Context_After"
+        ]
+        
+
+
+class WordsSerializer(serializers.ListSerializer):
+    child = TaskSerializer()
 
 
 class Task_9(Task):
