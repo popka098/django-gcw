@@ -46,25 +46,22 @@ element_next.style.display = "none";
 let is_started = false;
 
 let words_queue = []; // очаредь слов
-for (let i = 0; i < 10; i++) {
-    words_queue.push(get_next_word())
-    
-}
-console.log(words_queue);
-
 let compl = ""; // все напечатанное
 let current_word = ""; // текущее напечатанное слово
 
 let next_input_view = ""; // отображение следующих слов
 
-for (let i = 0; i < words_queue.length; i++) {
-    plus_next_inp(words_queue[i]);
-}
-if (words_queue[0]["Context_Before"] != "") {
-    move_context_before();
-}
-element_next.innerHTML = next_input_view.slice(0, char_amount_const);
-element_compl.innerHTML = compl;
+init_words_queue().then(() => {
+    console.log(words_queue);
+    if (words_queue[0]["Context_Before"] != "") {
+        move_context_before();
+    }
+    for (let i = 0; i < words_queue.length; i++) {
+        plus_next_inp(words_queue[i]);
+    }
+    element_next.innerHTML = next_input_view.slice(0, char_amount_const);
+    element_compl.innerHTML = compl;
+});
 
 let mistake_counter = 0;
 let success_counter = 0;
@@ -145,54 +142,95 @@ String.prototype.toHHMMSS = function () {
     return hours + ":" + minutes + ":" + seconds;
 };
 
-async function get_next_word_api() {
-    const apiUrl =
-        window.location.protocol +
-        "//" +
-        window.location.host +
-        "/api/get_random_word/" +
-        task;
+function get_next_word_api() {
+    return new Promise((resolve, reject) => {
+        const apiUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            "/api/get_random_word/" +
+            task;
 
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", apiUrl, true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                // Запрос завершен
+                if (xhr.status === 200) {
+                    // Успешный ответ
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        resolve(data); // Разрешаем промис с данными
+                    } catch (error) {
+                        console.error("Ошибка при парсинге JSON:", error);
+                        reject(error); // Отклоняем промис с ошибкой
+                    }
+                } else {
+                    console.error(
+                        "Ошибка при получении данных:",
+                        xhr.statusText
+                    );
+                    reject(
+                        new Error(
+                            "Ошибка при получении данных: " + xhr.statusText
+                        )
+                    ); // Отклоняем промис с ошибкой
+                }
+            }
+        };
+
+        xhr.send(); // Отправляем запрос
+    });
+}
+async function get_next_word() {
     try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
+        const result = await get_next_word_api(); // Ждем выполнения промиса
+
+        // Проверяем наличие нужных полей перед доступом
+        if (result && typeof result === "object") {
+            words_queue.push(result);
+            return result; // Возвращаем результат
+        } else {
+            throw new Error("Полученные данные имеют неверную структуру");
         }
-
-        const data = await response.json();
-
-        return data;
     } catch (error) {
-        console.error("Ошибка при получении данных:", error);
+        console.error("Ошибка:", error.message); // Обрабатываем ошибку
+        throw error; // Пробрасываем ошибку дальше, если нужно
     }
 }
-async function get_next_word_api2() {
-    const result = await get_next_word_api(); // Ждем выполнения всех промисов
-    return result;
-}
-function get_next_word() {
-    get_next_word_api2()
-        .then((result) => {
-            if (result && typeof result === 'object') {
-                let word = {
-                    "Word": result.Word,
-                    "Context_Before": result.Context_Before,
-                    "Pass": result.Pass,
-                    "Context_After": result.Context_After
-                };
-                console.log(word);
-                return word;
-            }
-        })
-        .catch((error) => {
-            console.error("Ошибка:", error.message); 
-        });
+
+async function init_words_queue() {
+    try {
+        const apiUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            "/api/get_random_words/" +
+            task + "/" + 10;
+
+        const response = await fetch(apiUrl); // Замените на ваш URL
+        if (!response.ok) {
+            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+        }
+        const data = await response.json();
+        
+        // Проверяем, есть ли ключ "words" и является ли он массивом
+        if (Array.isArray(data.words)) {
+            words_queue = data.words; // Сохраняем массив в глобальный массив
+        } else {
+            console.error('Ключ "words" отсутствует или не является массивом');
+        }
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+    }
 }
 
 function update_word_queue() {
     words_queue = words_queue.slice(1); // добавление новыйх слов в очаредь
-    words_queue.push(get_next_word());
-    plus_next_inp(words_queue[words_queue.length - 1]);
+    get_next_word().then(() => {
+        plus_next_inp(words_queue[words_queue.length - 1]);
+    });
 }
 
 function update_next_inp_front() {
@@ -336,8 +374,6 @@ function input(key) {
 window.addEventListener("keydown", controller);
 
 function controller(e) {
-    console.clear();
-
     const key = e.key.toLowerCase();
 
     if (!is_started) {
@@ -349,7 +385,6 @@ function controller(e) {
 
     if (key == " ") {
         // проверка введенного слова cur_compl на правильность
-        console.log(words_queue[0]["Word"].length);
         key_space(key);
         return;
     }
@@ -361,8 +396,5 @@ function controller(e) {
     }
 
     input(key);
-
-    console.log(current_word);
-    console.log(current_word.length);
     return;
 }
