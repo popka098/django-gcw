@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from main import views as main_views
 from django.contrib.auth import views as auth_views
@@ -15,6 +15,8 @@ urlpatterns = [
     path('registration/', main_views.registration_page, name='registration'),
     path('login/', main_views.login_page, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+    path("api/", include("main.urls_api")),
 
     path('training/task9/', training_views.training, {"task": 9}, name="task9"),
     path('training/task10/', training_views.training, {"task": 10}, name="task10"),
