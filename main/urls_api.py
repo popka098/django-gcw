@@ -8,10 +8,10 @@ import training.views as training_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from main.views_api import get_all_words, serializator_testing
+from main.views_api import get_all_words, serializater_testing
 
 urlpatterns = [
     path("get_all/<int:limit>", get_all_words),
-    path("test", serializator_testing),
+    path("test", serializater_testing),
 ]
 
