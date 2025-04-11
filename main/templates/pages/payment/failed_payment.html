@@ -1,12 +1,15 @@
+{% extends 'base/base.html' %}
 
 {% block content %} 
-    <p>Ошибка транзакции</p>
-    <span>Номер транзакции: </span>
-    <span>TX-789456123</span>
-    <span class="receipt-label">Дата и время:</span>
+    <p>Ошибка транзакции</p><br>
+    <span>Номер транзакции:</span>
+    <span>TX-789456123</span><br>
+    <span class="receipt-label">Дата и время:</span><br>
     <span class="receipt-value" id="transactionDate"></span>
     <span class="receipt-label">Статус:</span>
-    <span class="receipt-value text-success">Ошибка</span>
+    <span class="receipt-value text-success">Ошибка</span><br>
+    
+    <p>Проверьте корректность введённых данных карты, а затем попробуйте еще раз</p>
     
 {% endblock %}
 

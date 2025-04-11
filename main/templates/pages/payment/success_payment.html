@@ -1,14 +1,15 @@
+{% extends 'base/base.html' %}
 
 {% block content %} 
-    <p>Успешная транзакция</p>
+    <p>Успешная транзакция</p><br>
     <span>Номер транзакции: </span>
-    <span>TX-789456123</span>
-    <span class="receipt-label">Дата и время:</span>
-    <span class="receipt-value" id="transactionDate"></span>
-    <span class="receipt-label">Сумма:</span>
-    <span class="receipt-value">1 000 ₽</span>
-    <span class="receipt-label">Статус:</span>
-    <span class="receipt-value text-success">Успешно</span>
+    <span>TX-789456123</span><br>
+    <span class="receipt-label">Дата и время: </span>
+    <span class="receipt-value" id="transactionDate"></span><br>
+    <span class="receipt-label">Сумма: </span>
+    <span class="receipt-value">1 000 ₽</span><br>
+    <span class="receipt-label">Статус: </span>
+    <span class="receipt-value text-success">Успешно</span><br>
     
 {% endblock %}
 
