@@ -46,6 +46,16 @@ def get_random_words(request: WSGIRequest, task=9, limit=0):
     return JsonResponse({"words": words_shuffeled[:limit]})
 
 
+def get_random_word(request: WSGIRequest, task=9):
+    if not(9 <= task <= 12):
+        return bad_request(request, "No such table")
+    
+    words = WordsSerializer(tasks[task].objects.all()).data
+    word = random.choice(words)
+
+    return JsonResponse(word)
+
+
 def serializater_testing(request: WSGIRequest):
     words = Task_11.objects.all()
     ser = WordsSerializer(words)
