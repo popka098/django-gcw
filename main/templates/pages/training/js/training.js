@@ -101,10 +101,10 @@ function move_context_after() {
 }
 
 String.prototype.toHHMMSS = function () {
-    var sec_num = parseInt(this, 10);
-    var hours = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - hours * 3600) / 60);
-    var seconds = sec_num - hours * 3600 - minutes * 60;
+    let sec_num = parseInt(this, 10);
+    let hours = Math.floor(sec_num / 3600);
+    let minutes = Math.floor((sec_num - hours * 3600) / 60);
+    let seconds = sec_num - hours * 3600 - minutes * 60;
 
     if (hours < 10) {
         hours = "0" + hours;
