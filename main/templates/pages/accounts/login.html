@@ -8,15 +8,15 @@
 
 {% block content %}
 
-	<div class="div">
+	<div class="main-body">
 
 			<div class="login-form">
 
-				<div class="input-field_1"></div>
+				<input class="input-login" type="text" name="myText" />
 
 				<div class="login-text">Логин / Эл.Почта</div>
 
-				<div class="input-field_2"></div>
+				<input class="input-password" type="password" name="myPassword" />
 
 				<div class="password-text">Пароль</div>
 			</div>
@@ -26,8 +26,8 @@
 				<a href="{% url 'registration' %}" style="text-decoration: none;"><span class="span">Регистрация </span></a>
 			</div>
 
-			<div class="sing-in-button">
-				<div class="sing-in-text">Войти</div>
+			<div>
+				<input class="sing-in-button" type="submit" value="Войти">
 			</div>
 
   	</div>
