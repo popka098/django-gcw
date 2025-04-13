@@ -132,3 +132,7 @@ if SECRET_KEY == 'Insert secret key here and uncomment this variable':
 
 
 #DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
+FIXTURES_DIRS = [
+    '/main/database'
+]
