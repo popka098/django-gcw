@@ -50,7 +50,11 @@ def login_page(request):
         return HttpResponse('Некоректные данные')
 
     data = form.data
-    user = authenticate(username=data['username'], password=data['password'])
+    if data['username'].count('@') == 0:
+        user = authenticate(username=data['username'], password=data['password'])
+    else:
+        use = User.objects.filter(email=data['username'])
+        user = authenticate(username=use[0], password=data['password'])
     if user is not None:
         if user.is_active:
             login(request, user)
