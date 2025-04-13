@@ -3,9 +3,16 @@
 {% block content %}
     <div>
         <div class="content center">
+            {% if request.user.is_authenticated %}
+            <h1>Wellcome, {{ request.user.username }}!</h1>
+            {% else %}
             <h1>Wellcome!</h1>
+            {% endif %}
+            {% if is_login %}
+                Только что залогинелись
+            {% endif %}
             <hr>
-            <p>Это маленький и очень простой сайт</p>
+            <p>{{ subscription_status }}</p>
             <ul>
                 <li>Автор: {{ author }}</li>
                 <li>Количество страниц: {{ pages }}</li>
