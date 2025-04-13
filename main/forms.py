@@ -6,16 +6,16 @@ from django.contrib.auth.forms import UserCreationForm
 from PIL import Image
 
 class LoginForm(forms.Form):
-    username = forms.CharField(
-                               widget=forms.TextInput(
-                                   attrs={"class": "input-login"}), label='')
-    password = forms.CharField(
-        widget=forms.PasswordInput(
-            attrs={"class": "input-password"}), label='')
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "input-login"}), label='')
+    password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "input-password"}), label='')
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "input-username"}), label='')
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "input-name"}), label='')
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "input-lastname"}), label='')
+    email = forms.CharField(widget=forms.TextInput(attrs={"class": "input-email"}), label='')
+    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={"class": "input-password"}))
+    password2 = forms.CharField(label='', widget=forms.PasswordInput(attrs={"class": "input-doblepassword"}))
 
     class Meta:
         model = User

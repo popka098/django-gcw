@@ -13,8 +13,8 @@
 			<div class="registration-form">
 
 				<form action="." method="post">
-        		{{ form.as_p }}
-				{% csrf_token %}
+        		{{ user_form.as_p }}
+                {% csrf_token %}
         		<p><input class="sing-in-button" type="submit" value="Регистрация"></p>
     			</form>
 
@@ -28,7 +28,7 @@
 
 			</div>
 			<div class="main-registration">Регистрация</div>
-			<div class="sing-in-text" >
+			<div class="log-in-text" >
 				<span>Есть аккаунта? </span>
 				<a href="{% url 'login' %}" style="text-decoration: none;"><span class="span">Войти </span></a>
 			</div>
@@ -42,13 +42,6 @@
       			</a>
 
 			</div>
-        <h1>Создание аккаунта</h1>
-            <p>Пожалуйста, создайте акканут:</p>
-                <form action="." method="post">
-                {{ user_form.as_p }}
-                {% csrf_token %}
-            <p><input type="submit" value="Создать"></p>
-        </form>
 
   	</div>
 
