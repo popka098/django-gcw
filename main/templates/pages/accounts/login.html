@@ -12,11 +12,15 @@
 
 			<div class="login-form">
 
-				<input class="input-login" type="text" name="myText" />
+				<form action="." method="post">
+        		{{ form.as_p }}
+				{% csrf_token %}
+        		<p><input class="sing-in-button" type="submit" value="Войти"></p>
+    			</form>
+
 
 				<div class="login-text">Логин / Эл.Почта</div>
 
-				<input class="input-password" type="password" name="myPassword" />
 
 				<div class="password-text">Пароль</div>
 			</div>
@@ -26,9 +30,7 @@
 				<a href="{% url 'registration' %}" style="text-decoration: none;"><span class="span">Регистрация </span></a>
 			</div>
 
-			<div>
-				<input class="sing-in-button" type="submit" value="Войти">
-			</div>
+
 
   	</div>
 

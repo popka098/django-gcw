@@ -43,6 +43,8 @@ def login_page(request):
         return render(request, "pages/accounts/login.html", context)
 
     form = LoginForm(request.POST)
+
+
     context["form"] = form
     if not form.is_valid():
         return HttpResponse('Некоректные данные')

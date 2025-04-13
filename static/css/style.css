@@ -35,7 +35,7 @@
 }
 .logo-icon {
     position: absolute;
-    top: 10px;
+    top: 100px;
     left: 21px;
     width: 459px;
     height: 95px;
@@ -116,21 +116,16 @@
 }
 .sing-in-button {
     position: absolute;
-    top: 61.5%;
+    top: 71.5%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     background-color: #f79a23;
     width: 242px;
     height: 56px;
-}
-.sing-in-text {
-    position: absolute;
-    top: 22%;
-    left: 33%;
-    font-weight: 600;
     color: #f2eee5;
 }
+
 body{
     background-color: #F2EEE5;
     margin: 0;

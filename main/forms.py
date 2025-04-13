@@ -6,8 +6,12 @@ from django.contrib.auth.forms import UserCreationForm
 from PIL import Image
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='Логин')
-    password = forms.CharField(widget=forms.PasswordInput,label='Пароль')
+    username = forms.CharField(
+                               widget=forms.TextInput(
+                                   attrs={"class": "input-login"}))
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "input-password"}))
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
