@@ -116,7 +116,7 @@
 }
 .sing-in-button {
     position: absolute;
-    top: 71.5%;
+    top: 81.5%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
@@ -124,7 +124,52 @@
     width: 242px;
     height: 56px;
     color: #f2eee5;
+    font-weight: 600;
 }
+.google-button {
+    position: absolute;
+    top: 71.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.74);
+    border: 2px solid #23b0f7;
+    box-sizing: border-box;
+    width: 330px;
+    height: 51px;
+}
+.google-button-2 {
+    position: absolute;
+    top: 50.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 2px solid #23b0f7;
+    box-sizing: border-box;
+    width: 330px;
+    height: 51px;
+}
+.google-logo-icon {
+    position: absolute;
+    top: 50%;
+    left: 9%;
+    transform: translate(-50%, -50%);
+    width: 45px;
+    height: 45px;
+}
+.google-text {
+    position: absolute;
+    top: 50%;
+    left: 58%;
+    transform: translate(-50%, -50%);
+    width: 247px;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: Inter;
+    color: #262626;
+}
+
 
 body{
     background-color: #F2EEE5;

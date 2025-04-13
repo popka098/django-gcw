@@ -8,10 +8,10 @@ from PIL import Image
 class LoginForm(forms.Form):
     username = forms.CharField(
                                widget=forms.TextInput(
-                                   attrs={"class": "input-login"}))
+                                   attrs={"class": "input-login"}), label='')
     password = forms.CharField(
         widget=forms.PasswordInput(
-            attrs={"class": "input-password"}))
+            attrs={"class": "input-password"}), label='')
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)

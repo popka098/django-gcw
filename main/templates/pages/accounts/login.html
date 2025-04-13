@@ -30,7 +30,15 @@
 				<a href="{% url 'registration' %}" style="text-decoration: none;"><span class="span">Регистрация </span></a>
 			</div>
 
+			<div class="google-button">
 
+				<img class="google-logo-icon" alt="" src="{% static 'img/login/google-logo.png' %}">
+				<div class="google-text">Войти через Google</div>
+				<a class="google-button-2" href="{% url 'social:begin' 'google-oauth2' %}">
+
+      			</a>
+
+			</div>
 
   	</div>
 
