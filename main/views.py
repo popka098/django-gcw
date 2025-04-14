@@ -54,7 +54,10 @@ def login_page(request):
         user = authenticate(username=data['username'], password=data['password'])
     else:
         use = User.objects.filter(email=data['username'])
-        user = authenticate(username=use[0], password=data['password'])
+        if len(use) > 0:
+            user = authenticate(username=use[0], password=data['password'])
+        else:
+            user = None
     if user is not None:
         if user.is_active:
             login(request, user)
