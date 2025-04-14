@@ -6,7 +6,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from rest_framework.exceptions import bad_request
 
 from training.models import Task_9, Task_10, Task_11, Task_12
-from training.models import TaskSerializer, WordsSerializer
+from training.serializers import TaskSerializer, WordsSerializer
 
 tasks = {
     9: Task_9,
