@@ -60,6 +60,10 @@ let end_time_ind = 0;
 function change_time_end() {
     if (!is_sub) {
         // redirect на покупку деняк
+        // redirect на покупку деняк
+        // redirect на покупку деняк
+        // redirect на покупку деняк
+        // redirect на покупку деняк
         return;
     }
 
@@ -297,6 +301,13 @@ function timer_tick() {
     element_timer.innerHTML = (timer + "").toHHMMSS();
 
     if (timer >= end_times[end_time_ind]) {
+                
+
+
+        // redirect на статистику за эту сессию
+        // redirect на статистику за эту сессию
+        // redirect на статистику за эту сессию
+        // redirect на статистику за эту сессию
         // redirect на статистику за эту сессию
         console.log("ENDD");
     }
