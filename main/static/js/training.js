@@ -3,7 +3,7 @@
 // инициализация констант и переменных
 
 // получаемые данные
-let is_advanced = false; // куплена ли подписка
+let is_sub = false; // куплена ли подписка
 
 let task = window.location.href.slice(-2, -1) - 0;
 if (task != 9) {
@@ -11,26 +11,7 @@ if (task != 9) {
 }
 console.log(task);
 
-const words = [
-    {
-        Word: "фланелевый",
-        Context_Before: "",
-        Pass: "фланел.вый",
-        Context_After: "",
-    },
-    {
-        Word: "ситечко",
-        Context_Before: "чайное",
-        Pass: "сит.чко",
-        Context_After: "",
-    },
-    {
-        Word: "ветряная",
-        Context_Before: "",
-        Pass: "ветр.ная",
-        Context_After: "мельница",
-    },
-]; // тестовые слова
+
 // init
 const char_amount_const = 500;
 
@@ -63,6 +44,10 @@ init_words_queue().then(() => {
     element_compl.innerHTML = compl;
 });
 
+get_user_sub().then(() => {
+    console.log(is_sub);
+});
+
 let mistake_counter = 0;
 let success_counter = 0;
 let timer = 0; // seconds
@@ -73,7 +58,7 @@ let end_time_ind = 0;
 // вспомогательные функции
 
 function change_time_end() {
-    if (!is_advanced) {
+    if (!is_sub) {
         // redirect на покупку деняк
         return;
     }
@@ -221,6 +206,27 @@ async function init_words_queue() {
         } else {
             console.error('Ключ "words" отсутствует или не является массивом');
         }
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+    }
+}
+
+async function get_user_sub(){
+    try {
+        const apiUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            "/api/get_user_sub"
+    
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+        }
+        const data = await response.json();
+        
+        is_sub = data.sub; 
+    
     } catch (error) {
         console.error('Ошибка при получении данных:', error);
     }

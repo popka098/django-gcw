@@ -60,3 +60,5 @@ class Profile(models.Model):
         blank=True, 
         default="",
     )
+
+    subscribe = models.BooleanField(default=False)

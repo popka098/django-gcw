@@ -22,7 +22,7 @@ def gen_base_context(request: WSGIRequest, pagename: str):
     context = {
         "pagename": pagename,
         "user": request.user if request.user.is_authenticated else "Anon",
-        "user_icon": Profile.objects.get(user=request.user).icon if request.user.is_authenticated else "",
+        # "user_icon": Profile.objects.get(user=request.user).icon if request.user.is_authenticated else "",
     }
     return context
 

@@ -8,6 +8,9 @@ from rest_framework.exceptions import bad_request
 from training.models import Task_9, Task_10, Task_11, Task_12
 from training.serializers import TaskSerializer, WordsSerializer
 
+from main.models import Profile
+
+
 tasks = {
     9: Task_9,
     10: Task_10,
@@ -17,6 +20,9 @@ tasks = {
 
 
 def get_all_words(request: WSGIRequest, limit=0):
+    if request.method == "POST":
+        return bad_request(request, "Only GET method")
+
     words = (
         WordsSerializer(Task_9.objects.all()).data +
         WordsSerializer(Task_10.objects.all()).data +
@@ -33,6 +39,9 @@ def get_all_words(request: WSGIRequest, limit=0):
 
 
 def get_random_words(request: WSGIRequest, task=9, limit=0):
+    if request.method == "POST":
+        return bad_request(request, "Only GET method")
+
     if not(9 <= task <= 12):
         return bad_request(request, "No such table")
     
@@ -47,6 +56,9 @@ def get_random_words(request: WSGIRequest, task=9, limit=0):
 
 
 def get_random_word(request: WSGIRequest, task=9):
+    if request.method == "POST":
+        return bad_request(request, "Only GET method")
+
     if not(9 <= task <= 12):
         return bad_request(request, "No such table")
     
@@ -62,3 +74,15 @@ def serializater_testing(request: WSGIRequest):
     return JsonResponse({"words": ser.data})
 
 
+def get_user_sub(request: WSGIRequest):
+    if request.method == "POST":
+        return bad_request(request, "Only GET method")
+    
+    if not request.user.is_authenticated:
+        return JsonResponse({"sub": False})
+    
+    return JsonResponse(
+        {
+            "sub": Profile.objects.get(user=request.user).subscribe
+        }
+    )
