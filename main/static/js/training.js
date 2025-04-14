@@ -57,7 +57,16 @@ let end_time_ind = 0;
 
 // вспомогательные функции
 
+function getCSRFToken() {
+    return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+}
+
+
 function change_time_end() {
+    if (is_started) {
+        return
+    }
+
     if (!is_sub) {
         // redirect на покупку деняк
         // redirect на покупку деняк
@@ -130,6 +139,43 @@ String.prototype.toHHMMSS = function () {
     }
     return hours + ":" + minutes + ":" + seconds;
 };
+
+
+async function post_statistcs() {
+    try {
+        const apiUrl = 
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            "/api/save_statistics";
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
+                },
+                body: JSON.stringify(
+                    {
+                        "time": timer,
+                        "successes": success_counter,
+                        "mistakes": mistake_counter
+                    }
+                ) 
+            });
+
+        if (!response.ok) {
+            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+        }
+
+        const responseData = await response.json(); 
+        return responseData; 
+    } catch (error) {
+        console.error('Error:', error); 
+        throw error; 
+    }
+}
+
 
 function get_next_word_api() {
     return new Promise((resolve, reject) => {
@@ -301,15 +347,17 @@ function timer_tick() {
     element_timer.innerHTML = (timer + "").toHHMMSS();
 
     if (timer >= end_times[end_time_ind]) {
-                
+        post_statistcs().then(() => {
+            clearInterval(timerID);
+            // redirect на статистику за эту сессию
+            // redirect на статистику за эту сессию
+            // redirect на статистику за эту сессию
+            // redirect на статистику за эту сессию
+            // redirect на статистику за эту сессию
+            console.log("ENDD");
+        })
 
 
-        // redirect на статистику за эту сессию
-        // redirect на статистику за эту сессию
-        // redirect на статистику за эту сессию
-        // redirect на статистику за эту сессию
-        // redirect на статистику за эту сессию
-        console.log("ENDD");
     }
 }
 

@@ -1,4 +1,5 @@
 import random
+import json
 
 from django.http import JsonResponse
 from django.core.handlers.wsgi import WSGIRequest
@@ -87,5 +88,33 @@ def get_user_sub(request: WSGIRequest):
     return JsonResponse(
         {
             "sub": Profile.objects.get(user=request.user).subscribe
+        }
+    )
+
+
+def save_statistics(request: WSGIRequest):
+    if request.method == "GET":
+        return bad_request(request, "POST only")
+    
+    if not request.user.is_authenticated:
+        return JsonResponse(
+            {
+                "auntificated": False,
+                "success": False,
+            }
+        )
+    
+
+    data = json.loads(request.body)
+    
+    time = data["time"]
+    successes = data["successes"]
+    mistakes = data["mistakes"]
+    print(data)
+
+    return JsonResponse(
+        {
+            "success": True,
+            "auntificated": True,
         }
     )
