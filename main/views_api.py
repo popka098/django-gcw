@@ -75,6 +75,9 @@ def serializater_testing(request: WSGIRequest):
 
 
 def get_user_sub(request: WSGIRequest):
+    """
+    docs
+    """
     if request.method == "POST":
         return bad_request(request, "Only GET method")
     
