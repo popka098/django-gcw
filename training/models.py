@@ -1,7 +1,7 @@
 from django.db import models
 
 from main.models import Profile
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -9,11 +9,10 @@ class Stats(models.Model):
     time = models.IntegerField()
     successes = models.IntegerField()
     mistakes = models.IntegerField()
-    user = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
-
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
 class Atts(models.Model):
     time = models.IntegerField()
     successes = models.IntegerField()
     mistakes = models.IntegerField()
-    stat = models.ForeignKey(to=Stats, on_delete=models.CASCADE)
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
