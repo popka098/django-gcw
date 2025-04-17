@@ -242,7 +242,7 @@ async function init_words_queue() {
             "//" +
             window.location.host +
             "/api/get_random_words/" +
-            task + "/" + 10;
+            task + "/" + 20;
 
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -420,8 +420,8 @@ function key_space(key) {
 function input(key) {
     if (
         (key != words_queue[0]["Pass"][current_word.length] &&
-            words_queue[0]["Pass"][current_word.length] != ".") ||
-        !isLetter(key)
+        words_queue[0]["Pass"][current_word.length] != ".") ||
+        (!isLetter(key) && key != ".")
     ) {
         return;
     }
@@ -448,6 +448,8 @@ function controller(e) {
         return;
     }
 
+    input(key);
+
     if (key == " ") {
         // проверка введенного слова cur_compl на правильность
         key_space(key);
@@ -460,6 +462,5 @@ function controller(e) {
         // return;
     }
 
-    input(key);
     return;
 }
