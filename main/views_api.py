@@ -69,12 +69,6 @@ def get_random_word(request: WSGIRequest, task=9):
     return JsonResponse(word)
 
 
-def serializater_testing(request: WSGIRequest):
-    words = Task_11.objects.all()
-    ser = WordsSerializer(words)
-    return JsonResponse({"words": ser.data})
-
-
 def get_user_sub(request: WSGIRequest):
     """
     docs
