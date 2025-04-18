@@ -13,12 +13,12 @@ class ProfileAdmin(admin.ModelAdmin):
 
     def subscribe(self, request, queryset):
         queryset.update(subscribe=True)
-        self.message_user(request, "selected users are in subscrition")
+        self.message_user(request, "selected users are in subscription")
     subscribe.short_description = "subscribe users"
 
     def unsubscribe(self, request, queryset):
         queryset.update(subscribe=False)
-        self.message_user(request, "selected users are out subscrition")
+        self.message_user(request, "selected users are out subscription")
     unsubscribe.short_description = "unsubscribe users"
 
 admin.site.register(Profile, ProfileAdmin)

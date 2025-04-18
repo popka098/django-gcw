@@ -42,7 +42,8 @@ class Task_10_Resource(resources.ModelResource):
         ):
             return True
         return False
-
+    
+    
 class Task_11_Resource(resources.ModelResource):
     class Meta:
         model = models.Task_11

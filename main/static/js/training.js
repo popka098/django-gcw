@@ -1,4 +1,4 @@
-// этот код не будет робить для н и нн ((((
+// этот код не будет работает для н и нн ((((
 
 // инициализация констант и переменных
 
@@ -15,19 +15,19 @@ console.log(task);
 // init
 const char_amount_const = 500;
 
-let element_compl = document.getElementById("compl"); // элемент с пройденными словами
+let element_completed = document.getElementById("compl"); // элемент с пройденными словами
 let element_next = document.getElementById("next"); // элемент с предстоящими словами
 let element_start = document.getElementById("start"); // элемент с надписью Press space to start
 let element_timer = document.getElementById("timer");
 let element_choose_time_button = document.getElementById("choose_time_button");
 
-element_compl.style.display = "none";
+element_completed.style.display = "none";
 element_next.style.display = "none";
 
 let is_started = false;
 
-let words_queue = []; // очаредь слов
-let compl = ""; // все напечатанное
+let words_queue = []; // очередь слов
+let completed = ""; // все напечатанное
 let current_word = ""; // текущее напечатанное слово
 
 let next_input_view = ""; // отображение следующих слов
@@ -41,7 +41,7 @@ init_words_queue().then(() => {
         plus_next_inp(words_queue[i]);
     }
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
-    element_compl.innerHTML = compl;
+    element_completed.innerHTML = completed;
 });
 
 get_user_sub().then(() => {
@@ -68,11 +68,10 @@ function change_time_end() {
     }
 
     if (!is_sub) {
-        // redirect на покупку деняк
-        // redirect на покупку деняк
-        // redirect на покупку деняк
-        // redirect на покупку деняк
-        // redirect на покупку деняк
+        // redirect на покупку денег
+        // redirect на покупку денег
+        // redirect на покупку денег
+        // redirect на покупку денег
         return;
     }
 
@@ -102,21 +101,21 @@ function plus_next_inp(w) {
 }
 
 function move_context_before() {
-    compl += next_input_view.slice(
+    completed += next_input_view.slice(
         0,
         words_queue[0]["Context_Before"].length + 3
     );
-    compl += " ";
+    completed += " ";
     next_input_view = next_input_view.slice(
         words_queue[0]["Context_Before"].length + 3
     );
 }
 function move_context_after() {
-    compl += next_input_view.slice(
+    completed += next_input_view.slice(
         0,
         words_queue[0]["Context_After"].length + 3
     );
-    compl += " ";
+    completed += " ";
     next_input_view = next_input_view.slice(
         words_queue[0]["Context_After"].length + 3
     );
@@ -141,7 +140,7 @@ String.prototype.toHHMMSS = function () {
 };
 
 
-async function post_statistcs() {
+async function post_statistics() {
     try {
         const apiUrl = 
             window.location.protocol +
@@ -196,10 +195,10 @@ function get_next_word_api() {
                     // Успешный ответ
                     try {
                         const data = JSON.parse(xhr.responseText);
-                        resolve(data); // Разрешаем промис с данными
+                        resolve(data); 
                     } catch (error) {
-                        console.error("Ошибка при парсинге JSON:", error);
-                        reject(error); // Отклоняем промис с ошибкой
+                        console.error("Ошибка при парсинг JSON:", error);
+                        reject(error); 
                     }
                 } else {
                     console.error(
@@ -210,17 +209,17 @@ function get_next_word_api() {
                         new Error(
                             "Ошибка при получении данных: " + xhr.statusText
                         )
-                    ); // Отклоняем промис с ошибкой
+                    ); 
                 }
             }
         };
 
-        xhr.send(); // Отправляем запрос
+        xhr.send();
     });
 }
 async function get_next_word() {
     try {
-        const result = await get_next_word_api(); // Ждем выполнения промиса
+        const result = await get_next_word_api(); 
 
         // Проверяем наличие нужных полей перед доступом
         if (result && typeof result === "object") {
@@ -230,8 +229,8 @@ async function get_next_word() {
             throw new Error("Полученные данные имеют неверную структуру");
         }
     } catch (error) {
-        console.error("Ошибка:", error.message); // Обрабатываем ошибку
-        throw error; // Пробрасываем ошибку дальше, если нужно
+        console.error("Ошибка:", error.message); 
+        throw error; 
     }
 }
 
@@ -283,7 +282,7 @@ async function get_user_sub(){
 }
 
 function update_word_queue() {
-    words_queue = words_queue.slice(1); // добавление новых слов в очаредь
+    words_queue = words_queue.slice(1); // добавление новых слов в очередь
     get_next_word().then(() => {
         plus_next_inp(words_queue[words_queue.length - 1]);
     });
@@ -298,8 +297,8 @@ function update_next_inp_back() {
 }
 
 function slice_completed() {
-    if (compl.length > char_amount_const) {
-        compl = compl.slice(-char_amount_const);
+    if (completed.length > char_amount_const) {
+        completed = completed.slice(-char_amount_const);
     }
 }
 function isLetter(str) {
@@ -311,30 +310,30 @@ function highlight_correct() {
     ind = words_queue[0]["Pass"].indexOf(".");
     len = words_queue[0]["Pass"].length;
 
-    compl =
-        compl.slice(0, -(len - ind)) +
+    completed =
+        completed.slice(0, -(len - ind)) +
         "<span style='color: green'>" + // 27
-        compl.slice(-(len - ind), -(len - ind) + 1) +
+        completed.slice(-(len - ind), -(len - ind) + 1) +
         "</span>" + // 7
-        compl.slice(-(len - ind) + 1);
+        completed.slice(-(len - ind) + 1);
 }
 function highlight_incorrect() {
     let ind, len;
     ind = words_queue[0]["Pass"].indexOf(".");
     len = words_queue[0]["Pass"].length;
 
-    compl =
-        compl.slice(0, -(len - ind)) +
+    completed =
+        completed.slice(0, -(len - ind)) +
         "<span style='color: red'>" + // 25
-        compl.slice(-(len - ind), -(len - ind) + 1) +
+        completed.slice(-(len - ind), -(len - ind) + 1) +
         "</span>" + // 7
-        compl.slice(-(len - ind) + 1);
+        completed.slice(-(len - ind) + 1);
 }
 
 function start() {
     element_start.style.display = "none";
 
-    element_compl.style.display = "block";
+    element_completed.style.display = "block";
     element_next.style.display = "block";
 
     is_started = true;
@@ -347,14 +346,14 @@ function timer_tick() {
     element_timer.innerHTML = (timer + "").toHHMMSS();
 
     if (timer >= end_times[end_time_ind]) {
-        post_statistcs().then(() => {
+        post_statistics().then(() => {
             clearInterval(timerID);
             // redirect на статистику за эту сессию
             // redirect на статистику за эту сессию
             // redirect на статистику за эту сессию
             // redirect на статистику за эту сессию
             // redirect на статистику за эту сессию
-            console.log("ENDD");
+            console.log("END");
         })
 
 
@@ -370,11 +369,11 @@ function key_backspace() {
 
     update_next_inp_back();
 
-    compl = compl.slice(0, -1);
+    completed = completed.slice(0, -1);
     current_word = current_word.slice(0, -1);
 
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
-    element_compl.innerHTML = compl;
+    element_completed.innerHTML = completed;
     return;
 }
 
@@ -393,7 +392,7 @@ function key_space(key) {
         highlight_incorrect();
         mistake_counter++;
     }
-    compl += key;
+    completed += key;
 
     if (words_queue[0]["Context_After"] != "") {
         move_context_after();
@@ -409,7 +408,7 @@ function key_space(key) {
 
     current_word = ""; // обновление и обнуление переменных
     slice_completed();
-    element_compl.innerHTML = compl;
+    element_completed.innerHTML = completed;
 
     update_next_inp_front();
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
@@ -425,11 +424,11 @@ function input(key) {
     ) {
         return;
     }
-    compl += key;
+    completed += key;
     current_word += key;
 
     slice_completed();
-    element_compl.innerHTML = compl;
+    element_completed.innerHTML = completed;
     update_next_inp_front();
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
     return;
@@ -451,15 +450,13 @@ function controller(e) {
     input(key);
 
     if (key == " ") {
-        // проверка введенного слова cur_compl на правильность
         key_space(key);
         return;
     }
 
     if (e.code == "Backspace") {
-        // удаление символов
         key_backspace();
-        // return;
+        return;
     }
 
     return;
