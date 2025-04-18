@@ -104,7 +104,22 @@ def save_statistics(request: WSGIRequest):
     time = data["time"]
     successes = data["successes"]
     mistakes = data["mistakes"]
-    print(data)
+
+    mistakes_answers = [
+        word["Mistake"][:word["Pass"].find(".")] + 
+        word["Mistake"][word["Pass"].find(".")].upper() + 
+        word["Mistake"][word["Pass"].find(".") + 1:]
+        for word in data["mistake_words"]
+    ]
+    mistakes_correct = [
+        word["Word"][:word["Pass"].find(".")] + 
+        word["Word"][word["Pass"].find(".")].upper() + 
+        word["Word"][word["Pass"].find(".") + 1:]
+        for word in data["mistake_words"]
+    ]
+
+    print(mistakes_answers)
+    print(mistakes_correct)
 
     return JsonResponse(
         {
