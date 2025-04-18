@@ -29,6 +29,7 @@ let is_started = false;
 let words_queue = []; // очередь слов
 let completed = ""; // все напечатанное
 let current_word = ""; // текущее напечатанное слово
+let mistake_words = [];
 
 let next_input_view = ""; // отображение следующих слов
 
@@ -159,7 +160,8 @@ async function post_statistics() {
                     {
                         "time": timer,
                         "successes": success_counter,
-                        "mistakes": mistake_counter
+                        "mistakes": mistake_counter,
+                        "mistake_words": mistake_words
                     }
                 ) 
             });
@@ -335,7 +337,7 @@ function highlight_incorrect() {
     if (ind == len - 1) {
         completed = 
             completed.slice(0, -1) +
-            "<span style='color: green'>" + 
+            "<span style='color: red'>" + 
             completed.slice(-1) +
             "</span>";
         return;
@@ -343,9 +345,9 @@ function highlight_incorrect() {
 
     completed =
         completed.slice(0, -(len - ind)) +
-        "<span style='color: red'>" + // 25
+        "<span style='color: red'>" + 
         completed.slice(-(len - ind), -(len - ind) + 1) +
-        "</span>" + // 7
+        "</span>" +
         completed.slice(-(len - ind) + 1);
 }
 
@@ -409,6 +411,9 @@ function key_space(key) {
     } else {
         console.log("Fail!");
         highlight_incorrect();
+
+        mistake_words.push(words_queue[0]);
+        mistake_words[mistake_words.length - 1]["Mistake"] = current_word;
         mistake_counter++;
     }
     completed += key;
