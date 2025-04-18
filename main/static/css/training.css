@@ -13,7 +13,7 @@ body {
     width: 100%; /* Ширина контейнера на весь экран */
     position: relative;
 }
-#compl {
+#completed {
     position: absolute;
     left: 50%; /* Сдвигаем влево на 50% ширины контейнера */
     transform: translateX(-100%); /* Сдвигаем влево на ширину элемента */

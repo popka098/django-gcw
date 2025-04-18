@@ -15,7 +15,7 @@ console.log(task);
 // init
 const char_amount_const = 500;
 
-let element_completed = document.getElementById("compl"); // элемент с пройденными словами
+let element_completed = document.getElementById("completed"); // элемент с пройденными словами
 let element_next = document.getElementById("next"); // элемент с предстоящими словами
 let element_start = document.getElementById("start"); // элемент с надписью Press space to start
 let element_timer = document.getElementById("timer");
@@ -43,6 +43,7 @@ init_words_queue().then(() => {
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
     element_completed.innerHTML = completed;
 });
+
 
 get_user_sub().then(() => {
     console.log(is_sub);
@@ -310,17 +311,35 @@ function highlight_correct() {
     ind = words_queue[0]["Pass"].indexOf(".");
     len = words_queue[0]["Pass"].length;
 
+    if (ind == len - 1) {
+        completed = 
+            completed.slice(0, -1) +
+            "<span style='color: green'>" + 
+            completed.slice(-1) +
+            "</span>";
+        return;
+    }
+
     completed =
         completed.slice(0, -(len - ind)) +
-        "<span style='color: green'>" + // 27
+        "<span style='color: green'>" +
         completed.slice(-(len - ind), -(len - ind) + 1) +
-        "</span>" + // 7
+        "</span>" + 
         completed.slice(-(len - ind) + 1);
 }
 function highlight_incorrect() {
     let ind, len;
     ind = words_queue[0]["Pass"].indexOf(".");
     len = words_queue[0]["Pass"].length;
+
+    if (ind == len - 1) {
+        completed = 
+            completed.slice(0, -1) +
+            "<span style='color: green'>" + 
+            completed.slice(-1) +
+            "</span>";
+        return;
+    }
 
     completed =
         completed.slice(0, -(len - ind)) +
