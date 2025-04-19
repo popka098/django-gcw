@@ -10,13 +10,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* Градиент фона */
+            background: #fff0f5;/* Градиент фона */
             font-family: 'Roboto', sans-serif;
             padding: 20px;
             margin: 0;
         }
         h1 {
-            color: #1e88e5; /* Цвет заголовка */
+            color: #fb8c00;
             margin-bottom: 20px;
             text-align: center;
             font-size: 2.5rem;
@@ -29,15 +29,15 @@
             max-width: 1500px;
             margin-bottom: 30px;
         }
-        .pdf-container {
-            flex: 1 ; /* Занимает доступное пространство */
+         .pdf-container {
+            flex: 1;
             height: 700px;
             overflow: hidden;
             border-radius: 10px;
-            background-color: #ffffff; /* Цвет фона контейнера */
+            background-color: #fff0f5; /* Светло-розовый фон контейнера */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border: 2px solid #1e88e5; /* Граница контейнера */
-            margin-right: 20px; /* Отступ между PDF и кнопками */
+            border: 2px solid #fb8c00; /* Оранжевая граница */
+            margin-right: 20px;
         }
         iframe {
             width: 100%;
@@ -54,7 +54,7 @@
             margin: 5px; /* Отступы между кнопками */
             border: none;
             border-radius: 5px;
-            background-color: #1e88e5; /* Цвет кнопок */
+            background-color: #fb8c00;
             color: white;
             font-size: 1rem;
             cursor: pointer;
@@ -74,18 +74,18 @@
 </head>
 <body>
 
-    <h1>Учебник</h1>
+    <h1>Каталог теории на ЕГЭ :)</h1>
     <div class="container">
         <div class="pdf-container">
             <iframe src="{% static 'pdf/file1.pdf' %}" id="pdfFrame"></iframe>
         </div>
 
         <div class="navigation">
-            <button onclick="changePage(0)">Задание 9</button>
-            <button onclick="changePage(1)">Задание 10</button>
-            <button onclick="changePage(2)">Задание 11</button>
-            <button onclick="changePage(3)">Задание 12</button>
-       <button onclick="goBack()">Назад</button> <!-- Кнопка "Назад" -->
+            <button onclick="changePage(0)">Задание 9.Корень слова</button>
+            <button onclick="changePage(1)">Задание 10. Приставка</button>
+            <button onclick="changePage(2)">Задание 11. Суффикс</button>
+            <button onclick="changePage(3)">Задание 12.Гл-ые формы</button>
+       <button onclick="goBack()">На главную</button> <!-- Кнопка "Назад" -->
         </div>
     </div>
 
