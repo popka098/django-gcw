@@ -1,0 +1,38 @@
+{% block content %}
+<div>
+    <h3>Общая статистика</h3>
+    <p>Общее колличество затраченного времени: <span>{{ time_all }}</span></p>
+    <p>Всего правильных ответов: <span>{{ success_all }}</span></p>
+    <p>Всего ошибок: <span>{{ mistakes_all }}</span></p>
+    <p>Ваш процент правильности: {{ kd }}%</p>
+    <br>
+    <br>
+</div>
+
+
+<div>
+    <h4>Ваши последние попытки:</h4>
+    <br>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Номер попытки</th>
+      <th scope="col">Затраченное время</th>
+      <th scope="col">Правильных ответов</th>
+      <th scope="col">Не правилньых ответов</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in attemps %}
+        <tr>
+        <th class="row">{{ item.id }}</th>
+        <td>{{ item.time }}</td>
+        <td>{{ item.successes }}</td>
+        <td>{{ item.mistakes }}</td>
+        </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+</div>
+{% endblock %}

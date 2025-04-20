@@ -7,6 +7,7 @@ from django.contrib import messages
 
 from main.views import gen_base_context
 
+from training.models import Stats, Atts
 from training.models import Task_9, Task_10, Task_11, Task_12, Task_15
 # Create your views here.
 
@@ -36,3 +37,17 @@ def training(request: WSGIRequest, task: int):
         return render(request, "pages/training/training.html", context)
 
     return render(request, "pages/training/training.html", context)
+
+
+def statistics_page(request: WSGIRequest):
+    # stat = Stats.objects.get(user=request.user)
+    # attemps = Atts.objects.filter(user=request.user)
+    # context = {
+    #     "time_all" : stat.time,
+    #     "success_all" : stat.successes,
+    #     "mistakes_all" : stat.mistakes,
+    #     "kd" : 0 if (stat.successes == 0 and stat.mistakes == 0) else int(100*(stat.successes / (stat.successes + stat.mistakes))),
+    #     "attemps": attemps,
+    # }
+    context = {}
+    return render(request, "pages/general_statistics.html", context)
