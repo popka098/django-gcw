@@ -10,6 +10,8 @@ from training.models import Task_9, Task_10, Task_11, Task_12
 from training.serializers import WordsSerializer
 
 from main.models import Profile
+from training.models import Atts, MistakesAnswers, Stats
+
 
 
 tasks = {
@@ -118,8 +120,7 @@ def save_statistics(request: WSGIRequest):
         for word in data["mistake_words"]
     ]
 
-    print(mistakes_answers)
-    print(mistakes_correct)
+    
 
     return JsonResponse(
         {

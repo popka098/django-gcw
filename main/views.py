@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from main.models import Profile
 from django.contrib.auth.models import User
+from training.models import Stats
 
 from main.forms import LoginForm, UserRegistrationForm
 
@@ -73,6 +74,8 @@ def registration_page(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
+
+
             return render(request, 'pages/accounts/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
