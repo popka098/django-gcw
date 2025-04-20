@@ -134,8 +134,6 @@ def data_entry_page(request: WSGIRequest):
 
     form = PaymentForm(request.POST)
     number = randint(100000000, 999999999)
-    print(form.is_valid())
-    print(request.POST)
 
 
     payment = Payments(
