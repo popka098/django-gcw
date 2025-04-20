@@ -100,7 +100,7 @@ def save_statistics(request: WSGIRequest):
             }
         )
     
-
+    stats = Stats.objects.get(user=request.user)
     data = json.loads(request.body)
     
     time = data["time"]
@@ -120,6 +120,27 @@ def save_statistics(request: WSGIRequest):
         for word in data["mistake_words"]
     ]
 
+    stats.time += time
+    stats.successes += successes
+    stats.mistakes += mistakes
+    stats.save()
+
+    attempt = Atts(
+        time=time,
+        successes=successes,
+        mistakes=mistakes,
+        user=request.user
+    )
+    attempt.save()
+
+    print(len(mistakes_answers), len(mistakes_correct))
+    for i in range(len(mistakes_answers)):
+        mis = MistakesAnswers(
+            input_answer=mistakes_answers[i],
+            correct_answer=mistakes_correct[i],
+            att=attempt
+        )
+        mis.save()
     
 
     return JsonResponse(
