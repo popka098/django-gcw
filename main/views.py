@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from main.models import Profile
-from django.contrib.auth.models import User
 from training.models import Stats
+from django.contrib.auth.models import User
 
 from main.forms import LoginForm, UserRegistrationForm
 
@@ -74,7 +74,11 @@ def registration_page(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-
+            
+            profile = Profile(user=new_user)
+            profile.save()
+            stats = Stats(user=new_user)
+            stats.save()
 
             return render(request, 'pages/accounts/register_done.html', {'new_user': new_user})
     else:

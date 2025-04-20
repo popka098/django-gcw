@@ -49,9 +49,9 @@ class Task_15(Task):
     pass
 
 class Stats(models.Model):
-    time = models.IntegerField()
-    successes = models.IntegerField()
-    mistakes = models.IntegerField()
+    time = models.IntegerField(default=0)
+    successes = models.IntegerField(default=0)
+    mistakes = models.IntegerField(default=0)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
 class Atts(models.Model):

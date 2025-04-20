@@ -20,14 +20,14 @@ class Profile(models.Model):
     """
     def path_file(instance, filename):
         """
-        Функция, которая переименовываает файл на уникальный индентификатор
+        Функция, которая переименовывает файл на уникальный идентификатор
         :param instance: модель
         :param filename: имя получаемого файла
         """
-        uniqe_id = uuid.uuid4()
+        unique_id = uuid.uuid4()
         ext = filename.split('.')[-1]
 
-        new_filename = f"{uniqe_id}.{ext}"
+        new_filename = f"{unique_id}.{ext}"
         return os.path.join("avatars/", new_filename)
 
 
