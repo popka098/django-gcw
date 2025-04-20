@@ -11,15 +11,32 @@
 <br /><br />
 
 <div class="container">
-    <span id="timer">00:00:00</span>
-    <button type="button" id="choose_time_button" onclick="change_time_end()">
-        120
-    </button>
+    <span class="timer" id="timer">00:00:00</span>
+    <div class="main-settings">
+            <button class="time-button-text" type="button" id="choose_time_button" onclick="change_time_end()" >
+                120
+            </button>
+            <button class="icon-time-button" type="button" id="choose_time_button_clock_icon" onclick="change_time_end()" >
+                <img alt="" src="{% static 'img/login/Clock.svg' %}">
+            </button>
+            <div class="line-settings"></div>
+            <div class="number-text">{{ pagename }}</div>
+
+            <form class="icon-number-button">
+                <label for="number-select"><img src="{% static 'img/login/Chevron down.svg' %}"></label>
+                <select name="numbers" id="number-select">
+                    <option value="petersburg">Номер 9</option>
+                    <option value="samara">Номер 10</option>
+                    <option value="perm">Номер 11</option>
+                    <option value="novosibirsk">Номер 12</option>
+                </select>
+            </form>
+    </div>
 </div>
 
 <hr />
 <div class="container">
-    <span id="start">Press space to start</span>
+    <span id="start">Нажмите "space" чтобы начать</span>
     <span id="completed"></span>
     <span id="next" style="color: lightslategray"></span>
 </div>
