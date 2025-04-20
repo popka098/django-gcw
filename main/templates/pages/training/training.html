@@ -17,28 +17,33 @@
                 120
             </button>
             <button class="icon-time-button" type="button" id="choose_time_button_clock_icon" onclick="change_time_end()" >
-                <img alt="" src="{% static 'img/login/Clock.svg' %}">
+                <img class="icon-time-button" src="{% static 'img/login/Clock.svg' %}">
             </button>
             <div class="line-settings"></div>
-            <div class="number-text">{{ pagename }}</div>
 
-            <form class="icon-number-button">
-                <label for="number-select"><img src="{% static 'img/login/Chevron down.svg' %}"></label>
-                <select name="numbers" id="number-select">
-                    <option value="petersburg">Номер 9</option>
-                    <option value="samara">Номер 10</option>
-                    <option value="perm">Номер 11</option>
-                    <option value="novosibirsk">Номер 12</option>
+            <form>
+                <img alt="" src="{% static 'img/login/Hash.svg' %}" class="icon-number">
+                <label for="numbers-select"></label>
+                <select class="number-list" name="numbers" id="numbers-select">
+                    <option class="number-select" value="task9">Номер 9</option>
+                    <option class="number-select" value="task10">Номер 10</option>
+                    <option class="number-select" value="task11">Номер 11</option>
+                    <option class="number-select" value="task12">Номер 12</option>
                 </select>
+
             </form>
     </div>
 </div>
 
 <hr />
 <div class="container">
-    <span id="start">Нажмите "space" чтобы начать</span>
+    <span id="start">Нажмите space чтобы начать</span>
+    <span class="space" id="start2">space</span>
     <span id="completed"></span>
     <span id="next" style="color: lightslategray"></span>
+    <button class="icon-retry-button" type="button" id="button_retry_icon" onclick="" >
+        <img src="{% static 'img/login/Rotate cw.svg' %}">
+    </button>
 </div>
 <br />
 
