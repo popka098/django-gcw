@@ -16,3 +16,8 @@ class Atts(models.Model):
     successes = models.IntegerField()
     mistakes = models.IntegerField()
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+
+ class MistakesAnswers(models.Model):
+     input_answer = models.TextField()
+     correct_answer = models.TextField()
+     att = models.ForeignKey(to=Atts, on_delete=models.CASCADE)
