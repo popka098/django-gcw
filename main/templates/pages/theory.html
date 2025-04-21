@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебник</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff0f5;/* Градиент фона */
+            font-family: 'Roboto', sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #fb8c00;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Тень для заголовка */
+        }
+        .container {
+            display: flex; /* Используем flexbox для размещения PDF и кнопок */
+            align-items: flex-start; /* Выравнивание по верхнему краю */
+            width: 80%;
+            max-width: 1500px;
+            margin-bottom: 30px;
+        }
+         .pdf-container {
+            flex: 1;
+            height: 700px;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: #fff0f5; /* Светло-розовый фон контейнера */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid #fb8c00; /* Оранжевая граница */
+            margin-right: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+        .navigation {
+            display: flex;
+            flex-direction: column; /* Кнопки в столбик */
+        }
+        button {
+            padding: 12px 25px;
+            margin: 5px; /* Отступы между кнопками */
+            border: none;
+            border-radius: 5px;
+            background-color: #fb8c00;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #2196f3; /* Цвет кнопок при наведении */
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+    </style>
+    {% load static %}
+</head>
+<body>
+
+    <h1>Каталог теории на ЕГЭ :)</h1>
+    <div class="container">
+        <div class="pdf-container">
+            <iframe src="{% static 'pdf/file1.pdf' %}" id="pdfFrame"></iframe>
+        </div>
+
+        <div class="navigation">
+            <button onclick="changePage(0)">Задание 9.Корень слова</button>
+            <button onclick="changePage(1)">Задание 10. Приставка</button>
+            <button onclick="changePage(2)">Задание 11. Суффикс</button>
+            <button onclick="changePage(3)">Задание 12.Гл-ые формы</button>
+       <button onclick="goBack()">На главную</button> <!-- Кнопка "Назад" -->
+        </div>
+    </div>
+
+    <script>
+        const pdfFiles = [
+            '{% static "pdf/file1.pdf" %}',
+            '{% static "pdf/file2.pdf" %}',
+            '{% static "pdf/file3.pdf" %}',
+            '{% static "pdf/file4.pdf" %}',
+        ];
+
+        function changePage(index) {
+            const pdfFrame = document.getElementById('pdfFrame');
+            pdfFrame.src = pdfFiles[index];
+        }
+
+        function goBack() {
+            window.location.href = 'http://127.0.0.1:8000/';
+        }
+    </script>
+
+</body>
+</html>
