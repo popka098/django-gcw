@@ -369,6 +369,7 @@ function timer_tick() {
     if (timer >= end_times[end_time_ind]) {
         post_statistics().then(() => {
             clearInterval(timerID);
+            window.location.href = "../../stats";
             // redirect на статистику за эту сессию
             // redirect на статистику за эту сессию
             // redirect на статистику за эту сессию

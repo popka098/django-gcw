@@ -5,7 +5,7 @@ from main import views as main_views
 import training.views as training_views
 
 from django.conf import settings
-from django.contrib.auth import views as auth_views, logout
+from django.contrib.auth import views as auth_views
 
 from django.conf.urls.static import static
 

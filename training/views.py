@@ -40,6 +40,7 @@ def training(request: WSGIRequest, task: int):
 
 
 def statistics_page(request: WSGIRequest):
+    context = {}
     # stat = Stats.objects.get(user=request.user)
     # attemps = Atts.objects.filter(user=request.user)
     # context = {
@@ -49,5 +50,4 @@ def statistics_page(request: WSGIRequest):
     #     "kd" : 0 if (stat.successes == 0 and stat.mistakes == 0) else int(100*(stat.successes / (stat.successes + stat.mistakes))),
     #     "attemps": attemps,
     # }
-    context = {}
     return render(request, "pages/general_statistics.html", context)
