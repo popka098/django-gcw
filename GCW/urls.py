@@ -19,6 +19,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/',main_views.profile_page, name='profile'),
     path('stats/', training_views.statistics_page, name='statistics'),
+    path('theory/', main_views.theory_page, name='theory'),
 
     path("api/", include("main.urls_api")),
 
