@@ -38,14 +38,13 @@
 <hr />
 <div class="container">
     <span id="start">Нажмите space чтобы начать</span>
-    <span class="space" id="start2">space</span>
     <span id="completed"></span>
     <span id="next" style="color: lightslategray"></span>
-    <button class="icon-retry-button" type="button" id="button_retry_icon" onclick="" >
+    <button class="icon-retry-button" type="button" id="button_retry_icon" onclick="window.location.reload()">
         <img src="{% static 'img/login/Rotate cw.svg' %}">
     </button>
-    <button class="statistic-button" type="button" id="button_statistic" onclick="" >
-        Статистика
+    <button class="statistic-button" type="button" id="button_statistic" onclick="window.location.href = '../../stats'" >
+        Закончить
     </button>
 </div>
 <br />
