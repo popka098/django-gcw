@@ -59,6 +59,18 @@ let end_time_ind = 0;
 
 // вспомогательные функции
 
+function redirect() {
+    const select = document.getElementById("numbers-select");
+    const val = select.value;
+
+    window.location.href = "../" + val;
+}
+window.onload = function() {
+    const select = document.getElementById("numbers-select");
+    select.value = "task" + task;
+}
+
+
 function getCSRFToken() {
     return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 }
