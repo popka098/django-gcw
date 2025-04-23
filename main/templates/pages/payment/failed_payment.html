@@ -3,11 +3,11 @@
 {% block content %} 
     <p>Ошибка транзакции</p><br>
     <span>Номер транзакции:</span>
-    <span>TX-789456123</span><br>
+    <span>{{ number }}</span><br>
     <span class="receipt-label">Дата и время:</span><br>
     <span class="receipt-value" id="transactionDate"></span>
     <span class="receipt-label">Статус:</span>
-    <span class="receipt-value text-success">Ошибка</span><br>
+    <span class="receipt-value text-danger">Ошибка</span><br>
     
     <p>Проверьте корректность введённых данных карты, а затем попробуйте еще раз</p>
     

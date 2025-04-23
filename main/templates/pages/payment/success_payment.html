@@ -3,11 +3,11 @@
 {% block content %} 
     <p>Успешная транзакция</p><br>
     <span>Номер транзакции: </span>
-    <span>TX-789456123</span><br>
+    <span>{{ number }}</span><br>
     <span class="receipt-label">Дата и время: </span>
     <span class="receipt-value" id="transactionDate"></span><br>
     <span class="receipt-label">Сумма: </span>
-    <span class="receipt-value">1 000 ₽</span><br>
+    <span class="receipt-value">{{ amount }} рублей</span><br>
     <span class="receipt-label">Статус: </span>
     <span class="receipt-value text-success">Успешно</span><br>
     

@@ -134,13 +134,14 @@ def data_entry_page(request: WSGIRequest):
 
     form = PaymentForm(request.POST)
     number = randint(100000000, 999999999)
+    request.session["number"] = str(number)
 
 
     payment = Payments(
         number=number,
         date=datetime.date.today(),
         amount=request.session["amount"],
-        user=request.user if not request.user.is_anonymous else None
+        user=request.user
     )
 
     if form.is_valid():
@@ -169,7 +170,10 @@ def data_entry_page(request: WSGIRequest):
 def failed_payment_page(request):
     if request.session["is_payment"]:
         request.session["is_payment"] = False
-        return render(request, "pages/payment/failed_payment.html")
+        context = {
+            "number": "TX-" + request.session["number"],
+        }
+        return render(request, "pages/payment/failed_payment.html", context)
     raise Http404
 
 
@@ -192,7 +196,11 @@ def success_payment_page(request):
         c_user.period_subscribe = datetime_period
         c_user.subscribe = True
         c_user.save()
-        return render(request, "pages/payment/success_payment.html")
+        context = {
+            "number": "TX-" + request.session["number"],
+            "amount": request.session["amount"],
+        }
+        return render(request, "pages/payment/success_payment.html", context)
     raise Http404
 
 

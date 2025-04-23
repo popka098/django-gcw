@@ -34,7 +34,7 @@ class PaymentForm(forms.Form):
         label="Номер карты",
         validators=[
             RegexValidator(
-                regex='^[0-9]{16,19}$',
+                regex='^[0-9 ]{16,22}$',
                 message='Номер карты должен содержать 16-19 цифр'
             )
         ],
@@ -47,6 +47,12 @@ class PaymentForm(forms.Form):
 
     cardName = forms.CharField(
         label="Имя владельца",
+        validators=[
+            RegexValidator(
+                regex='^[A-Za-z ]+$',
+                message='Имя должно содержать только буквы'
+            )
+        ],
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'IVAN IVANOV'
@@ -57,7 +63,7 @@ class PaymentForm(forms.Form):
         label="Срок действия",
         validators=[
             RegexValidator(
-                regex='^(0[1-9]|1[0-2])\/?([0-9]{2})$',
+                regex='^(0[1-9]|1[0-2])\/([0-9]{2})$',
                 message='Формат даты: MM/ГГ'
             )
         ],
@@ -73,13 +79,13 @@ class PaymentForm(forms.Form):
         validators=[
             RegexValidator(
                 regex='^[0-9]{3,4}$',
-                message='CVV должен содержать 3 цифры'
+                message='CVV должен содержать 3 или 4 цифры'
             )
         ],
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': '•••',
-            'maxlength': '3'
+            'maxlength': '4'
         })
     )
 
