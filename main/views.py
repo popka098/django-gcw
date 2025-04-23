@@ -202,7 +202,7 @@ def data_entry_page(request: WSGIRequest):
 
 
 @login_required
-def failed_payment_page(request):
+def failed_payment_page(request: WSGIRequest):
     if request.session["is_payment"]:
         request.session["is_payment"] = False
         context = {
@@ -213,7 +213,7 @@ def failed_payment_page(request):
 
 
 @login_required
-def success_payment_page(request):
+def success_payment_page(request: WSGIRequest):
     if request.session["is_payment"]:
         request.session["is_payment"] = False
         counter_month = {
