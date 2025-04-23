@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block content %} 
+    <p>Успешная транзакция</p><br>
+    <span>Номер транзакции: </span>
+    <span>{{ number }}</span><br>
+    <span class="receipt-label">Дата и время: </span>
+    <span class="receipt-value" id="transactionDate"></span><br>
+    <span class="receipt-label">Сумма: </span>
+    <span class="receipt-value">{{ amount }} рублей</span><br>
+    <span class="receipt-label">Статус: </span>
+    <span class="receipt-value text-success">Успешно</span><br>
+    
+{% endblock %}
+
+{% block extra_js %} 
+    <script>
+        const now = new Date();
+        document.getElementById('transactionDate').textContent = 
+            now.toLocaleDateString('ru-RU') + ' ' + now.toLocaleTimeString('ru-RU');
+    </script>
+{% endblock %}

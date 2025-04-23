@@ -11,6 +11,17 @@ from training.models import Stats
 from django.contrib.auth.models import User
 
 from main.forms import LoginForm, UserRegistrationForm
+from random import randint
+from django.core.handlers.wsgi import WSGIRequest
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.defaultfilters import random
+import datetime
+from dateutil.relativedelta import relativedelta
+from main.models import Profile, Payments
+from django.contrib.auth.models import User
+
+from main.forms import RegForm, LoginForm, PaymentForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -145,4 +156,113 @@ def not_found_500(request: WSGIRequest):
     :param request: Реквест
     :type request: WSGIRequest
     """
-    return render(request, "pages/ErrorsAndExceptions/500_page.html", status=500)
+    return render(request, "pages/ErrorsAndExceptions/404_page.html", status=500)
+
+@login_required
+def data_entry_page(request: WSGIRequest):
+    """
+    Страница ввода данных карты
+    :param request: request-object
+    :type request: WSGIRequest
+    """
+    if not request.session["amount"] or not request.session["subscribe"]:
+        raise Http404
+
+    context = {
+        "form": PaymentForm(),
+    }
+
+    if request.method == "GET":
+        if request.session["amount"]:
+            context["amount"] = request.session["amount"]
+            return render(request, "pages/payment/data_entry_page.html", context)
+        raise Http404
+
+    form = PaymentForm(request.POST)
+    number = randint(100000000, 999999999)
+    request.session["number"] = str(number)
+
+
+    payment = Payments(
+        number=number,
+        date=datetime.date.today(),
+        amount=request.session["amount"],
+        user=request.user
+    )
+
+    if form.is_valid():
+        payment.status = "Успешно"
+        payment.save()
+        context = {
+            "amount": payment.amount,
+            "number": payment.number,
+            "date": payment.date,
+            "status": "Успешно",
+        }
+        request.session["is_payment"] = True
+        return redirect("/payment/success", context)
+    payment.status = "Ошибка"
+    payment.save()
+    context = {
+        "number": payment.number,
+        "date": payment.date,
+        "status": "Ошибка",
+    }
+    request.session["is_payment"] = True
+    return redirect("/payment/failed", context)
+
+
+@login_required
+def failed_payment_page(request):
+    if request.session["is_payment"]:
+        request.session["is_payment"] = False
+        context = {
+            "number": "TX-" + request.session["number"],
+        }
+        return render(request, "pages/payment/failed_payment.html", context)
+    raise Http404
+
+
+@login_required
+def success_payment_page(request):
+    if request.session["is_payment"]:
+        request.session["is_payment"] = False
+        counter_month = {
+            'month': 1,
+            'three_month': 3,
+            'year': 12
+        }
+
+        c_user = Profile.objects.get(user_id=request.user.id)
+        if c_user.period_subscribe:
+            datetime_period = c_user.period_subscribe + relativedelta(
+                months=counter_month[request.session["subscribe"]])
+        else:
+            datetime_period = datetime.datetime.now() + relativedelta(months=counter_month[request.session["subscribe"]])
+        c_user.period_subscribe = datetime_period
+        c_user.subscribe = True
+        c_user.save()
+        context = {
+            "number": "TX-" + request.session["number"],
+            "amount": request.session["amount"],
+        }
+        return render(request, "pages/payment/success_payment.html", context)
+    raise Http404
+
+
+@login_required
+def choose_subscriber_page(request: WSGIRequest):
+    if request.method == "GET":
+        return render(request, "pages/subscribe/choose_subcribe.html")
+
+    prices = {
+        "month": 1000,
+        "three_month": 2700,
+        "year": 9000
+    }
+
+    subscribe = request.POST.get("period")
+    request.session["subscribe"] = subscribe
+    request.session["amount"] = prices[subscribe]
+
+    return redirect("/payment/data_entry")
