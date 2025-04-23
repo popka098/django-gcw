@@ -71,5 +71,5 @@ class Payments(models.Model):
     number = models.IntegerField(null=True)
     date = models.DateField(null=True)
     amount = models.IntegerField(null=True)
-    status = models.CharField(null=True)
+    status = models.CharField(null=True, max_length=256)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)

@@ -1,33 +1,22 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.core.handlers.wsgi import WSGIRequest
-
-from django.http import HttpResponse
-from django.http import HttpResponseForbidden
-from django.shortcuts import render, redirect, get_object_or_404
-
-from main.models import Profile
-from training.models import Stats
-from django.contrib.auth.models import User
-
-from main.forms import LoginForm, UserRegistrationForm
-from random import randint
-from django.core.handlers.wsgi import WSGIRequest
-from django.http import Http404
-from django.shortcuts import render, redirect, get_object_or_404
-from django.template.defaultfilters import random
-import datetime
-from dateutil.relativedelta import relativedelta
-from main.models import Profile, Payments
-from django.contrib.auth.models import User
-
-from main.forms import RegForm, LoginForm, PaymentForm
-
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-from django.contrib import messages
+from django.core.handlers.wsgi import WSGIRequest
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+from django.http import Http404
+from django.shortcuts import render, redirect
 
+from main.models import Profile, Payments
+from training.models import Stats
+
+from main.forms import LoginForm, UserRegistrationForm, PaymentForm
+
+import datetime
+from dateutil.relativedelta import relativedelta
+from random import randint
 from functools import wraps
 
 

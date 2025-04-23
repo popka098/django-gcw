@@ -1,7 +1,8 @@
 {% extends 'base/base.html' %}
 
-
+{% load static %}
 {% block content %}
+<div>
     <form method="POST">
     {% csrf_token %}
         <input type="radio" name="period" id="one" value="month" checked>
@@ -16,28 +17,9 @@
         <p id="amount">Цена: </p>
         <input type="submit" value="Перейти к оплате">
     </form>
+</div>
+{% endblock %}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const prices = {
-                month: "1000 рублей",
-                three_month: "2700 рублей",
-                year: "9000 рублей"
-            };
-            
-            const radioButtons = document.querySelectorAll('input[name="period"]'); 
-            const amountElement = document.getElementById('amount');
-            
-            function updatePrice() {
-                const selectedPeriod = document.querySelector('input[name="period"]:checked').value;
-                amountElement.textContent = `Цена: ${prices[selectedPeriod]}`;
-            }
-            
-            radioButtons.forEach(radio => {
-                radio.addEventListener('change', updatePrice);
-            });
-            
-            updatePrice();
-        });
-    </script>
+{% block extra_js %}
+<script charset="utf-8" type="text/javascript" src="{% static 'js/choose_subcribe.js' %}"></script>
 {% endblock %}

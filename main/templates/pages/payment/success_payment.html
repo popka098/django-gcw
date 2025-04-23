@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 
+{% load static %}
 {% block content %} 
     <p>Успешная транзакция</p><br>
     <span>Номер транзакции: </span>
@@ -14,9 +15,5 @@
 {% endblock %}
 
 {% block extra_js %} 
-    <script>
-        const now = new Date();
-        document.getElementById('transactionDate').textContent = 
-            now.toLocaleDateString('ru-RU') + ' ' + now.toLocaleTimeString('ru-RU');
-    </script>
+    <script charset="utf-8" type="text/javascript" src="{% static 'js/status_payment.js' %}"></script>
 {% endblock %}
