@@ -1,23 +1,25 @@
-{% extends 'base/base.html' %}
-
+{% extends "base/base.html" %}
 {% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "css/subcribe.css" %}" />
+{% endblock %}
 {% block content %}
-<div>
-    <form method="POST">
-    {% csrf_token %}
-        <input type="radio" name="period" id="one" value="month" checked>
-        <label for="one">1 месяц</label>
-        
-        <input type="radio" name="period" id="two" value="three_month">
-        <label for="two">3 месяца</label>
-        
-        <input type="radio" name="period" id="three" value="year">
-        <label for="three">1 год</label>
-        
-        <p id="amount">Цена: </p>
-        <input type="submit" value="Перейти к оплате">
-    </form>
-</div>
+    <div>
+        <form method="POST">
+        {% csrf_token %}
+            <input type="radio" name="period" id="one" value="month" checked>
+            <label for="one">1 месяц</label>
+
+            <input type="radio" name="period" id="two" value="three_month">
+            <label for="two">3 месяца</label>
+
+            <input type="radio" name="period" id="three" value="year">
+            <label for="three">1 год</label>
+
+            <p id="amount">Цена: </p>
+            <input type="submit" value="Перейти к оплате">
+        </form>
+    </div>
 {% endblock %}
 
 {% block extra_js %}
