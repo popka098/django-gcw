@@ -35,11 +35,12 @@ let next_input_view = ""; // отображение следующих слов
 
 init_words_queue().then(() => {
     console.log(words_queue);
-    if (words_queue[0]["Context_Before"] != "") {
-        move_context_before();
-    }
+    // words_queue[0] = test_word;
     for (let i = 0; i < words_queue.length; i++) {
         plus_next_inp(words_queue[i]);
+    }
+    if (words_queue[0]["Context_Before"] != "") {
+        move_context_before();
     }
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
     element_completed.innerHTML = completed;
@@ -68,6 +69,12 @@ function redirect() {
 window.onload = function() {
     const select = document.getElementById("numbers-select");
     select.value = "task" + task;
+}
+window.onbeforeunload = function() {
+    if (timer == 0 || success_counter + mistake_counter == 0) {
+        return;
+    }
+    post_statistics();
 }
 
 
@@ -379,18 +386,9 @@ function timer_tick() {
     element_timer.innerHTML = (timer + "").toHHMMSS();
 
     if (timer >= end_times[end_time_ind]) {
-        post_statistics().then(() => {
-            clearInterval(timerID);
-            window.location.href = "../../stats";
-            // redirect на статистику за эту сессию
-            // redirect на статистику за эту сессию
-            // redirect на статистику за эту сессию
-            // redirect на статистику за эту сессию
-            // redirect на статистику за эту сессию
-            console.log("END");
-        })
-
-
+        clearInterval(timerID);
+        window.location.href = "../../stats";
+        console.log("END");
     }
 }
 
