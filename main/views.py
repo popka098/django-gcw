@@ -51,12 +51,14 @@ def subscription_required(view_func):
                     return view_func(request, *args, **kwargs)
                 else:
                     print("Подписка неактивна")
-                    # redirect на покупку подписки
+                    return redirect("choose")
             else:
                 print("Подписка не найдена")
+                return redirect("choose")
                 # redirect на покупку подписки
         else:
             print("Пользователь не аутентифицирован")
+            return redirect("choose")
             # redirect на аунтификацию
         return HttpResponseForbidden("У вас нет доступа к этой странице. Пожалуйста, оформите подписку.")
 

@@ -35,7 +35,6 @@ let next_input_view = ""; // отображение следующих слов
 
 init_words_queue().then(() => {
     console.log(words_queue);
-    // words_queue[0] = test_word;
     for (let i = 0; i < words_queue.length; i++) {
         plus_next_inp(words_queue[i]);
     }
@@ -89,10 +88,7 @@ function change_time_end() {
     }
 
     if (!is_sub) {
-        // redirect на покупку денег
-        // redirect на покупку денег
-        // redirect на покупку денег
-        // redirect на покупку денег
+        window.location.href = "../../subscribe/choose"
         return;
     }
 
