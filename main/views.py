@@ -244,7 +244,7 @@ def success_payment_page(request: WSGIRequest):
 @login_required
 def choose_subscriber_page(request: WSGIRequest):
     if request.method == "GET":
-        return render(request, "pages/subscribe/choose_subcribe.html")
+        return render(request, "pages/subscribe/choose_subscribe.html")
 
     prices = {
         "month": 1000,
