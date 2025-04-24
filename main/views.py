@@ -1,15 +1,24 @@
-from django.core.handlers.wsgi import WSGIRequest
-from django.shortcuts import render, redirect, get_object_or_404
-
-from main.models import Profile
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-
-from main.forms import RegForm, LoginForm
-
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-from django.contrib import messages
+from django.core.handlers.wsgi import WSGIRequest
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+from django.http import Http404
+from django.shortcuts import render, redirect
+
+from main.models import Profile, Payments
+from training.models import Stats
+
+from main.forms import LoginForm, UserRegistrationForm, PaymentForm
+
+import datetime
+from dateutil.relativedelta import relativedelta
+from random import randint
+from functools import wraps
+
 
 def gen_base_context(request: WSGIRequest, pagename: str):
     """
@@ -22,7 +31,7 @@ def gen_base_context(request: WSGIRequest, pagename: str):
     context = {
         "pagename": pagename,
         "user": request.user if request.user.is_authenticated else "Anon",
-        "user_icon": Profile.objects.get(user=request.user).icon if request.user.is_authenticated else "",
+        # "user_icon": Profile.objects.get(user=request.user).icon if request.user.is_authenticated else "",
     }
     return context
 
@@ -32,64 +41,95 @@ def index_page(request: WSGIRequest):
     return render(request, 'pages/index.html', context)
 
 
-def login_page(request: WSGIRequest):
-    """
-    Вход в аккаунт
-    :param request: Реквест
-    :type request: WSGIRequest
-    """
-    context = gen_base_context(request, "Логин")
-    context["form"] = LoginForm()
+def subscription_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            profile = Profile.objects.get(user=request.user)
+            if hasattr(profile, 'subscribe'):
+                if profile.subscribe:
+                    return view_func(request, *args, **kwargs)
+                else:
+                    print("Подписка неактивна")
+                    return redirect("choose")
+            else:
+                print("Подписка не найдена")
+                return redirect("choose")
+                # redirect на покупку подписки
+        else:
+            print("Пользователь не аутентифицирован")
+            return redirect("choose")
+            # redirect на аунтификацию
+        return HttpResponseForbidden("У вас нет доступа к этой странице. Пожалуйста, оформите подписку.")
 
+    return _wrapped_view
+
+
+@subscription_required
+def theory_page(request: WSGIRequest):
+    return render(request, 'pages/theory.html')
+
+
+def login_page(request):
+    context = {
+        "form": LoginForm()
+    }
     if request.method == "GET":
-        return render(request, 'pages/accounts/login.html', context)
-    
+        return render(request, "pages/accounts/login.html", context)
 
     form = LoginForm(request.POST)
+
+
+    context["form"] = form
     if not form.is_valid():
-        context["errors"] = form.errors
-        context["form"] = form
-        return render(request=request, template_name="pages/accounts/login.html", context=context)
-    
-    user = authenticate(request=request, username=form.data["username"], password=form.data["password"])
+        return HttpResponse('Некоректные данные')
 
-    if user is None:
-        messages.error(request, "Login Meh")
-        return render(request, 'pages/accounts/login.html', context)
+    data = form.data
+    if data['username'].count('@') == 0:
+        user = authenticate(username=data['username'], password=data['password'])
+    else:
+        use = User.objects.filter(email=data['username'])
+        if len(use) > 0:
+            user = authenticate(username=use[0], password=data['password'])
+        else:
+            user = None
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return redirect('index')
 
-    login(request=request, user=user)
-    messages.success(request, "Login success")
-
-    next_url = request.POST.get('next', 'index')
-    return redirect(next_url)
+        return HttpResponse('Такого аккаунта нет')
+    return render(request, 'pages/accounts/login.html', context)
 
 
-def registration_page(request: WSGIRequest):
-    """
-    Обработка регистрации
-    :param request: Реквест
-    :type request: WSGIRequest
-    """
-    context = gen_base_context(request, "Регистрация")
-    context["form"] = RegForm()
+def registration_page(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.save()
+            
+            profile = Profile(user=new_user)
+            profile.save()
+            stats = Stats(user=new_user)
+            stats.save()
 
-    if request.method == "GET":
-        return render(request=request, template_name="pages/accounts/registration.html", context=context)
+            return render(request, 'pages/accounts/register_done.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'pages/accounts/registration.html', {'user_form': user_form})
 
-    form = RegForm(request.POST)
-    if not form.is_valid():
-           context["errors"] = form.errors
-           context["form"] = form
-           return render(request=request, template_name="pages/accounts/registration.html", context=context)
-    
-    usr = User.objects.create_user(username=form.data["username"], password=form.data["password1"])
-    
-    pr = Profile(user=usr)
-    pr.save()
 
-    return redirect("login")
-    #return render(request=request, template_name="pages/registration.html", context=context)
+@login_required
+def profile_page(request):
+    context = gen_base_context(request, 'profile')
+    return render(request, 'pages/accounts/profile.html', context)
 
+
+def logout_view(request):
+    logout(request)
+    return redirect('pages/index.html')
 
 
 def not_found(request: WSGIRequest, exception):
@@ -100,10 +140,120 @@ def not_found(request: WSGIRequest, exception):
     """
     return render(request, "pages/ErrorsAndExceptions/404_page.html", status=404)
 
+
 def not_found_500(request: WSGIRequest):
     """
-    СТраница 500 (не найдено)
+    Страница 500 (не найдено)
     :param request: Реквест
     :type request: WSGIRequest
     """
     return render(request, "pages/ErrorsAndExceptions/404_page.html", status=500)
+
+@login_required
+def data_entry_page(request: WSGIRequest):
+    """
+    Страница ввода данных карты
+    :param request: request-object
+    :type request: WSGIRequest
+    """
+    if not request.session["amount"] or not request.session["subscribe"]:
+        raise Http404
+
+    context = {
+        "form": PaymentForm(),
+    }
+
+    if request.method == "GET":
+        if request.session["amount"]:
+            context["amount"] = request.session["amount"]
+            return render(request, "pages/payment/data_entry_page.html", context)
+        raise Http404
+
+    form = PaymentForm(request.POST)
+    number = randint(100000000, 999999999)
+    request.session["number"] = str(number)
+
+
+    payment = Payments(
+        number=number,
+        date=datetime.date.today(),
+        amount=request.session["amount"],
+        user=request.user
+    )
+
+    if form.is_valid():
+        payment.status = "Успешно"
+        payment.save()
+        context = {
+            "amount": payment.amount,
+            "number": payment.number,
+            "date": payment.date,
+            "status": "Успешно",
+        }
+        request.session["is_payment"] = True
+        return redirect("/payment/success", context)
+    payment.status = "Ошибка"
+    payment.save()
+    context = {
+        "number": payment.number,
+        "date": payment.date,
+        "status": "Ошибка",
+    }
+    request.session["is_payment"] = True
+    return redirect("/payment/failed", context)
+
+
+@login_required
+def failed_payment_page(request: WSGIRequest):
+    if request.session["is_payment"]:
+        request.session["is_payment"] = False
+        context = {
+            "number": "TX-" + request.session["number"],
+        }
+        return render(request, "pages/payment/failed_payment.html", context)
+    raise Http404
+
+
+@login_required
+def success_payment_page(request: WSGIRequest):
+    if request.session["is_payment"]:
+        request.session["is_payment"] = False
+        counter_month = {
+            'month': 1,
+            'three_month': 3,
+            'year': 12
+        }
+
+        c_user = Profile.objects.get(user_id=request.user.id)
+        if c_user.period_subscribe:
+            datetime_period = c_user.period_subscribe + relativedelta(
+                months=counter_month[request.session["subscribe"]])
+        else:
+            datetime_period = datetime.datetime.now() + relativedelta(months=counter_month[request.session["subscribe"]])
+        c_user.period_subscribe = datetime_period
+        c_user.subscribe = True
+        c_user.save()
+        context = {
+            "number": "TX-" + request.session["number"],
+            "amount": request.session["amount"],
+        }
+        return render(request, "pages/payment/success_payment.html", context)
+    raise Http404
+
+
+@login_required
+def choose_subscriber_page(request: WSGIRequest):
+    if request.method == "GET":
+        return render(request, "pages/subscribe/choose_subscribe.html")
+
+    prices = {
+        "month": 1000,
+        "three_month": 2700,
+        "year": 9000
+    }
+
+    subscribe = request.POST.get("period")
+    request.session["subscribe"] = subscribe
+    request.session["amount"] = prices[subscribe]
+
+    return redirect("/payment/data_entry")

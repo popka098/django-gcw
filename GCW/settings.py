@@ -1,4 +1,5 @@
 import os
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -6,7 +7,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Эта настройка отключена в шаблоне, чтобы все проекты обязательно указывали свой индивидуальный SECRET_KEY.
 # Генерация делается в консоли Python при помощи команд:
-from django.core.management.utils import get_random_secret_key
 
 # Далее полученное значение подставляется в соответствующую переменную
 
@@ -16,8 +16,21 @@ SECRET_KEY = get_random_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '487307331145-ck95tdae6qiu1lqemj3r8qkeed22mf4j.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # Application definition
 
@@ -32,7 +45,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'training',
     'import_export',
+    'social_django',
+
 ]
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,7 +67,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            "main/templates"
+            "main/templates",
+            "training/templates",
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -115,8 +133,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-MEDIA_URL = "/media/"
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/login/'
@@ -128,3 +150,10 @@ LOGOUT_REDIRECT_URL = '/'
 # Проверка тех, кто ленится указать корректный SECRET_KEY
 if SECRET_KEY == 'Insert secret key here and uncomment this variable':
     raise RuntimeError('Сначала укажите SECRET_KEY. Подробности - в settings.py')
+
+
+#DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
+FIXTURES_DIRS = [
+    '/main/database'
+]

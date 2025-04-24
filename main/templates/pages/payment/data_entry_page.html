@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+    <form method="POST">
+    {% csrf_token %}
+    <label for="cardNumber" class="form-label">{{ form.cardNumber.label }}</label>
+        {{ form.cardNumber }}
+    <label for="cardName">{{ form.cardName.label }}</label>
+        {{ form.cardName }}
+    <label for="expiryDate">{{ form.expiryDate.label }}</label>
+        {{ form.expiryDate }}
+    <label for="cvv">{{ form.cvv.label }}</label>
+        {{ form.cvv }}
+    <label for="amount">Сумма</label>
+        <p>{{ amount }} рублей</p>
+    <button type="submit">
+            <i class="bi bi-lock-fill me-2"></i>Оплатить
+    </button>
+    </form>
+{% endblock %}
+
+{% block extra_js %}
+    <script charset="utf-8" type="text/javascript" src="{% static 'js/data_entry.js' %}"></script>
+{% endblock %}

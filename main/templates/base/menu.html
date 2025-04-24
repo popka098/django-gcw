@@ -1,6 +1,10 @@
+{% load static %}
 <nav>
 
-    <a href="{% url 'index' %}">Simple votings</a>
+    <header class="header">
+    <a href="{% url 'index' %}"><img class="logo-icon" alt="" src="{% static 'img/login/Frame 2 1.png' %}"></a>
+
+    <a href="{% url 'theory' %}">Кайфани с теории</a>
 
 
     <ul>
@@ -19,11 +23,24 @@
             <li>
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'logout' %}">Выйти</a>
+
                 {% else %}
                     <a href="{% url 'login' %}">Войти</a>
                 {% endif %}
             </li>
+            <li>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'profile' %}"><img class="account-circle-icon" alt="" src="{% static 'img/login/account_circle.svg' %}" id="accountCircleIcon"></a>
+                 {% else %}
+                <a href="{% url 'login' %}"><img class="account-circle-icon" alt="" src="{% static 'img/login/account_circle.svg' %}" id="accountCirclecon"></a>
+                 {% endif %}
+
+            </li>
+            <li>
+                <a href="{% url 'registration' %}">Регистрация</a>
+            </li>
         {% endblock %}
     </ul>
+    </header>
 
 </nav>

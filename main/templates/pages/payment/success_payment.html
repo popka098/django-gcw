@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %} 
+    <p>Успешная транзакция</p><br>
+    <span>Номер транзакции: </span>
+    <span>{{ number }}</span><br>
+    <span class="receipt-label">Дата и время: </span>
+    <span class="receipt-value" id="transactionDate"></span><br>
+    <span class="receipt-label">Сумма: </span>
+    <span class="receipt-value">{{ amount }} рублей</span><br>
+    <span class="receipt-label">Статус: </span>
+    <span class="receipt-value text-success">Успешно</span><br>
+    
+{% endblock %}
+
+{% block extra_js %} 
+    <script charset="utf-8" type="text/javascript" src="{% static 'js/status_payment.js' %}"></script>
+{% endblock %}
