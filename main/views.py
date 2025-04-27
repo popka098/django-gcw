@@ -22,7 +22,8 @@ from functools import wraps
 
 def gen_base_context(request: WSGIRequest, pagename: str):
     """
-    генерирует базовый контекст из названия страницы, пользователя и его аватарки
+    Генерирует базовый контекст из названия страницы, пользователя и его аватарки
+
     :param request: Реквест
     :type request: WSGIRequest
     :param pagename: Название страницы
@@ -47,6 +48,11 @@ def index_page(request: WSGIRequest):
 
 
 def subscription_required(view_func):
+    """Декоратор, проверяющий подписку
+
+    :param view_func: функция
+    :return: перенаправление на покупку подписки или view_func
+    """
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -72,10 +78,20 @@ def subscription_required(view_func):
 
 @subscription_required
 def theory_page(request: WSGIRequest):
+    """Страница теории
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     return render(request, 'pages/theory.html')
 
 
-def login_page(request):
+def login_page(request: WSGIRequest):
+    """Страница аунтификации
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     context = {
         "form": LoginForm()
     }
@@ -107,7 +123,12 @@ def login_page(request):
     return render(request, 'pages/accounts/login.html', context)
 
 
-def registration_page(request):
+def registration_page(request: WSGIRequest):
+    """Страница регистрации
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -127,38 +148,51 @@ def registration_page(request):
 
 
 @login_required
-def profile_page(request):
+def profile_page(request: WSGIRequest):
+    """Страница профиля
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     context = gen_base_context(request, 'profile')
     return render(request, 'pages/accounts/profile.html', context)
 
 
-def logout_view(request):
+def logout_view(request: WSGIRequest):
+    """Выход из аккаунта
+
+    :param request: _description_
+    :type request: _type_
+    :return: _description_
+    :rtype: _type_
+    """
     logout(request)
     return redirect('pages/index.html')
 
 
 def not_found(request: WSGIRequest, exception):
-    """
-    Страница 404 (не найдено)
-    :param request: Реквест
+    """Страница 404 (не найдено)
+
+    :param request: реквест
     :type request: WSGIRequest
+    :param exception: исключение
     """
     return render(request, "pages/ErrorsAndExceptions/404_page.html", status=404)
 
 
 def not_found_500(request: WSGIRequest):
-    """
-    Страница 500 (не найдено)
-    :param request: Реквест
+    """Страница 500 (не найдено)
+
+    :param request: реквест
     :type request: WSGIRequest
     """
     return render(request, "pages/ErrorsAndExceptions/404_page.html", status=500)
 
 @login_required
 def data_entry_page(request: WSGIRequest):
-    """
-    Страница ввода данных карты
-    :param request: request-object
+    """Страница ввода данных карты
+
+    :param request: реквест
     :type request: WSGIRequest
     """
     if not request.session["amount"] or not request.session["subscribe"]:
@@ -210,6 +244,11 @@ def data_entry_page(request: WSGIRequest):
 
 @login_required
 def failed_payment_page(request: WSGIRequest):
+    """страница неудачной оплаты
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     if request.session["is_payment"]:
         request.session["is_payment"] = False
         context = {
@@ -221,6 +260,11 @@ def failed_payment_page(request: WSGIRequest):
 
 @login_required
 def success_payment_page(request: WSGIRequest):
+    """страница успешной оплаты
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     if request.session["is_payment"]:
         request.session["is_payment"] = False
         counter_month = {
@@ -248,6 +292,11 @@ def success_payment_page(request: WSGIRequest):
 
 @login_required
 def choose_subscriber_page(request: WSGIRequest):
+    """Страница выбора тарифа подписки
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     if request.method == "GET":
         return render(request, "pages/subscribe/choose_subscribe.html")
 
