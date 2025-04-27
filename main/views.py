@@ -37,6 +37,11 @@ def gen_base_context(request: WSGIRequest, pagename: str):
 
 
 def index_page(request: WSGIRequest):
+    """Главная страница
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     context = gen_base_context(request, "index")
     return render(request, 'pages/index.html', context)
 

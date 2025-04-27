@@ -10,7 +10,7 @@ Welcome to sv's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   views.rst
+   main_views.rst
 
 
 
