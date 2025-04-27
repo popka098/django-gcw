@@ -29,6 +29,7 @@ pylint:
     before_script:
         - pip install -r ci/pylint_requirements.txt
     script:
+        - chmod u+r+x ./ci/pylint_runner.sh
         - ./ci/pylint_runner.sh
     artifacts:
         paths:
