@@ -15,7 +15,7 @@ class Task_9_Resource(resources.ModelResource):
         """мета класс для Task_9
 
         """
-        model = models.Task_9
+        model = models.Task9
     
     
     def skip_row(self, instance, original, row, import_validation_errors=None):
@@ -43,7 +43,7 @@ class Task_10_Resource(resources.ModelResource):
         """мета класс для Task_10
 
         """
-        model = models.Task_10
+        model = models.Task10
 
     
     def skip_row(self, instance, original, row, import_validation_errors=None):
@@ -71,7 +71,7 @@ class Task_11_Resource(resources.ModelResource):
         """мета класс для Task_11
 
         """
-        model = models.Task_11
+        model = models.Task11
 
     
     def skip_row(self, instance, original, row, import_validation_errors=None):
@@ -99,7 +99,7 @@ class Task_12_Resource(resources.ModelResource):
         """мета класс для Task_12
 
         """
-        model = models.Task_12
+        model = models.Task12
 
     
     def skip_row(self, instance, original, row, import_validation_errors=None):
@@ -157,7 +157,7 @@ class Task_12_Admin(ImportExportActionModelAdmin):
 
 
 # регистрация
-admin.site.register(models.Task_9, Task_9_Admin)
-admin.site.register(models.Task_10, Task_10_Admin)
-admin.site.register(models.Task_11, Task_11_Admin)
-admin.site.register(models.Task_12, Task_12_Admin)
+admin.site.register(models.Task9, Task_9_Admin)
+admin.site.register(models.Task10, Task_10_Admin)
+admin.site.register(models.Task11, Task_11_Admin)
+admin.site.register(models.Task12, Task_12_Admin)

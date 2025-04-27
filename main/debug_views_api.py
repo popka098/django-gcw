@@ -5,15 +5,15 @@ from django.core.handlers.wsgi import WSGIRequest
 
 from rest_framework.exceptions import bad_request
 
-from training.models import Task_9, Task_10, Task_11, Task_12
+from training.models import Task9, Task10, Task11, Task12
 from training.serializers import WordsSerializer
 
 
 tasks = {
-    9: Task_9,
-    10: Task_10,
-    11: Task_11,
-    12: Task_12
+    9: Task9,
+    10: Task10,
+    11: Task11,
+    12: Task12
 }
 
 def get_end(request: WSGIRequest, task=9, limit=0):

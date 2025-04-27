@@ -3,15 +3,15 @@ from django.http import Http404
 from django.shortcuts import render
 
 from main.views import gen_base_context
-from training.models import Task_9, Task_10, Task_11, Task_12
+from training.models import Task9, Task10, Task11, Task12
 
 # Create your views here.
 
 TASK_MODELS = {
-    9: Task_9,
-    10: Task_10,
-    11: Task_11,
-    12: Task_12,
+    9: Task9,
+    10: Task10,
+    11: Task11,
+    12: Task12,
 }
 
 def training(request: WSGIRequest, task: int):

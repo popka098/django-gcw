@@ -8,15 +8,15 @@ from django.http import JsonResponse
 from rest_framework.exceptions import bad_request
 
 from main.models import Profile
-from training.models import (Atts, MistakesAnswers, Stats, Task_9, Task_10,
-                             Task_11, Task_12)
+from training.models import (Atts, MistakesAnswers, Stats, Task9, Task10,
+                             Task11, Task12)
 from training.serializers import WordsSerializer
 
 tasks = {
-    9: Task_9,
-    10: Task_10,
-    11: Task_11,
-    12: Task_12
+    9: Task9,
+    10: Task10,
+    11: Task11,
+    12: Task12
 }
 
 
@@ -33,10 +33,10 @@ def get_all_words(request: WSGIRequest, limit=0):
         return bad_request(request, "Only GET method")
 
     words = (
-        WordsSerializer(Task_9.objects.all()).data +
-        WordsSerializer(Task_10.objects.all()).data +
-        WordsSerializer(Task_11.objects.all()).data +
-        WordsSerializer(Task_12.objects.all()).data
+        WordsSerializer(Task9.objects.all()).data +
+        WordsSerializer(Task10.objects.all()).data +
+        WordsSerializer(Task11.objects.all()).data +
+        WordsSerializer(Task12.objects.all()).data
     )
 
     if limit == 0:
