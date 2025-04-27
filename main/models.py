@@ -1,3 +1,4 @@
+"""main models"""
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -11,16 +12,16 @@ import os
 import uuid
 
 class Profile(models.Model):
-    """
-    Доп. таблица к пользователю
+    """Доп. таблица к пользователю
+
     :param user: Пользователь 
     :param icon: Аватрка
     :param telegram: Телеграм (без @)
     :param phone: Номер телефона
     """
     def path_file(instance, filename):
-        """
-        Функция, которая переименовывает файл на уникальный идентификатор
+        """Функция, которая переименовывает файл на уникальный идентификатор
+        
         :param instance: модель
         :param filename: имя получаемого файла
         """
@@ -65,8 +66,13 @@ class Profile(models.Model):
 
 
 class Payments(models.Model):
-    """
-    База данных для хранения платежей
+    """База данных для хранения платежей
+    
+    :param number: номер платежа
+    :param date: дата платежа
+    :param amount: сумма платежа
+    :param status: статус платежа
+    :param user: пользователь, совершающий платеж
     """
     number = models.IntegerField(null=True)
     date = models.DateField(null=True)
