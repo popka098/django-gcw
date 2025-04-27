@@ -1,12 +1,7 @@
 """main forms"""
 from django import forms
-
-from django.core.validators import RegexValidator
-
-from main.models import Profile
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from PIL import Image
+from django.core.validators import RegexValidator
 
 
 class LoginForm(forms.Form):
@@ -15,8 +10,14 @@ class LoginForm(forms.Form):
     :param username: имя пользователя
     :param password: пароль
     """
-    username = forms.CharField(widget=forms.TextInput(attrs={"class": "input-login"}), label='')
-    password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "input-password"}), label='')
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "input-login"}),
+        label=''
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "input-password"}),
+        label=''
+    )
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -29,12 +30,30 @@ class UserRegistrationForm(forms.ModelForm):
     :param password: пароль
     :param password2: потверждение пароля
     """
-    username = forms.CharField(widget=forms.TextInput(attrs={"class": "input-username"}), label='')
-    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "input-name"}), label='')
-    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "input-lastname"}), label='')
-    email = forms.CharField(widget=forms.TextInput(attrs={"class": "input-email"}), label='')
-    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={"class": "input-password"}))
-    password2 = forms.CharField(label='', widget=forms.PasswordInput(attrs={"class": "input-doblepassword"}))
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={"class": "input-username"}),
+        label=''
+    )
+    first_name = forms.CharField(widget=forms.TextInput(
+        attrs={"class": "input-name"}),
+        label=''
+    )
+    last_name = forms.CharField(widget=forms.TextInput(
+        attrs={"class": "input-lastname"}),
+        label=''
+    )
+    email = forms.CharField(widget=forms.TextInput(
+        attrs={"class": "input-email"}),
+        label=''
+    )
+    password = forms.CharField(
+        label='',
+        widget=forms.PasswordInput(attrs={"class": "input-password"})
+    )
+    password2 = forms.CharField(
+        label='',
+        widget=forms.PasswordInput(attrs={"class": "input-doblepassword"})
+    )
 
     class Meta:
         """Мета класс для подвязки к пользователю
@@ -58,7 +77,7 @@ class UserRegistrationForm(forms.ModelForm):
 class PaymentForm(forms.Form):
     """Форма оплаты
 
-    :param cardNumber: номер карты 
+    :param cardNumber: номер карты
     :param cardName: имя владельца
     :param expiryDate: срок действия
     :param cvv: cvv/cvc
@@ -121,5 +140,3 @@ class PaymentForm(forms.Form):
             'maxlength': '4'
         })
     )
-
-
