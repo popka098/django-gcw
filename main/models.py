@@ -1,27 +1,23 @@
 """main models"""
-from django.db import models
-from django.contrib.auth.models import User
-
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
-from django.core.validators import RegexValidator
-
-import PIL
 import os
 import uuid
+
+from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
+from django.db import models
+
 
 class Profile(models.Model):
     """Доп. таблица к пользователю
 
-    :param user: Пользователь 
+    :param user: Пользователь
     :param icon: Аватрка
     :param telegram: Телеграм (без @)
     :param phone: Номер телефона
     """
-    def path_file(instance, filename):
+    def path_file(self, filename):
         """Функция, которая переименовывает файл на уникальный идентификатор
-        
+
         :param instance: модель
         :param filename: имя получаемого файла
         """
@@ -33,32 +29,32 @@ class Profile(models.Model):
 
 
     user = models.OneToOneField(
-        User, 
+        User,
         on_delete=models.CASCADE,
         default="",
     )
-    
+
     icon = models.ImageField(
         null=True,
-        blank=True, 
+        blank=True,
         upload_to=path_file,
     )
 
     telegram = models.CharField(
-        null=True, 
+        null=True,
         blank=True,
-        default="", 
+        default="",
         #unique=True,
         max_length=64
     )
-    
+
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
     phone = models.CharField(
-        validators=[phoneNumberRegex], 
-        max_length=16, 
-        #unique=True, 
-        null=True, 
-        blank=True, 
+        validators=[phoneNumberRegex],
+        max_length=16,
+        #unique=True,
+        null=True,
+        blank=True,
     )
 
     subscribe = models.BooleanField(default=False)
@@ -67,7 +63,7 @@ class Profile(models.Model):
 
 class Payments(models.Model):
     """База данных для хранения платежей
-    
+
     :param number: номер платежа
     :param date: дата платежа
     :param amount: сумма платежа
