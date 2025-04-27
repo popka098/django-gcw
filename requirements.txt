@@ -1,5 +1,6 @@
 django-import-export
-coverage
+coveragae
+pylint
 python-dateutil
 certifi==2025.1.31
 cffi==1.17.1
