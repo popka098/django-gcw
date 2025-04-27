@@ -1,6 +1,7 @@
 django-import-export
 coverage==7.8.0
 pylint
+pylint-django
 python-dateutil
 certifi==2025.1.31
 cffi==1.17.1

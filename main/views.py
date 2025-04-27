@@ -12,7 +12,6 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
-from django.http import HttpResponseForbidden
 from django.http import Http404
 from django.shortcuts import render, redirect
 
@@ -36,7 +35,6 @@ def gen_base_context(request: WSGIRequest, pagename: str):
     context = {
         "pagename": pagename,
         "user": request.user if request.user.is_authenticated else "Anon",
-        # "user_icon": Profile.objects.get(user=request.user).icon if request.user.is_authenticated else "",
     }
     return context
 
@@ -64,18 +62,14 @@ def subscription_required(view_func):
             if hasattr(profile, 'subscribe'):
                 if profile.subscribe:
                     return view_func(request, *args, **kwargs)
-                else:
-                    print("Подписка неактивна")
-                    return redirect("choose")
-            else:
-                print("Подписка не найдена")
+                print("Подписка неактивна")
                 return redirect("choose")
-                # redirect на покупку подписки
-        else:
-            print("Пользователь не аутентифицирован")
+            print("Подписка не найдена")
             return redirect("choose")
-            # redirect на аунтификацию
-        return HttpResponseForbidden("У вас нет доступа к этой странице. Пожалуйста, оформите подписку.")
+            # redirect на покупку подписки
+        print("Пользователь не аутентифицирован")
+        return redirect("choose")
+        # redirect на аунтификацию
 
     return _wrapped_view
 
@@ -139,7 +133,6 @@ def registration_page(request: WSGIRequest):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            
             profile = Profile(user=new_user)
             profile.save()
             stats = Stats(user=new_user)
@@ -181,7 +174,13 @@ def not_found(request: WSGIRequest, exception):
     :type request: WSGIRequest
     :param exception: исключение
     """
-    return render(request, "pages/ErrorsAndExceptions/404_page.html", status=404)
+
+
+    return render(request,
+    "pages/ErrorsAndExceptions/404_page.html",
+    status=404,
+    context={"exception": exception}
+    )
 
 
 def not_found_500(request: WSGIRequest):
