@@ -1,19 +1,16 @@
 """main vews_api"""
 
-import random
 import json
+import random
 
-from django.http import JsonResponse
 from django.core.handlers.wsgi import WSGIRequest
-
+from django.http import JsonResponse
 from rest_framework.exceptions import bad_request
 
-from training.models import Task_9, Task_10, Task_11, Task_12
-from training.serializers import WordsSerializer
-
 from main.models import Profile
-from training.models import Atts, MistakesAnswers, Stats
-
+from training.models import (Atts, MistakesAnswers, Stats, Task_9, Task_10,
+                             Task_11, Task_12)
+from training.serializers import WordsSerializer
 
 tasks = {
     9: Task_9,
@@ -44,7 +41,7 @@ def get_all_words(request: WSGIRequest, limit=0):
 
     if limit == 0:
         limit = len(words)
-    
+
     words_shuffled = words.copy()
     random.shuffle(words_shuffled)
     return JsonResponse({"words": words_shuffled[:limit]})
@@ -64,9 +61,9 @@ def get_random_words(request: WSGIRequest, task=9, limit=0):
     if request.method == "POST":
         return bad_request(request, "Only GET method")
 
-    if not(9 <= task <= 12):
+    if not 9 <= task <= 12:
         return bad_request(request, "No such table")
-    
+
 
     words = WordsSerializer(tasks[task].objects.all()).data
     if limit == 0:
@@ -89,9 +86,9 @@ def get_random_word(request: WSGIRequest, task=9):
     if request.method == "POST":
         return bad_request(request, "Only GET method")
 
-    if not(9 <= task <= 12):
+    if not 9 <= task <= 12:
         return bad_request(request, "No such table")
-    
+
     words = WordsSerializer(tasks[task].objects.all()).data
     word = random.choice(words)
 
@@ -107,10 +104,10 @@ def get_user_sub(request: WSGIRequest):
     """
     if request.method == "POST":
         return bad_request(request, "Only GET method")
-    
+
     if not request.user.is_authenticated:
         return JsonResponse({"sub": False})
-    
+
     return JsonResponse(
         {
             "sub": Profile.objects.get(user=request.user).subscribe
@@ -127,7 +124,7 @@ def save_statistics(request: WSGIRequest):
     """
     if request.method == "GET":
         return bad_request(request, "POST only")
-    
+
     if not request.user.is_authenticated:
         return JsonResponse(
             {
@@ -135,23 +132,23 @@ def save_statistics(request: WSGIRequest):
                 "success": False,
             }
         )
-    
+
     stats = Stats.objects.get(user=request.user)
     data = json.loads(request.body)
-    
+
     time = data["time"]
     successes = data["successes"]
     mistakes = data["mistakes"]
 
     mistakes_answers = [
-        word["Mistake"][:word["Pass"].find(".")] + 
-        word["Mistake"][word["Pass"].find(".")].upper() + 
+        word["Mistake"][:word["Pass"].find(".")] +
+        word["Mistake"][word["Pass"].find(".")].upper() +
         word["Mistake"][word["Pass"].find(".") + 1:]
         for word in data["mistake_words"]
     ]
     mistakes_correct = [
-        word["Word"][:word["Pass"].find(".")] + 
-        word["Word"][word["Pass"].find(".")].upper() + 
+        word["Word"][:word["Pass"].find(".")] +
+        word["Word"][word["Pass"].find(".")].upper() +
         word["Word"][word["Pass"].find(".") + 1:]
         for word in data["mistake_words"]
     ]
@@ -170,14 +167,14 @@ def save_statistics(request: WSGIRequest):
     attempt.save()
 
     print(len(mistakes_answers), len(mistakes_correct))
-    for i in range(len(mistakes_answers)):
+    for i in enumerate(mistakes_answers):
         mis = MistakesAnswers(
             input_answer=mistakes_answers[i],
             correct_answer=mistakes_correct[i],
             att=attempt
         )
         mis.save()
-    
+
 
     return JsonResponse(
         {
