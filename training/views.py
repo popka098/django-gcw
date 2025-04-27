@@ -1,12 +1,10 @@
-from django.http import Http404
-
 from django.core.handlers.wsgi import WSGIRequest
+from django.http import Http404
 from django.shortcuts import render
 
-
 from main.views import gen_base_context
-
 from training.models import Task_9, Task_10, Task_11, Task_12
+
 # Create your views here.
 
 TASK_MODELS = {
@@ -25,12 +23,10 @@ def training(request: WSGIRequest, task: int):
     :type task: int
     """
     context = gen_base_context(request, f"training_{task}")
-    
-    try:
-        task_model = TASK_MODELS[task]
-    except:
+
+    if task not in TASK_MODELS:
         raise Http404
-    
+
     if request.method == "GET":
         return render(request, "pages/training/training.html", context)
 
@@ -50,7 +46,10 @@ def statistics_page(request: WSGIRequest):
     #     "time_all" : stat.time,
     #     "success_all" : stat.successes,
     #     "mistakes_all" : stat.mistakes,
-    #     "kd" : 0 if (stat.successes == 0 and stat.mistakes == 0) else int(100*(stat.successes / (stat.successes + stat.mistakes))),
+    #     "kd" : 0 if (
+    #      (stat.successes == 0 and stat.mistakes == 0)
+    #       else int(100*(stat.successes / (stat.successes + stat.mistakes)))
+    #     ),
     #     "attemps": attemps,
     # }
     return render(request, "pages/general_statistics.html", context)
