@@ -15,6 +15,7 @@ Welcome to gcw's documentation!
    main_models.rst
    main_forms.rst
    main_admin.rst
+   training_views.rst
 
 
 

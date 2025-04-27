@@ -1,14 +1,12 @@
 from django.http import Http404
 
 from django.core.handlers.wsgi import WSGIRequest
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render
 
-from django.contrib import messages
 
 from main.views import gen_base_context
 
-from training.models import Stats, Atts
-from training.models import Task_9, Task_10, Task_11, Task_12, Task_15
+from training.models import Task_9, Task_10, Task_11, Task_12
 # Create your views here.
 
 TASK_MODELS = {
@@ -16,14 +14,14 @@ TASK_MODELS = {
     10: Task_10,
     11: Task_11,
     12: Task_12,
-    15: Task_15,
 }
 
 def training(request: WSGIRequest, task: int):
-    """
-    Тренировка
-    :param request: Реквест
-    :param task: Номер задания
+    """страница тренитровки
+
+    :param request: реквест
+    :type request: WSGIRequest
+    :param task: задание
     :type task: int
     """
     context = gen_base_context(request, f"training_{task}")
@@ -40,6 +38,11 @@ def training(request: WSGIRequest, task: int):
 
 
 def statistics_page(request: WSGIRequest):
+    """Страница статистики
+
+    :param request: реквест
+    :type request: WSGIRequest
+    """
     context = {}
     # stat = Stats.objects.get(user=request.user)
     # attemps = Atts.objects.filter(user=request.user)
