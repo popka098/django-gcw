@@ -4,4 +4,5 @@ pylint
 pylint-django
 pylint-json2html
 anybadge
-
+djangorestframework==3.15.2
+python-dateutil
