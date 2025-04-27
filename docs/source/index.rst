@@ -13,6 +13,7 @@ Welcome to sv's documentation!
    main_views.rst
    main_views_api.rst
    main_models.rst
+   main_forms.rst
 
 
 
