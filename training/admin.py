@@ -1,3 +1,4 @@
+"""training admin"""
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportActionModelAdmin
@@ -7,11 +8,20 @@ import training.models as models
 
 # классы обработки данных
 class Task_9_Resource(resources.ModelResource):
+    """ресурс для загрузки бд слов задания 9
+
+    """
     class Meta:
+        """мета класс для Task_9
+
+        """
         model = models.Task_9
     
     
     def skip_row(self, instance, original, row, import_validation_errors=None):
+        """валидация слова
+
+        """
         _Word = row["Word"]
         _Pass = row["Pass"]
         print(_Word, _Pass)
@@ -26,11 +36,20 @@ class Task_9_Resource(resources.ModelResource):
             
 
 class Task_10_Resource(resources.ModelResource):
+    """ресурс для загрузки бд слов задания 10
+
+    """
     class Meta:
+        """мета класс для Task_10
+
+        """
         model = models.Task_10
 
     
     def skip_row(self, instance, original, row, import_validation_errors=None):
+        """валидация слова
+
+        """
         _Word = row["Word"]
         _Pass = row["Pass"]
         print(_Word, _Pass)
@@ -45,11 +64,20 @@ class Task_10_Resource(resources.ModelResource):
     
     
 class Task_11_Resource(resources.ModelResource):
+    """ресурс для загрузки бд слов задания 11
+
+    """
     class Meta:
+        """мета класс для Task_11
+
+        """
         model = models.Task_11
 
     
     def skip_row(self, instance, original, row, import_validation_errors=None):
+        """валидация слова
+
+        """
         _Word = row["Word"]
         _Pass = row["Pass"]
         print(_Word, _Pass)
@@ -64,11 +92,20 @@ class Task_11_Resource(resources.ModelResource):
 
 
 class Task_12_Resource(resources.ModelResource):
+    """ресурс для загрузки бд слов задания 12
+
+    """
     class Meta:
+        """мета класс для Task_12
+
+        """
         model = models.Task_12
 
     
     def skip_row(self, instance, original, row, import_validation_errors=None):
+        """валидация слова
+
+        """
         _Word = row["Word"]
         _Pass = row["Pass"]
         print(_Word, _Pass)
@@ -84,24 +121,36 @@ class Task_12_Resource(resources.ModelResource):
 
 # Импорт данных на странице
 class Task_9_Admin(ImportExportActionModelAdmin):
+    """админка задания 9
+
+    """
     resource_class = Task_9_Resource
     list_display = ("Word", "Context_Before", "Pass", "Context_After")
     search_fields = ("Word", "Context_Before", "Pass", "Context_After")
 
 
 class Task_10_Admin(ImportExportActionModelAdmin):
+    """админка задания 10
+
+    """
     resource_class = Task_10_Resource
     list_display = ("Word", "Context_Before", "Pass", "Context_After")
     search_fields = ("Word", "Context_Before", "Pass", "Context_After")
 
 
 class Task_11_Admin(ImportExportActionModelAdmin):
+    """админка задания 11
+
+    """
     resource_class = Task_11_Resource
     list_display = ("Word", "Context_Before", "Pass", "Context_After")
     search_fields = ("Word", "Context_Before", "Pass", "Context_After")
 
 
 class Task_12_Admin(ImportExportActionModelAdmin):
+    """админка задания 12
+
+    """
     resource_class = Task_12_Resource
     list_display = ("Word", "Context_Before", "Pass", "Context_After")
     search_fields = ("Word", "Context_Before", "Pass", "Context_After")
