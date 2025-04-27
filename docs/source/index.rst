@@ -17,6 +17,7 @@ Welcome to gcw's documentation!
    main_admin.rst
    training_views.rst
    training_serializers.rst
+   training_models.rst
 
 
 
