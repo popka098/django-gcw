@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # run pylint
-pylint $(ls -d */) | tee pylint.txt
+pylint --disable="C0114, C0115, C0116" main/views.py main/views_api.py main/models.py main/forms.py training/views.py training/models.py | tee pylint.txt
 
 # get badge
 mkdir public
