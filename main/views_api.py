@@ -1,3 +1,5 @@
+"""main vews_api"""
+
 import random
 import json
 
@@ -13,7 +15,6 @@ from main.models import Profile
 from training.models import Atts, MistakesAnswers, Stats
 
 
-
 tasks = {
     9: Task_9,
     10: Task_10,
@@ -23,6 +24,14 @@ tasks = {
 
 
 def get_all_words(request: WSGIRequest, limit=0):
+    """Получение всех слов
+
+    :param request: реквест
+    :type request: WSGIRequest
+    :param limit: количество получемых слов (если 0 то все), defaults to 0
+    :type limit: int, optional
+    :return: json
+    """
     if request.method == "POST":
         return bad_request(request, "Only GET method")
 
@@ -42,6 +51,16 @@ def get_all_words(request: WSGIRequest, limit=0):
 
 
 def get_random_words(request: WSGIRequest, task=9, limit=0):
+    """получение нескольких случайных слов из определенного задания
+
+    :param request: реквест
+    :type request: WSGIRequest
+    :param task: задание, defaults to 9
+    :type task: int, optional
+    :param limit: количество получаемых слов (если 0 то все), defaults to 0
+    :type limit: int, optional
+    :return: json
+    """
     if request.method == "POST":
         return bad_request(request, "Only GET method")
 
@@ -59,6 +78,14 @@ def get_random_words(request: WSGIRequest, task=9, limit=0):
 
 
 def get_random_word(request: WSGIRequest, task=9):
+    """Получение одного случанойго слова из задания
+
+    :param request: реквест
+    :type request: WSGIRequest
+    :param task: задание, defaults to 9
+    :type task: int, optional
+    :return: json
+    """
     if request.method == "POST":
         return bad_request(request, "Only GET method")
 
@@ -72,8 +99,11 @@ def get_random_word(request: WSGIRequest, task=9):
 
 
 def get_user_sub(request: WSGIRequest):
-    """
-    docs
+    """Получение подписки пользователя
+
+    :param request: реквест
+    :type request: WSGIRequest
+    :return: json
     """
     if request.method == "POST":
         return bad_request(request, "Only GET method")
@@ -89,6 +119,12 @@ def get_user_sub(request: WSGIRequest):
 
 
 def save_statistics(request: WSGIRequest):
+    """сохранение статистики
+
+    :param request: реквест
+    :type request: WSGIRequest
+    :return: json
+    """
     if request.method == "GET":
         return bad_request(request, "POST only")
     

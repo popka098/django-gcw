@@ -11,6 +11,7 @@ Welcome to sv's documentation!
    :caption: Contents:
 
    main_views.rst
+   main_views_api.rst
 
 
 

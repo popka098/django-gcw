@@ -1,3 +1,10 @@
+"""main_views"""
+
+import datetime
+from random import randint
+from functools import wraps
+from dateutil.relativedelta import relativedelta
+
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
@@ -9,15 +16,12 @@ from django.http import HttpResponseForbidden
 from django.http import Http404
 from django.shortcuts import render, redirect
 
+
+from main.forms import LoginForm, UserRegistrationForm, PaymentForm
 from main.models import Profile, Payments
 from training.models import Stats
 
-from main.forms import LoginForm, UserRegistrationForm, PaymentForm
 
-import datetime
-from dateutil.relativedelta import relativedelta
-from random import randint
-from functools import wraps
 
 
 def gen_base_context(request: WSGIRequest, pagename: str):
@@ -278,7 +282,9 @@ def success_payment_page(request: WSGIRequest):
             datetime_period = c_user.period_subscribe + relativedelta(
                 months=counter_month[request.session["subscribe"]])
         else:
-            datetime_period = datetime.datetime.now() + relativedelta(months=counter_month[request.session["subscribe"]])
+            datetime_period = datetime.datetime.now() + relativedelta(
+                months=counter_month[request.session["subscribe"]]
+            )
         c_user.period_subscribe = datetime_period
         c_user.subscribe = True
         c_user.save()
