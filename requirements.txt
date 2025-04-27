@@ -1,5 +1,5 @@
 django-import-export
-coveragae
+coveragae==7.8.0
 pylint
 python-dateutil
 certifi==2025.1.31
