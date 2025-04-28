@@ -2,12 +2,14 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportActionModelAdmin
+
+from training import models
+
 # Register your models here.
 
-import training.models as models
 
 # классы обработки данных
-class Task_9_Resource(resources.ModelResource):
+class Task9Resource(resources.ModelResource):
     """ресурс для загрузки бд слов задания 9
 
     """
@@ -16,26 +18,26 @@ class Task_9_Resource(resources.ModelResource):
 
         """
         model = models.Task9
-    
-    
+
+
     def skip_row(self, instance, original, row, import_validation_errors=None):
         """валидация слова
 
         """
-        _Word = row["Word"]
-        _Pass = row["Pass"]
-        print(_Word, _Pass)
+        word = row["Word"]
+        passed = row["Pass"]
+        print(word, passed)
         if (
-            len(_Word) == 0 or 
-            len(_Pass) == 0 or 
-            len(_Word) != len(_Pass) or
-            _Pass.count(".") != 1
+            len(word) == 0 or
+            len(passed) == 0 or
+            len(word) != len(passed) or
+            passed.count(".") != 1
         ):
             return True
         return False
-            
 
-class Task_10_Resource(resources.ModelResource):
+
+class Task10Resource(resources.ModelResource):
     """ресурс для загрузки бд слов задания 10
 
     """
@@ -45,25 +47,25 @@ class Task_10_Resource(resources.ModelResource):
         """
         model = models.Task10
 
-    
+
     def skip_row(self, instance, original, row, import_validation_errors=None):
         """валидация слова
 
         """
-        _Word = row["Word"]
-        _Pass = row["Pass"]
-        print(_Word, _Pass)
+        word = row["Word"]
+        passed = row["Pass"]
+        print(word, passed)
         if (
-            len(_Word) == 0 or 
-            len(_Pass) == 0 or 
-            len(_Word) != len(_Pass) or
-            _Pass.count(".") != 1
+            len(word) == 0 or
+            len(passed) == 0 or
+            len(word) != len(passed) or
+            passed.count(".") != 1
         ):
             return True
         return False
-    
-    
-class Task_11_Resource(resources.ModelResource):
+
+
+class Task11Resource(resources.ModelResource):
     """ресурс для загрузки бд слов задания 11
 
     """
@@ -73,25 +75,25 @@ class Task_11_Resource(resources.ModelResource):
         """
         model = models.Task11
 
-    
+
     def skip_row(self, instance, original, row, import_validation_errors=None):
         """валидация слова
 
         """
-        _Word = row["Word"]
-        _Pass = row["Pass"]
-        print(_Word, _Pass)
+        word = row["Word"]
+        passed = row["Pass"]
+        print(word, passed)
         if (
-            len(_Word) == 0 or 
-            len(_Pass) == 0 or 
-            len(_Word) != len(_Pass) or
-            _Pass.count(".") != 1
+            len(word) == 0 or
+            len(passed) == 0 or
+            len(word) != len(passed) or
+            passed.count(".") != 1
         ):
             return True
         return False
 
 
-class Task_12_Resource(resources.ModelResource):
+class Task12Resource(resources.ModelResource):
     """ресурс для загрузки бд слов задания 12
 
     """
@@ -101,63 +103,63 @@ class Task_12_Resource(resources.ModelResource):
         """
         model = models.Task12
 
-    
+
     def skip_row(self, instance, original, row, import_validation_errors=None):
         """валидация слова
 
         """
-        _Word = row["Word"]
-        _Pass = row["Pass"]
-        print(_Word, _Pass)
+        word = row["Word"]
+        passed = row["Pass"]
+        print(word, passed)
         if (
-            len(_Word) == 0 or 
-            len(_Pass) == 0 or 
-            len(_Word) != len(_Pass) or
-            _Pass.count(".") != 1
+            len(word) == 0 or
+            len(passed) == 0 or
+            len(word) != len(passed) or
+            passed.count(".") != 1
         ):
             return True
         return False
 
 
 # Импорт данных на странице
-class Task_9_Admin(ImportExportActionModelAdmin):
+class Task9Admin(ImportExportActionModelAdmin):
     """админка задания 9
 
     """
-    resource_class = Task_9_Resource
+    resource_class = Task9Resource
     list_display = ("Word", "Context_Before", "Pass", "Context_After")
     search_fields = ("Word", "Context_Before", "Pass", "Context_After")
 
 
-class Task_10_Admin(ImportExportActionModelAdmin):
+class Task10Admin(ImportExportActionModelAdmin):
     """админка задания 10
 
     """
-    resource_class = Task_10_Resource
+    resource_class = Task10Resource
     list_display = ("Word", "Context_Before", "Pass", "Context_After")
     search_fields = ("Word", "Context_Before", "Pass", "Context_After")
 
 
-class Task_11_Admin(ImportExportActionModelAdmin):
+class Task11Admin(ImportExportActionModelAdmin):
     """админка задания 11
 
     """
-    resource_class = Task_11_Resource
+    resource_class = Task11Resource
     list_display = ("Word", "Context_Before", "Pass", "Context_After")
     search_fields = ("Word", "Context_Before", "Pass", "Context_After")
 
 
-class Task_12_Admin(ImportExportActionModelAdmin):
+class Task12Admin(ImportExportActionModelAdmin):
     """админка задания 12
 
     """
-    resource_class = Task_12_Resource
+    resource_class = Task12Resource
     list_display = ("Word", "Context_Before", "Pass", "Context_After")
     search_fields = ("Word", "Context_Before", "Pass", "Context_After")
 
 
 # регистрация
-admin.site.register(models.Task9, Task_9_Admin)
-admin.site.register(models.Task10, Task_10_Admin)
-admin.site.register(models.Task11, Task_11_Admin)
-admin.site.register(models.Task12, Task_12_Admin)
+admin.site.register(models.Task9, Task9Admin)
+admin.site.register(models.Task10, Task10Admin)
+admin.site.register(models.Task11, Task11Admin)
+admin.site.register(models.Task12, Task12Admin)

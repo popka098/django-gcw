@@ -1,8 +1,6 @@
 """training serializers"""
 from rest_framework import serializers
 
-from training import models
-
 
 class TaskSerializer(serializers.Serializer):
     """Сериализатор слова
@@ -16,9 +14,17 @@ class TaskSerializer(serializers.Serializer):
     Context_Before = serializers.CharField()
     Pass = serializers.CharField()
     Context_After = serializers.CharField()
+
+    def create(self, validated_data):
+        print("", end="")
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        print("", end="")
+        return super().update(instance, validated_data)
     class Meta:
         """Мета класс для слова
-        
+
         """
         fields = [
             "Word",
@@ -26,7 +32,7 @@ class TaskSerializer(serializers.Serializer):
             "Pass",
             "Context_After"
         ]
-        
+
 
 class WordsSerializer(serializers.ListSerializer):
     """Сериализатор слов
@@ -35,3 +41,6 @@ class WordsSerializer(serializers.ListSerializer):
     """
     child = TaskSerializer()
 
+    def update(self, instance, validated_data):
+        print("", end="")
+        return super().update(instance, validated_data)

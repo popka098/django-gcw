@@ -31,8 +31,9 @@ class Profile(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        default="",
+        default=""
     )
+
 
     icon = models.ImageField(
         null=True,
@@ -75,3 +76,4 @@ class Payments(models.Model):
     amount = models.IntegerField(null=True)
     status = models.CharField(null=True, max_length=256)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
