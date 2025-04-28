@@ -276,7 +276,8 @@ def success_payment_page(request: WSGIRequest):
             'year': 12
         }
 
-        c_user = Profile.objects.get(user_id=request.user.id)
+        print(request.user.id)
+        c_user = Profile.objects.get(user=request.user)
         if c_user.period_subscribe:
             datetime_period = c_user.period_subscribe + relativedelta(
                 months=counter_month[request.session["subscribe"]])
