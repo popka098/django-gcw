@@ -1,6 +1,6 @@
 #!/bin/bash
 
-files="main/views.py main/views_api.py main/models.py main/forms.py training/views.py training/models.py"
+files="main/views.py main/views_api.py main/models.py main/forms.py training/views.py training/models.py training/admin.py training/serializers.py main/admin.py"
 
 # run pylint
 pylint --load-plugins=pylint_django --disable="C0114, C0115, C0116" $files | tee pylint.txt
