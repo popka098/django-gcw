@@ -3,6 +3,8 @@ import sys
 import django
 import logging
 
+logger = logging.getLogger("__name__")
+
 sys.path.insert(0, os.path.abspath("../.."))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'GCW.settings'
 django.setup()
