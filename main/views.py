@@ -1,26 +1,23 @@
 """main_views"""
 
 import datetime
-from random import randint
+import logging
 from functools import wraps
+from random import randint
+
 from dateutil.relativedelta import relativedelta
-
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 from django.core.handlers.wsgi import WSGIRequest
-from django.http import HttpResponse
-from django.http import Http404
-from django.shortcuts import render, redirect
+from django.http import Http404, HttpResponse
+from django.shortcuts import redirect, render
 
-
-from main.forms import LoginForm, UserRegistrationForm, PaymentForm
-from main.models import Profile, Payments
+from main.forms import LoginForm, PaymentForm, UserRegistrationForm
+from main.models import Payments, Profile
 from training.models import Stats
 
-
+logger = logging.getLogger("__name__")
 
 
 def gen_base_context(request: WSGIRequest, pagename: str):

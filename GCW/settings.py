@@ -157,3 +157,60 @@ if SECRET_KEY == 'Insert secret key here and uncomment this variable':
 FIXTURES_DIRS = [
     '/main/database'
 ]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+
+    "handlers": {
+        "debug_file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "logs/debug.log",
+            "formatter": "simple",
+        },
+        "info_file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "logs/info.log",
+            "formatter": "simple",
+        },
+        "warning_file": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": "logs/warning.log",
+            "formatter": "verbose",
+        },
+        "error_file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "logs/error.log",
+            "formatter": "verbose",
+        },
+        "critical_file": {
+            "level": "CRITICAL",
+            "class": "logging.FileHandler",
+            "filename": "logs/critical.log",
+            "formatter": "verbose",
+        },
+    },
+
+    "loggers": {
+        "": {
+            "handlers": ["debug_file", "info_file", "warning_file", "error_file", "critical_file", ],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}
