@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div>
+    <h3>Ошибки в попытке {{ att_id }}</h3>
+    <br>
+    <br>
+</div>
+
+
+<div>
+    <br>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Ваш ответ</th>
+      <th scope="col">Правильный ответ</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in mistakes %}
+        <tr>
+        <td>{{ item.input_answer }}</td>
+        <td>{{ item.correct_answer }}</td>
+        </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+</div>
+{% endblock %}

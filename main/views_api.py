@@ -167,9 +167,9 @@ def save_statistics(request: WSGIRequest):
     attempt.save()
 
     print(len(mistakes_answers), len(mistakes_correct))
-    for i in enumerate(mistakes_answers):
+    for i, m in enumerate(mistakes_answers):
         mis = MistakesAnswers(
-            input_answer=mistakes_answers[i],
+            input_answer=m,
             correct_answer=mistakes_correct[i],
             att=attempt
         )
