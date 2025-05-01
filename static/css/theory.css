@@ -1,0 +1,56 @@
+body {
+    background-color: #F2EEE5;
+    margin: 0;
+    padding: 0;
+}
+        h1 {
+            top: 17.5%;
+            color: #f79a23;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 45px;
+            font-weight: 600;
+        }
+        .container {
+            display: flex; /* Используем flexbox для размещения PDF и кнопок */
+            align-items: flex-start; /* Выравнивание по верхнему краю */
+            width: 80%;
+            max-width: 1500px;
+            margin-bottom: 30px;
+        }
+         .pdf-container {
+            flex: 1;
+            height: 700px;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid #f79a23; /* Оранжевая граница */
+            margin-right: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+        .navigation {
+            display: flex;
+            flex-direction: column; /* Кнопки в столбик */
+        }
+        button {
+            padding: 20px 25px;
+            margin: 5px; /* Отступы между кнопками */
+            border: none;
+            border-radius: 10px;
+            background-color: #f79a23;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 600;
+        }
+        button:hover {
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
