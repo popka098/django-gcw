@@ -15,7 +15,6 @@ from django.shortcuts import redirect, render
 
 from main.forms import LoginForm, PaymentForm, UserRegistrationForm
 from main.models import Payments, Profile
-from training.models import Stats
 
 logger = logging.getLogger("__name__")
 
@@ -130,10 +129,6 @@ def registration_page(request: WSGIRequest):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            profile = Profile(user=new_user)
-            profile.save()
-            stats = Stats(user=new_user)
-            stats.save()
 
             return render(request, 'pages/accounts/register_done.html', {'new_user': new_user})
     else:
