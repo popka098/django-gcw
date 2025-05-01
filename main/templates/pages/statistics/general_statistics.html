@@ -1,7 +1,9 @@
+{% extends "base/base.html" %}
+
 {% block content %}
 <div>
     <h3>Общая статистика</h3>
-    <p>Общее колличество затраченного времени: <span>{{ time_all }}</span></p>
+    <p>Общее количество затраченного времени: <span>{{ time_all }}</span></p>
     <p>Всего правильных ответов: <span>{{ success_all }}</span></p>
     <p>Всего ошибок: <span>{{ mistakes_all }}</span></p>
     <p>Ваш процент правильности: {{ kd }}%</p>
@@ -19,16 +21,18 @@
       <th scope="col">Номер попытки</th>
       <th scope="col">Затраченное время</th>
       <th scope="col">Правильных ответов</th>
-      <th scope="col">Не правилньых ответов</th>
+      <th scope="col">Не правильных ответов</th>
+      <th scope="col">Ошибки</th>
     </tr>
   </thead>
   <tbody>
-    {% for item in attemps %}
+    {% for item in attempts %}
         <tr>
-        <th class="row">{{ item.id }}</th>
+        <th>{{ item.id }}</th>
         <td>{{ item.time }}</td>
         <td>{{ item.successes }}</td>
         <td>{{ item.mistakes }}</td>
+        <td><a href="{% url 'mistakes' item.id %}">Посмотреть</a></td>
         </tr>
     {% endfor %}
 

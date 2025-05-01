@@ -20,6 +20,7 @@ urlpatterns = [
     path('profile/',main_views.profile_page, name='profile'),
 
     path('stats/', training_views.statistics_page, name='statistics'),
+    path("mistakes/<int:att_id>", training_views.mistakes_page, name="mistakes"),
     path('theory/', main_views.theory_page, name='theory'),
 
     path('payment/data_entry', main_views.data_entry_page, name="data_entry"),
