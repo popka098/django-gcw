@@ -58,12 +58,9 @@ def subscription_required(view_func):
             if hasattr(profile, 'subscribe'):
                 if profile.subscribe:
                     return view_func(request, *args, **kwargs)
-                print("Подписка неактивна")
                 return redirect("choose")
-            print("Подписка не найдена")
             return redirect("choose")
             # redirect на покупку подписки
-        print("Пользователь не аутентифицирован")
         return redirect("choose")
         # redirect на аунтификацию
 

@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from main.views import gen_base_context
+from main.views import gen_base_context, subscription_required
 from training.models import Atts, Stats, MistakesAnswers, Task9, Task10, Task11, Task12
 
 # Create your views here.
@@ -62,7 +62,7 @@ def statistics_page(request: WSGIRequest):
     return render(request, "pages/statistics/general_statistics.html", context)
 
 
-@login_required
+@subscription_required
 def mistakes_page(request: WSGIRequest, att_id: int):
     """страница просмотра ошибок пользователя
 

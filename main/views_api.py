@@ -2,6 +2,7 @@
 
 import json
 import random
+import logging
 
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse
@@ -11,6 +12,8 @@ from main.models import Profile
 from training.models import (Atts, MistakesAnswers, Stats, Task9, Task10,
                              Task11, Task12)
 from training.serializers import WordsSerializer
+
+logger = logging.getLogger("__name__")
 
 tasks = {
     9: Task9,
@@ -166,7 +169,7 @@ def save_statistics(request: WSGIRequest):
     )
     attempt.save()
 
-    print(len(mistakes_answers), len(mistakes_correct))
+    logger.info(len(mistakes_answers), len(mistakes_correct))
     for i, m in enumerate(mistakes_answers):
         mis = MistakesAnswers(
             input_answer=m,
@@ -174,6 +177,11 @@ def save_statistics(request: WSGIRequest):
             att=attempt
         )
         mis.save()
+
+    sub = Profile.objects.get(user=request.user).subscribe
+    atts = Atts.objects.filter(user=request.user)
+    if not sub and atts.count() > 5:
+        atts[0].delete()
 
 
     return JsonResponse(
