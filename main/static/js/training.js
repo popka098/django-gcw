@@ -159,14 +159,14 @@ String.prototype.toHHMMSS = function () {
 
 async function post_statistics() {
     try {
-        const apiUrl = 
+        const apiUrl =
             window.location.protocol +
             "//" +
             window.location.host +
             "/api/save_statistics";
-            
+
             const response = await fetch(apiUrl, {
-                method: 'POST', 
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': getCSRFToken()
@@ -178,18 +178,18 @@ async function post_statistics() {
                         "mistakes": mistake_counter,
                         "mistake_words": mistake_words
                     }
-                ) 
+                )
             });
 
         if (!response.ok) {
             throw new Error('Сеть ответила с ошибкой: ' + response.status);
         }
 
-        const responseData = await response.json(); 
-        return responseData; 
+        const responseData = await response.json();
+        return responseData;
     } catch (error) {
-        console.error('Error:', error); 
-        throw error; 
+        console.error('Error:', error);
+        throw error;
     }
 }
 
@@ -213,10 +213,10 @@ function get_next_word_api() {
                     // Успешный ответ
                     try {
                         const data = JSON.parse(xhr.responseText);
-                        resolve(data); 
+                        resolve(data);
                     } catch (error) {
                         console.error("Ошибка при парсинг JSON:", error);
-                        reject(error); 
+                        reject(error);
                     }
                 } else {
                     console.error(
@@ -227,7 +227,7 @@ function get_next_word_api() {
                         new Error(
                             "Ошибка при получении данных: " + xhr.statusText
                         )
-                    ); 
+                    );
                 }
             }
         };
@@ -237,7 +237,7 @@ function get_next_word_api() {
 }
 async function get_next_word() {
     try {
-        const result = await get_next_word_api(); 
+        const result = await get_next_word_api();
 
         // Проверяем наличие нужных полей перед доступом
         if (result && typeof result === "object") {
@@ -247,8 +247,8 @@ async function get_next_word() {
             throw new Error("Полученные данные имеют неверную структуру");
         }
     } catch (error) {
-        console.error("Ошибка:", error.message); 
-        throw error; 
+        console.error("Ошибка:", error.message);
+        throw error;
     }
 }
 
@@ -266,7 +266,7 @@ async function init_words_queue() {
             throw new Error('Сеть ответила с ошибкой: ' + response.status);
         }
         const data = await response.json();
-        
+
         // Проверяем, есть ли ключ words и массив ли он
         if (Array.isArray(data.words)) {
             words_queue = data.words; // Сохраняем массив
@@ -285,15 +285,15 @@ async function get_user_sub(){
             "//" +
             window.location.host +
             "/api/get_user_sub"
-    
+
         const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error('Сеть ответила с ошибкой: ' + response.status);
         }
         const data = await response.json();
-        
-        is_sub = data.sub; 
-    
+
+        is_sub = data.sub;
+
     } catch (error) {
         console.error('Ошибка при получении данных:', error);
     }
@@ -329,9 +329,9 @@ function highlight_correct() {
     len = words_queue[0]["Pass"].length;
 
     if (ind == len - 1) {
-        completed = 
+        completed =
             completed.slice(0, -1) +
-            "<span style='color: green'>" + 
+            "<span style='color: green'>" +
             completed.slice(-1) +
             "</span>";
         return;
@@ -341,7 +341,7 @@ function highlight_correct() {
         completed.slice(0, -(len - ind)) +
         "<span style='color: green'>" +
         completed.slice(-(len - ind), -(len - ind) + 1) +
-        "</span>" + 
+        "</span>" +
         completed.slice(-(len - ind) + 1);
 }
 function highlight_incorrect() {
@@ -350,9 +350,9 @@ function highlight_incorrect() {
     len = words_queue[0]["Pass"].length;
 
     if (ind == len - 1) {
-        completed = 
+        completed =
             completed.slice(0, -1) +
-            "<span style='color: red'>" + 
+            "<span style='color: red'>" +
             completed.slice(-1) +
             "</span>";
         return;
@@ -360,7 +360,7 @@ function highlight_incorrect() {
 
     completed =
         completed.slice(0, -(len - ind)) +
-        "<span style='color: red'>" + 
+        "<span style='color: red'>" +
         completed.slice(-(len - ind), -(len - ind) + 1) +
         "</span>" +
         completed.slice(-(len - ind) + 1);
