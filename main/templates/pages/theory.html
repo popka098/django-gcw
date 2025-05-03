@@ -7,20 +7,9 @@
 {% endblock %}
 
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Учебник</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    {% load static %}
-</head>
-<body>
-
-    <h1>Каталог теории на ЕГЭ</h1>
-    <div class="container">
-        <div class="pdf-container">
-            <iframe src="{% static 'pdf/file1.pdf' %}" id="pdfFrame"></iframe>
-        </div>
+<div class="main-body">
+    <div class="main-theory">Каталог теории на ЕГЭ</div>
+    <iframe class="pdf-container" src="{% static 'pdf/file1.pdf' %}" id="pdfFrame"></iframe>
 
         <div class="navigation">
             <button onclick="changePage(0)">Задание 9.Корень слова</button>
@@ -29,7 +18,10 @@
             <button onclick="changePage(3)">Задание 12.Гл-ые формы</button>
         </div>
     </div>
+</div>
+{% endblock %}
 
+{% block extra_js %}
     <script>
         const pdfFiles = [
             '{% static "pdf/file1.pdf" %}',
@@ -47,7 +39,4 @@
             window.location.href = 'http://127.0.0.1:8000/';
         }
     </script>
-
-</body>
-</html>
 {% endblock %}
