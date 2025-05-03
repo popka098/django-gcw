@@ -9,5 +9,6 @@
 <div class="main-body">
     <div class="main-profile">Профиль</div>
     <p class="name-text"> Привет, {{user.first_name}} {{user.last_name}}</p>
+    <a href="{% url 'logout' %}"> <button class="logout-button">Выйти</button></a>
 </div>
 {% endblock %}
