@@ -206,6 +206,7 @@ function get_next_word_api() {
 
         const xhr = new XMLHttpRequest();
         xhr.open("GET", apiUrl, true);
+        xhr.withCredentials = true;
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -262,7 +263,13 @@ async function init_words_queue() {
             "/api/get_random_words/" +
             task + "/" + 20;
 
-        const response = await fetch(apiUrl);
+        const response = await fetch(
+            apiUrl,
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
         if (!response.ok) {
             throw new Error('Сеть ответила с ошибкой: ' + response.status);
         }
@@ -287,7 +294,13 @@ async function get_user_sub(){
             window.location.host +
             "/api/get_user_sub"
 
-        const response = await fetch(apiUrl);
+        const response = await fetch(
+            apiUrl,
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
         if (!response.ok) {
             throw new Error('Сеть ответила с ошибкой: ' + response.status);
         }
