@@ -91,11 +91,8 @@ WSGI_APPLICATION = 'GCW.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u3120090_default',
-        'USER': 'u3120090_default',
-        'PASSWORD': 'xaMMUtn9Q4MGf57d',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, "db.sqlite3")
     }
 }
 
