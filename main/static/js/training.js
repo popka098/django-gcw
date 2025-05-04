@@ -167,6 +167,7 @@ async function post_statistics() {
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': getCSRFToken()

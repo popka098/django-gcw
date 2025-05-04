@@ -133,6 +133,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+# COOKIEs ohm nom nom
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1209600
+SESSION_COOKIE_DOMAIN = '.goose-cycle.ru'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
