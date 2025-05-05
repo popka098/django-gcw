@@ -63,7 +63,7 @@ function redirect() {
     const select = document.getElementById("numbers-select");
     const val = select.value;
 
-    window.location.replace("../" + val);
+    window.location.href = "../" + val;
 }
 window.onload = function() {
     const select = document.getElementById("numbers-select");
@@ -88,7 +88,7 @@ function change_time_end() {
     }
 
     if (!is_sub) {
-        window.location.replace("../../subscribe/choose");  // Не пишите относительный путь от текущего URL, надо от корня
+        window.location.href = "../../subscribe/choose";
         return;
     }
 
@@ -397,7 +397,7 @@ function timer_tick() {
 
     if (timer >= end_times[end_time_ind]) {
         clearInterval(timerID);
-        window.location.replace("/stats");
+        window.location.href = "../../stats";
         console.log("END");
     }
 }
