@@ -1,0 +1,59 @@
+body {
+    background-color: #F2EEE5;
+    margin: 0;
+    padding: 0;
+}
+.main-theory {
+    position: absolute;
+    top: 17.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 45px;
+    font-weight: 600;
+    color: #f79a23;
+}
+.pdf-container {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    height: 800px;
+    border-radius: 10px;
+    border: 2px solid #f79a23; /* Оранжевая граница */
+    width: 45%;
+
+}
+
+        .navigation {
+            position: absolute;
+            top: 40.5%;
+            left: 76%;
+            transform: translate(-50%, -50%);
+            flex-direction: column; /* Кнопки в столбик */
+        }
+        button {
+            width: 380px;
+            height: 80px;
+            margin: 10px; /* Отступы между кнопками */
+            border: none;
+            border-radius: 10px;
+            background-color: #f79a23;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 600;
+        }
+        button:hover {
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+    .main-body {
+        width: 100%;
+        position: relative;
+        background-color: #f2eee5;
+        height: 1080px;
+        font-family: Inter;
+    }

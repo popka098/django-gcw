@@ -1,23 +1,23 @@
 .account-circle-icon {
     position: absolute;
-    top: 6%;
+    top: 90%;
     left: 96.5%;
     transform: translate(-50%, -50%);
     width: 45px;
     height: 45px;
     cursor: pointer;
 }
-.settings-icon {
+.keyboard-icon {
     position: absolute;
-    top: 8%;
+    top: 90%;
     left: 91.5%;
     transform: translate(-50%, -50%);
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
 }
 .award-icon {
     position: absolute;
-    top: 8%;
+    top: 90%;
     left: 86.5%;
     transform: translate(-50%, -50%);
     width: 38px;
@@ -25,7 +25,7 @@
 }
 .layers-icon {
     position: absolute;
-    top: 8%;
+    top: 90%;
     left: 81.5%;
     transform: translate(-50%, -50%);
     width: 40px;
@@ -35,10 +35,10 @@
 }
 .logo-icon {
     position: absolute;
-    top: 100px;
+    top: 20%;
     left: 21px;
-    width: 1px;
-    height: 1px;
+    width: 500px;
+    height: 100px;
     object-fit: cover;
 }
 .main-body {
@@ -177,7 +177,9 @@ body{
     padding: 0;
 }
 .header {
+    position: fixed;
     background-color: #F2EEE5;
+    z-index: 3;
     width: 100%;
     height: 100px;
 }
