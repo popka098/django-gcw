@@ -1,19 +1,21 @@
-{% extends 'base/base.html' %}
-
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
 {% load static %}
-{% block content %} 
-    <p>Ошибка транзакции</p><br>
-    <span>Номер транзакции:</span>
-    <span>{{ number }}</span><br>
-    <span class="receipt-label">Дата и время:</span><br>
-    <span class="receipt-value" id="transactionDate"></span>
-    <span class="receipt-label">Статус:</span>
-    <span class="receipt-value text-danger">Ошибка</span><br>
-    
-    <p>Проверьте корректность введённых данных карты, а затем попробуйте еще раз</p>
-    
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/failed_pay.css' %}">
+{% endblock %}
+{% block content %}
+<div class="main-body">
+    <p class="main-pay">Ошибка оплаты</p><br>
+    <img class="goose-money" alt="" src="{% static 'img/goose/goose_succses.png' %}">
+    <span class="numbert-text">Номер транзакции: <span class="span">{{ number }} </span></span>
+    <span class="time-text">Дата и время: <span class="span" id="transactionDate"></span> </span>
+    <span class="status-text">Статус: <span class="receipt-value text-danger">Ошибка</span> </span>
+</div>
+
 {% endblock %}
 
-{% block extra_js %} 
+{% block extra_js %}
     <script charset="utf-8" type="text/javascript" src="{% static 'js/status_payment.js' %}"></script>
 {% endblock %}

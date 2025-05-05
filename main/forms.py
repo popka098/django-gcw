@@ -83,7 +83,7 @@ class PaymentForm(forms.Form):
     :param cvv: cvv/cvc
     """
     cardNumber = forms.CharField(
-        label="Номер карты",
+        label="",
         validators=[
             RegexValidator(
                 regex='^[0-9 ]{16,22}$',
@@ -98,7 +98,7 @@ class PaymentForm(forms.Form):
     )
 
     cardName = forms.CharField(
-        label="Имя владельца",
+        label="",
         validators=[
             RegexValidator(
                 regex='^[A-Za-z ]+$',
@@ -106,13 +106,13 @@ class PaymentForm(forms.Form):
             )
         ],
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'form-control card-name-input',
             'placeholder': 'IVAN IVANOV'
         })
     )
 
     expiryDate = forms.CharField(
-        label="Срок действия",
+        label="",
         validators=[
             RegexValidator(
                 regex='^(0[1-9]|1[0-2])\/([0-9]{2})$',
@@ -120,14 +120,14 @@ class PaymentForm(forms.Form):
             )
         ],
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'form-control card-data-input',
             'placeholder': 'MM/ГГ',
             'maxlength': '5'
         })
     )
 
     cvv = forms.CharField(
-        label="CVV/CVC",
+        label="",
         validators=[
             RegexValidator(
                 regex='^[0-9]{3,4}$',
@@ -135,7 +135,7 @@ class PaymentForm(forms.Form):
             )
         ],
         widget=forms.PasswordInput(attrs={
-            'class': 'form-control',
+            'class': 'form-control card-cvv-input',
             'placeholder': '•••',
             'maxlength': '4'
         })

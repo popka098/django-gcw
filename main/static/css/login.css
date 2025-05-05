@@ -1,23 +1,23 @@
 .account-circle-icon {
     position: absolute;
-    top: 90%;
+    top: 8%;
     left: 96.5%;
     transform: translate(-50%, -50%);
     width: 45px;
     height: 45px;
     cursor: pointer;
 }
-.keyboard-icon {
+.settings-icon {
     position: absolute;
-    top: 90%;
+    top: 8%;
     left: 91.5%;
     transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
 }
 .award-icon {
     position: absolute;
-    top: 90%;
+    top: 8%;
     left: 86.5%;
     transform: translate(-50%, -50%);
     width: 38px;
@@ -25,7 +25,7 @@
 }
 .layers-icon {
     position: absolute;
-    top: 90%;
+    top: 8%;
     left: 81.5%;
     transform: translate(-50%, -50%);
     width: 40px;
@@ -35,13 +35,13 @@
 }
 .logo-icon {
     position: absolute;
-    top: 20%;
+    top: 10px;
     left: 21px;
-    width: 500px;
-    height: 100px;
+    width: 459px;
+    height: 95px;
     object-fit: cover;
 }
-.main-body {
+.div {
     width: 100%;
     position: relative;
     background-color: #f2eee5;
@@ -62,7 +62,7 @@
     width: 711px;
     height: 415px;
     }
-.input-login {
+.input-field_1 {
     position: absolute;
     top: 100px;
     left: 50%;
@@ -87,7 +87,7 @@
     left: 50px;
     font-weight: 600;
 }
-.input-password {
+.input-field_2 {
     position: absolute;
     top: 240px;
     left: 50%;
@@ -112,74 +112,26 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: 600;
-    text-decoration: none;
 }
 .sing-in-button {
     position: absolute;
-    top: 81.5%;
+    top: 61.5%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     background-color: #f79a23;
     width: 242px;
     height: 56px;
+}
+.sing-in-text {
+    position: absolute;
+    top: 22%;
+    left: 33%;
+    font-weight: 600;
     color: #f2eee5;
-    font-weight: 600;
 }
-.google-button {
-    position: absolute;
-    top: 71.5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.74);
-    border: 2px solid #23b0f7;
-    box-sizing: border-box;
-    width: 330px;
-    height: 51px;
-}
-.google-button-2 {
-    position: absolute;
-    top: 50.5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0);
-    border: 2px solid #23b0f7;
-    box-sizing: border-box;
-    width: 330px;
-    height: 51px;
-}
-.google-logo-icon {
-    position: absolute;
-    top: 50%;
-    left: 9%;
-    transform: translate(-50%, -50%);
-    width: 45px;
-    height: 45px;
-}
-.google-text {
-    position: absolute;
-    top: 50%;
-    left: 58%;
-    transform: translate(-50%, -50%);
-    width: 247px;
-    font-size: 25px;
-    font-weight: 600;
-    font-family: Inter;
-    color: #262626;
-}
-
-
 body{
     background-color: #F2EEE5;
     margin: 0;
     padding: 0;
-}
-.header {
-    position: fixed;
-    background-color: #F2EEE5;
-    z-index: 3;
-    width: 100%;
-    height: 100px;
 }

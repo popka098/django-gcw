@@ -1,0 +1,40 @@
+.main-body {
+    width: 100%;
+    position: relative;
+    background-color: #f2eee5;
+    height: 1080px;
+    font-family: Inter;
+}
+.main-profile {
+    position: absolute;
+    top: 17.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 45px;
+    font-weight: 600;
+    color: #f79a23;
+}
+.name-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+}
+.logout-button {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background-color: #f79a23;
+    width: 200px;
+    height: 60px;
+    color: #f2eee5;
+    font-weight: 600;
+}
+body{
+    background-color: #F2EEE5;
+    margin: 0;
+    padding: 0;
+}
