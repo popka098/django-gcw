@@ -14,9 +14,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['goose-cycle.ru', 'www.goose-cycle.ru']
+ALLOWED_HOSTS = [
+    'goose-cycle.ru', 
+    'www.goose-cycle.ru',
+    '95.163.223.131',
+    '192.168.0.100',
+]
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
