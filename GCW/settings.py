@@ -17,7 +17,7 @@ SECRET_KEY = get_random_secret_key()
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'goose-cycle.ru', 
+    'goose-cycle.ru',
     'www.goose-cycle.ru',
     '95.163.223.131',
     '192.168.0.100',
@@ -135,12 +135,18 @@ USE_L10N = True
 
 USE_TZ = True
 
-# COOKIEs ohm nom nom
+# COOKIEs ohm nom nom and CSRF
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 1209600
 SESSION_COOKIE_DOMAIN = '.goose-cycle.ru'
+CSRF_TRUSTED_ORIGINS = [
+    "http://goose-cycle.ru",
+    "https://goose-cycle.ru",
+    "https://www.goose-cycle.ru",
+    "https://www.goose-cycle.ru",
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
