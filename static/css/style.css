@@ -1,7 +1,7 @@
 .account-circle-icon {
     position: absolute;
-    top: 90%;
-    left: 96.5%;
+    top: 55%;
+    left: 95.5%;
     transform: translate(-50%, -50%);
     width: 45px;
     height: 45px;
@@ -9,24 +9,24 @@
 }
 .keyboard-icon {
     position: absolute;
-    top: 90%;
-    left: 91.5%;
+    top: 55%;
+    left: 89.5%;
     transform: translate(-50%, -50%);
     width: 50px;
     height: 50px;
 }
 .award-icon {
     position: absolute;
-    top: 90%;
-    left: 86.5%;
+    top: 55%;
+    left: 83.5%;
     transform: translate(-50%, -50%);
     width: 38px;
     height: 38px;
 }
 .layers-icon {
     position: absolute;
-    top: 90%;
-    left: 81.5%;
+    top: 55%;
+    left: 77.5%;
     transform: translate(-50%, -50%);
     width: 40px;
     height: 40px;
@@ -35,11 +35,43 @@
 }
 .logo-icon {
     position: absolute;
-    top: 20%;
+    top: 5%;
     left: 21px;
     width: 500px;
     height: 100px;
     object-fit: cover;
+}
+.profile-text {
+    position: absolute;
+    top: 88%;
+    left: 95.5%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    font-size: 17px;
+}
+.keyboard-text {
+    position: absolute;
+    top: 88%;
+    left: 89.5%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    font-size: 17px;
+}
+.statistic-text {
+    position: absolute;
+    top: 88%;
+    left: 83.5%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    font-size: 17px;
+}
+.theory-text {
+    position: absolute;
+    top: 88%;
+    left: 77.5%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    font-size: 17px;
 }
 .main-body {
     width: 100%;
@@ -181,5 +213,6 @@ body{
     background-color: #F2EEE5;
     z-index: 3;
     width: 100%;
-    height: 100px;
+    height: 115px;
+    border-bottom: 2px solid rgba(38, 38, 38, 0.14);
 }
