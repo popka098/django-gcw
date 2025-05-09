@@ -11,7 +11,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Далее полученное значение подставляется в соответствующую переменную
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "o*bv(y6)dnj0fh20)d3=@naku0n5&)-+(^$u$^zck0kmfoixc1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -135,19 +134,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# COOKIEs ohm nom nom and CSRF
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 1209600
-# SESSION_COOKIE_DOMAIN = '.goose-cycle.ru'
-CSRF_TRUSTED_ORIGINS = [
-    "http://goose-cycle.ru",
-    "https://goose-cycle.ru",
-    "https://www.goose-cycle.ru",
-    "https://www.goose-cycle.ru",
-]
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -167,8 +153,8 @@ LOGOUT_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'main.User'  # Если вы хотите
 
 # Проверка тех, кто ленится указать корректный SECRET_KEY
-if SECRET_KEY == 'Insert secret key here and uncomment this variable':
-    raise RuntimeError('Сначала укажите SECRET_KEY. Подробности - в settings.py')
+# if SECRET_KEY == 'Insert secret key here and uncomment this variable':
+#     raise RuntimeError('Сначала укажите SECRET_KEY. Подробности - в settings.py')
 
 
 #DEFAULT_AUTO_FIELD='django.db.models.AutoField'
