@@ -11,6 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Далее полученное значение подставляется в соответствующую переменную
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = "o*bv(y6)dnj0fh20)d3=@naku0n5&)-+(^$u$^zck0kmfoixc1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -153,8 +154,8 @@ LOGOUT_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'main.User'  # Если вы хотите
 
 # Проверка тех, кто ленится указать корректный SECRET_KEY
-# if SECRET_KEY == 'Insert secret key here and uncomment this variable':
-#     raise RuntimeError('Сначала укажите SECRET_KEY. Подробности - в settings.py')
+if SECRET_KEY == 'Insert secret key here and uncomment this variable':
+    raise RuntimeError('Сначала укажите SECRET_KEY. Подробности - в settings.py')
 
 
 #DEFAULT_AUTO_FIELD='django.db.models.AutoField'
