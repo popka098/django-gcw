@@ -1,0 +1,52 @@
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/statistic.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="main-body">
+    <div class="statistic-form">
+        <h3 class="main-statistic" >Общая статистика</h3>
+        <p class="statistic-text-time">Общее количество затраченного времени: <span class="span">{{ time_all }}</span></p>
+        <p class="statistic-text-right-answer">Всего правильных ответов: <span class="span">{{ success_all }}</span></p>
+        <p class="statistic-text-error">Всего ошибок: <span class="span">{{ mistakes_all }}</span></p>
+        <p class="statistic-text-percent">Ваш процент правильности: <span class="span">{{ kd }}%</span></p>
+        <br>
+        <br>
+    </div>
+
+
+<div>
+    <h4 class="main-table">Ваши последние попытки:</h4>
+    <br>
+    <div class="table">
+    <table>
+        <thead>
+            <tr>
+            <th scope="col" class="tb">Номер попытки</th>
+            <th scope="col" class="tb">Затраченное время</th>
+            <th scope="col" class="tb">Правильных ответов</th>
+            <th scope="col" class="tb">Не правильных ответов</th>
+            <th scope="col" class="tb">Ошибки</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in attempts %}
+            <tr>
+            <th class="th">{{ item.id }}</th>
+            <td class="th">{{ item.time }}</td>
+            <td class="th">{{ item.successes }}</td>
+            <td class="th">{{ item.mistakes }}</td>
+            <td class="th"><a href="{% url 'mistakes' item.id %}" class="span">Посмотреть</a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

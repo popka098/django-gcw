@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/mistakes.css' %}">
+{% endblock %}
+{% block content %}
+<div class="main-body">
+<div>
+    <h3 class="main-table">Ошибки в попытке {{ att_id }}</h3>
+    <br>
+    <br>
+</div>
+
+
+<div class="table">
+    <br>
+    <table>
+  <thead>
+    <tr>
+      <th scope="col" class="th">Ваш ответ</th>
+      <th scope="col" class="th">Правильный ответ</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in mistakes %}
+        <tr>
+        <td class="tb">{{ item.input_answer }}</td>
+        <td class="tb">{{ item.correct_answer }}</td>
+        </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+</div>
+</div>
+{% endblock %}
