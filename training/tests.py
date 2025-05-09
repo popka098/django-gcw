@@ -131,6 +131,10 @@ class ViewsTest(TestCase):
         response = self.client.get('/training/task999/')
         self.assertEqual(response.status_code, 404)
 
+        # Тест для задания 15 (которого нет в TASK_MODELS)
+        response = self.client.get('/training/task15/')
+        self.assertEqual(response.status_code, 404)
+
     def test_statistics_page_view(self):
         # Удаляем все существующие статистики для пользователя
         Stats.objects.filter(user=self.user).delete()
