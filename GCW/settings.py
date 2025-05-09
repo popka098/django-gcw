@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Далее полученное значение подставляется в соответствующую переменную
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_random_secret_key()
+SECRET_KEY = "o*bv(y6)dnj0fh20)d3=@naku0n5&)-+(^$u$^zck0kmfoixc1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -140,7 +140,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 1209600
-SESSION_COOKIE_DOMAIN = '.goose-cycle.ru'
+# SESSION_COOKIE_DOMAIN = '.goose-cycle.ru'
 CSRF_TRUSTED_ORIGINS = [
     "http://goose-cycle.ru",
     "https://goose-cycle.ru",
