@@ -26,7 +26,6 @@ class Task9Resource(resources.ModelResource):
         """
         word = row["Word"]
         passed = row["Pass"]
-        print(word, passed)
         if (
             len(word) == 0 or
             len(passed) == 0 or
@@ -54,7 +53,6 @@ class Task10Resource(resources.ModelResource):
         """
         word = row["Word"]
         passed = row["Pass"]
-        print(word, passed)
         if (
             len(word) == 0 or
             len(passed) == 0 or
@@ -82,7 +80,6 @@ class Task11Resource(resources.ModelResource):
         """
         word = row["Word"]
         passed = row["Pass"]
-        print(word, passed)
         if (
             len(word) == 0 or
             len(passed) == 0 or
@@ -110,7 +107,6 @@ class Task12Resource(resources.ModelResource):
         """
         word = row["Word"]
         passed = row["Pass"]
-        print(word, passed)
         if (
             len(word) == 0 or
             len(passed) == 0 or

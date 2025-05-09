@@ -169,7 +169,6 @@ def save_statistics(request: WSGIRequest):
     )
     attempt.save()
 
-    logger.info(len(mistakes_answers), len(mistakes_correct))
     for i, m in enumerate(mistakes_answers):
         mis = MistakesAnswers(
             input_answer=m,

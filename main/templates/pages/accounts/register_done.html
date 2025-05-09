@@ -1,8 +1,14 @@
 {% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
 
-{% block title %}Welcome{% endblock %}
-
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/registration_done.css' %}">
+{% endblock %}
 {% block content %}
-    <h1>Добро пожаловать {{ new_user.first_name }}!</h1>
-    <p>Ваш аккаунт успешно создан. Теперь вы можете <a href="/login">войти</a>.</p>
+<div class="main-body">
+    <h1 class="main-hello">Добро пожаловать {{ new_user.first_name }}!</h1>
+    <img class="goose-hello" alt="" src="{% static 'img/goose/goose_hello.png.png' %}">
+    <p class="about-text">Ваш аккаунт успешно создан. Теперь вы можете <a class="span" href="/login">войти</a></p>
+</div>
 {% endblock %}

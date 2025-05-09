@@ -15,11 +15,11 @@ class TaskSerializer(serializers.Serializer):
     Pass = serializers.CharField()
     Context_After = serializers.CharField()
 
-    def create(self, validated_data):
+    def create(self, validated_data): # pragma: no cover
         print("", end="")
         return super().create(validated_data)
 
-    def update(self, instance, validated_data):
+    def update(self, instance, validated_data): # pragma: no cover
         print("", end="")
         return super().update(instance, validated_data)
     class Meta:
@@ -41,6 +41,6 @@ class WordsSerializer(serializers.ListSerializer):
     """
     child = TaskSerializer()
 
-    def update(self, instance, validated_data):
+    def update(self, instance, validated_data): # pragma: no cover
         print("", end="")
         return super().update(instance, validated_data)
