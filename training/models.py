@@ -9,7 +9,7 @@ class Task(models.Model):
 
     :param Word: Слово
     :param Context_Before: Контекст перед словом
-    :param Pass: Слово с пропуском
+    :param Pass: Слово с пропуском в формате Сл.во где . это пропуск
     :param Context_After: Контекст после слова
     """
     Word = models.CharField(
