@@ -48,7 +48,7 @@ test:
         - coverage html --omit=manage.py
         - mkdir public
         - mv htmlcov public/coverage
-    coverage: '/TOTAL\s+\d+\s+\d+\s+\d+\s+(\d+%)/'
+    coverage: '/TOTAL\s+\d+\s+\d+\s+(\d+%)/'
     artifacts:
         paths:
             - public/coverage
