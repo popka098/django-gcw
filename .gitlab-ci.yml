@@ -65,7 +65,7 @@ sphinx:
         - mv docs/build/html/* public/
     artifacts:
         paths:
-            - public/docs
+            - public
 
 pages:
     stage: deploy
