@@ -66,6 +66,18 @@ sphinx:
     artifacts:
         paths:
             - public/docs
+
+pages:
+    stage: docs
+    script:
+        - mkdir -p public
+        - mv public/docs/* public/ || true
+    artifacts:
+        paths:
+            - public
+    only:
+        - master
+
 # pages:
 #   stage: deploy
 #   script:
