@@ -62,7 +62,7 @@ sphinx:
         - export PYTHONPATH=..
         - make html
         - cd ..
-        - mv docs/build/html public/docs
+        - mv docs/build/html public/
     artifacts:
         paths:
             - public/docs
