@@ -1,15 +1,18 @@
 # Проект "GooseCycleWords"
 
+### Проект доступен по ссылке https://goose-cycle.ru
+
 ### Инструкция по начальной настройке проекта:
 1. Обновить pip и установить все необходимое:
    ```bash
    pip install --upgrade pip
    pip install -r requirements.txt
    ```
-2. Синхронизировать структуру базы данных с моделями: 
+2. Синхронизировать проект:
    ```bash
    python manage.py makemigrations
    python manage.py migrate
+   python manage.py collectstatic
    ```
 3. Создать суперпользователя
    ```bash
@@ -17,7 +20,7 @@
    ```
 
 ### Добавление слов в базу данных:
-1. Пройти по [ссылке](https://docs.google.com/spreadsheets/d/1YbYf7SLtEpUzzKlDy3BGpTMENcaaVtO6DuReRQio6NU/edit?usp=sharing) 
+1. Пройти по [ссылке](https://docs.google.com/spreadsheets/d/1YbYf7SLtEpUzzKlDy3BGpTMENcaaVtO6DuReRQio6NU/edit?usp=sharing)
 и скачать таблицы *Task9*, *Task10*, *Task11*, *Task12* в формате **csv**
 ---
 ![tables](.readme_media/tables.png)
