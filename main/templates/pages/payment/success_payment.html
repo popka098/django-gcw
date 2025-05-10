@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/success_pay.css' %}">
+{% endblock %}
+{% block content %}
+<div class="main-body">
+    <p class="main-pay">Оплата прошла успешно</p><br>
+    <img class="goose-money" alt="" src="{% static 'img/goose/goose_succses.png' %}">
+    <span class="numbert-text">Номер транзакции: <span class="span">{{ number }} </span></span>
+    <span class="time-text">Дата и время: <span class="span" id="transactionDate"></span> </span>
+    <span class="sum-text">Сумма: <span class="span">{{ amount }} рублей</span> </span>
+    <span class="status-text">Статус: <span class="receipt-value text-success">Успешно</span> </span>
+</div>
+    
+{% endblock %}
+
+{% block extra_js %} 
+    <script charset="utf-8" type="text/javascript" src="{% static 'js/status_payment.js' %}"></script>
+{% endblock %}

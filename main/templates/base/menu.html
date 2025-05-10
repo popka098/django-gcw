@@ -1,6 +1,15 @@
+{% load static %}
 <nav>
 
-    <a href="{% url 'index' %}">Simple votings</a>
+    <header class="header">
+    <a href="{% url 'index' %}"><img class="logo-icon" alt="" src="{% static 'img/login/Frame 2 1.png' %}"></a>
+    <div class="profile-text">профиль</div>
+    <div class="keyboard-text">тренировка</div>
+    <div class="statistic-text">статистика</div>
+    <div class="theory-text">учебник</div>
+    <a href="{% url 'theory' %}"><img class="layers-icon" alt="" src="{% static 'img/login/Layers.svg' %}"></a>
+    <a href="{% url 'statistics' %}"><img class="award-icon" alt="" src="{% static 'img/login/Award.svg' %}"></a>
+    <a href="{% url 'task9' %}"><img class="keyboard-icon" alt="" src="{% static 'img/login/keyboard.svg' %}"></a>
 
 
     <ul>
@@ -16,14 +25,17 @@
 
     <ul>
         {% block usermenu %}
+
             <li>
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'logout' %}">Выйти</a>
-                {% else %}
-                    <a href="{% url 'login' %}">Войти</a>
-                {% endif %}
+                <a href="{% url 'profile' %}"><img class="account-circle-icon" alt="" src="{% static 'img/login/account_circle.svg' %}" id="accountCircleIcon"></a>
+                 {% else %}
+                <a href="{% url 'login' %}"><img class="account-circle-icon" alt="" src="{% static 'img/login/account_circle.svg' %}" id="accountCirclecon"></a>
+                 {% endif %}
+
             </li>
         {% endblock %}
     </ul>
+    </header>
 
 </nav>

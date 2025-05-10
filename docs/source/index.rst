@@ -3,14 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to sv's documentation!
+Welcome to gcw's documentation!
 ==============================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   views.rst
+   main_views.rst
+   main_views_api.rst
+   main_models.rst
+   main_forms.rst
+   main_admin.rst
+   training_views.rst
+   training_serializers.rst
+   training_models.rst
 
 
 

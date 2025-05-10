@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %} 
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "css/training.css" %}" />
+{% endblock %} 
+
+{% block content %}
+<h1>{{ pagename }}</h1>
+
+<br /><br />
+
+<div class="container">
+    <span class="timer" id="timer">00:00:00</span>
+    <div class="main-settings">
+            <button class="time-button-text" type="button" id="choose_time_button" onclick="change_time_end()" >
+                120
+            </button>
+            <button class="icon-time-button" type="button" id="choose_time_button_clock_icon" onclick="change_time_end()" >
+                <img class="icon-time-button" src="{% static 'img/login/Clock.svg' %}">
+            </button>
+            <div class="line-settings"></div>
+
+            <form>
+                <img alt="" src="{% static 'img/login/Hash.svg' %}" class="icon-number">
+                <label for="numbers-select"></label>
+                <select class="number-list" name="numbers" id="numbers-select" onchange="redirect()">
+                    <option class="number-select" value="task9">Номер 9</option>
+                    <option class="number-select" value="task10">Номер 10</option>
+                    <option class="number-select" value="task11">Номер 11</option>
+                    <option class="number-select" value="task12">Номер 12</option>
+                </select>
+
+            </form>
+    </div>
+</div>
+
+<hr />
+<div class="container">
+    <span id="start">Нажмите space чтобы начать</span>
+    <span id="completed"></span>
+    <span id="next" style="color: lightslategray"></span>
+    <button class="icon-retry-button" type="button" id="button_retry_icon" onclick="window.location.reload()">
+        <img src="{% static 'img/login/Rotate cw.svg' %}">
+    </button>
+    <button class="statistic-button" type="button" id="button_statistic" onclick="window.location.href = '../../stats'" >
+        Закончить
+    </button>
+</div>
+<br />
+
+<hr />
+{% if messages %} {% for message in messages %}
+<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %} {% endif %}
+
+<h1>
+    {% if form.errors %} {{ form.errors }} <br />
+    {% endif %}
+</h1>
+{% endblock %} {% block extra_js %}
+    <script charset="utf-8" type="text/javascript" src="{% static 'js/training.js' %}"></script>
+{% endblock %}

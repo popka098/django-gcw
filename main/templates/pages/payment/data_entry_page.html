@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/data_entry.css' %}">
+{% endblock %}
+{% block content %}
+<div class="main-body">
+    <div class="main-data">Данные карты</div>
+    <form method="POST" class="card-form">
+    {% csrf_token %}
+        <div class="card-number-text">Номер карты</div>
+        <label for="cardNumber" class="form-label">{{ form.cardNumber.label }}</label>
+        {{ form.cardNumber }}
+        <div class="card-name-text">Имя владельца</div>
+        <label for="cardName">{{ form.cardName.label }}</label>
+        {{ form.cardName }}
+        <div class="card-data-text">Срок действия</div>
+        <label for="expiryDate">{{ form.expiryDate.label }}</label>
+        {{ form.expiryDate }}
+        <div class="card-cvv-text">CVV/CVC</div>
+        <label for="cvv">{{ form.cvv.label }}</label>
+        {{ form.cvv }}
+    <label class="card-sum-text" for="amount">Сумма {{ amount }} рублей</label>
+    <button type="submit" class="card-button">
+            <i class="bi bi-lock-fill me-2"></i>Оплатить
+    </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script charset="utf-8" type="text/javascript" src="{% static 'js/data_entry.js' %}"></script>
+{% endblock %}

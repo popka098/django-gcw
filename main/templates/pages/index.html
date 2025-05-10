@@ -1,15 +1,21 @@
-{% extends 'base/base.html' %}
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
 
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
 {% block content %}
     <div>
-        <div class="content center">
-            <h1>Wellcome!</h1>
-            <hr>
-            <p>Это маленький и очень простой сайт</p>
-            <ul>
-                <li>Автор: {{ author }}</li>
-                <li>Количество страниц: {{ pages }}</li>
-            </ul>
+        <div class="main-body">
+            <h1 class="main-hello">Добро пожаловать в GCW!</h1>
+            <img class="goose-hello" alt="" src="{% static 'img/goose/goose_hello.png.png' %}">
+            <h1 class="about-text">Этот сайт создан для улучшения скорости печати, а также подготовки к четырем номерам ЕГЭ по русскому:
+                <span class="span">9</span>,
+                <span class="span">10</span>,
+                <span class="span">11</span> и
+                <span class="span">12</span>
+            </h1>
         </div>
     </div>
 {% endblock %}

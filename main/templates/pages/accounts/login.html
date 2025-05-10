@@ -1,0 +1,62 @@
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/global.css' %}">
+{% endblock %}
+
+{% block content %}
+
+	<div class="main-body">
+
+			<div class="login-form">
+
+				<form action="." method="post">
+        		{{ form.as_p }}
+				{% csrf_token %}
+        		<p><input class="sing-in-button" type="submit" value="Войти"></p>
+    			</form>
+
+
+				<div class="login-text">Логин / Эл.Почта</div>
+
+
+				<div class="password-text">Пароль</div>
+			</div>
+			<div class="main-login">Вход</div>
+			<div class="log-in-text" >
+				<span>Нет аккаунта? </span>
+				<a href="{% url 'registration' %}" style="text-decoration: none;"><span class="span">Регистрация </span></a>
+			</div>
+
+			<div class="google-button">
+
+				<img class="google-logo-icon" alt="" src="{% static 'img/login/google-logo.png' %}">
+				<div class="google-text">Войти через Google</div>
+				<a class="google-button-2" href="{% url 'social:begin' 'google-oauth2' %}">
+
+      			</a>
+
+			</div>
+
+  	</div>
+
+
+
+
+  	<script>
+    		var accountCircleIcon = document.getElementById("accountCircleIcon");
+    		if(accountCircleIcon) {
+      			accountCircleIcon.addEventListener("click", function (e) {
+        				// Add your code here
+      			});
+    		}
+
+    		var layersIcon = document.getElementById("layersIcon");
+    		if(layersIcon) {
+      			layersIcon.addEventListener("click", function (e) {
+        				// Add your code here
+      			});
+    		}</script>
+{% endblock %}

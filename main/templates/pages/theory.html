@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/theory.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="main-body">
+    <div class="main-theory">Каталог теории на ЕГЭ</div>
+    <iframe class="pdf-container" src="{% static 'pdf/file1.pdf' %}" id="pdfFrame"></iframe>
+
+        <div class="navigation">
+            <button onclick="changePage(0)">Задание 9.Корень слова</button>
+            <button onclick="changePage(1)">Задание 10. Приставка</button>
+            <button onclick="changePage(2)">Задание 11. Суффикс</button>
+            <button onclick="changePage(3)">Задание 12.Гл-ые формы</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const pdfFiles = [
+            '{% static "pdf/file1.pdf" %}',
+            '{% static "pdf/file2.pdf" %}',
+            '{% static "pdf/file3.pdf" %}',
+            '{% static "pdf/file4.pdf" %}',
+        ];
+
+        function changePage(index) {
+            const pdfFrame = document.getElementById('pdfFrame');
+            pdfFrame.src = pdfFiles[index];
+        }
+
+        function goBack() {
+            window.location.href = 'http://127.0.0.1:8000/';
+        }
+    </script>
+{% endblock %}

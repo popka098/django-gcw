@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/subcribe.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="main-body">
+        <div class="main-subcribe">Подписки</div>
+        <form method="POST" class="period-form">
+        {% csrf_token %}
+            <input class="radio-button-one-m" type="radio" name="period" id="one" value="month" checked>
+            <label class="radio-button-one-m-text" for="one">Ежемесячно</label>
+            <br>
+
+            <input class="radio-button-three-m" type="radio" name="period" id="two" value="three_month">
+            <label class="radio-button-three-m-text" for="two">3 месяца</label>
+            <br>
+
+            <input class="radio-button-year" type="radio" name="period" id="three" value="year">
+            <label class="radio-button-year-text" for="three">Ежегодно</label>
+
+            <p class="price-text" id="amount">Цена: </p>
+            <input class="subcribe-button" type="submit" value="Перейти к оплате">
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script charset="utf-8" type="text/javascript" src="{% static 'js/choose_subscribe.js' %}"></script>
+{% endblock %}
