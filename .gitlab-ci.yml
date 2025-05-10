@@ -70,20 +70,9 @@ sphinx:
 pages:
     stage: deploy
     script:
-        - mkdir -p public
-        - mv public/docs/* public/ || true
+    - echo 'Publish pages data'
     artifacts:
         paths:
-            - public
+        - public
     only:
-        - master
-
-# pages:
-#   stage: deploy
-#   script:
-#   - echo 'Publish pages data'
-#   artifacts:
-#     paths:
-#     - public
-#   only:
-#   - master
+    - master
