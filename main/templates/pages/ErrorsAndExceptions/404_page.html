@@ -1,4 +1,4 @@
-% extends "base/base.html" %}
+{% extends "base/base.html" %}
 {% load static %}
 
 {% block extra_css %}
@@ -8,11 +8,7 @@
 {% block content %}
     <div>
         <div class="main-body">
-            <img class="error" alt="" src="{% static 'img/goose/error_404.css' %}">
-            <h1>Ooooopsie!</h1>
-            <hr>
-            <h3>404</h3>
-
+            <img class="error" alt="" src="{% static 'img/goose/error_404.png' %}">
         </div>
     </div>
 {% endblock %}
