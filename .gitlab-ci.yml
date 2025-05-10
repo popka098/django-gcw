@@ -12,7 +12,7 @@ stages:
     - test
     - style
     - docs
-    # - deploy
+    - deploy
 
 # pep8:
 #     stage: style
@@ -68,7 +68,7 @@ sphinx:
             - public/docs
 
 pages:
-    stage: docs
+    stage: deploy
     script:
         - mkdir -p public
         - mv public/docs/* public/ || true
@@ -77,6 +77,7 @@ pages:
             - public
     only:
         - master
+
 # pages:
 #   stage: deploy
 #   script:
