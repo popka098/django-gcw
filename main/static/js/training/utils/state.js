@@ -1,9 +1,8 @@
-// этот код не будет работает для н и нн ((((
+import { end_times, end_time_ind } from "../interactive.js";
 
 // инициализация констант и переменных
 
-// получаемые данные
-let is_sub = false; // куплена ли подписка
+export let is_sub = false; // куплена ли подписка
 
 let task = window.location.href.slice(-2, -1) - 0;
 if (task != 9) {
@@ -11,20 +10,16 @@ if (task != 9) {
 }
 console.log(task);
 
-
-// init
 const char_amount_const = 500;
 
 let element_completed = document.getElementById("completed"); // элемент с пройденными словами
 let element_next = document.getElementById("next"); // элемент с предстоящими словами
 let element_start = document.getElementById("start"); // элемент с надписью Press space to start
 let element_timer = document.getElementById("timer");
-let element_choose_time_button = document.getElementById("choose_time_button");
-
 element_completed.style.display = "none";
 element_next.style.display = "none";
 
-let is_started = false;
+export let is_started = false;
 
 let words_queue = []; // очередь слов
 let completed = ""; // все напечатанное
@@ -43,61 +38,34 @@ init_words_queue().then(() => {
     }
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
     element_completed.innerHTML = completed;
-});
 
-
-get_user_sub().then(() => {
-    console.log(is_sub);
+    get_user_sub().then(() => {
+        console.log(is_sub);
+    });
 });
 
 let mistake_counter = 0;
 let success_counter = 0;
 let timer = 0; // seconds
 let timerID = 0;
-let end_times = [120, 180, 300, 600];
-let end_time_ind = 0;
 
 // вспомогательные функции
 
-function redirect() {
-    const select = document.getElementById("numbers-select");
-    const val = select.value;
-
-    window.location.href = "../" + val;
-}
-window.onload = function() {
+window.onload = function () {
     const select = document.getElementById("numbers-select");
     select.value = "task" + task;
-}
-window.onbeforeunload = function() {
+};
+window.onbeforeunload = function () {
     if (timer == 0 || success_counter + mistake_counter == 0) {
         return;
     }
     post_statistics();
-}
-
+};
 
 function getCSRFToken() {
-    return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-}
-
-
-function change_time_end() {
-    if (is_started) {
-        return
-    }
-
-    if (!is_sub) {
-        window.location.href = "../../subscribe/choose"
-        return;
-    }
-
-    end_time_ind++;
-    if (end_time_ind >= end_times.length) {
-        end_time_ind = 0;
-    }
-
-    element_choose_time_button.innerHTML = end_times[end_time_ind];
+    return document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
 }
 
 function plus_next_inp(w) {
@@ -156,7 +124,6 @@ String.prototype.toHHMMSS = function () {
     return hours + ":" + minutes + ":" + seconds;
 };
 
-
 async function post_statistics() {
     try {
         const apiUrl =
@@ -165,34 +132,32 @@ async function post_statistics() {
             window.location.host +
             "/api/save_statistics";
 
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCSRFToken()
-                },
-                body: JSON.stringify(
-                    {
-                        "time": timer,
-                        "successes": success_counter,
-                        "mistakes": mistake_counter,
-                        "mistake_words": mistake_words
-                    }
-                )
-            });
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCSRFToken(),
+            },
+            body: JSON.stringify({
+                time: timer,
+                successes: success_counter,
+                mistakes: mistake_counter,
+                mistake_words: mistake_words,
+            }),
+        });
 
         if (!response.ok) {
-            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+            throw new Error("Сеть ответила с ошибкой: " + response.status);
         }
 
         const responseData = await response.json();
         return responseData;
     } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
         throw error;
     }
 }
-
 
 function get_next_word_api() {
     return new Promise((resolve, reject) => {
@@ -205,6 +170,7 @@ function get_next_word_api() {
 
         const xhr = new XMLHttpRequest();
         xhr.open("GET", apiUrl, true);
+        xhr.withCredentials = true;
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -259,11 +225,16 @@ async function init_words_queue() {
             "//" +
             window.location.host +
             "/api/get_random_words/" +
-            task + "/" + 20;
+            task +
+            "/" +
+            20;
 
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            credentials: "include",
+        });
         if (!response.ok) {
-            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+            throw new Error("Сеть ответила с ошибкой: " + response.status);
         }
         const data = await response.json();
 
@@ -274,28 +245,30 @@ async function init_words_queue() {
             console.error('Ключ "words" отсутствует или не является массивом');
         }
     } catch (error) {
-        console.error('Ошибка при получении данных:', error);
+        console.error("Ошибка при получении данных:", error);
     }
 }
 
-async function get_user_sub(){
+async function get_user_sub() {
     try {
         const apiUrl =
             window.location.protocol +
             "//" +
             window.location.host +
-            "/api/get_user_sub"
+            "/api/get_user_sub";
 
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            credentials: "include",
+        });
         if (!response.ok) {
-            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+            throw new Error("Сеть ответила с ошибкой: " + response.status);
         }
         const data = await response.json();
 
         is_sub = data.sub;
-
     } catch (error) {
-        console.error('Ошибка при получении данных:', error);
+        console.error("Ошибка при получении данных:", error);
     }
 }
 
@@ -366,7 +339,7 @@ function highlight_incorrect() {
         completed.slice(-(len - ind) + 1);
 }
 
-function start() {
+export function start() {
     element_start.style.display = "none";
 
     element_completed.style.display = "block";
@@ -389,7 +362,7 @@ function timer_tick() {
 }
 
 // основные функции при вводе
-function key_backspace() {
+export function key_backspace() {
     if (current_word.length < 1) {
         console.log("BF");
         return;
@@ -405,7 +378,7 @@ function key_backspace() {
     return;
 }
 
-function key_space(key) {
+export function key_space(key) {
     if (current_word.length < words_queue[0]["Word"].length) {
         console.log("space_barrier"); // не дает перейти на следующее слово пока не написано текущее
         return;
@@ -447,10 +420,10 @@ function key_space(key) {
     return;
 }
 
-function input(key) {
+export function input(key) {
     if (
         (key != words_queue[0]["Pass"][current_word.length] &&
-        words_queue[0]["Pass"][current_word.length] != ".") ||
+            words_queue[0]["Pass"][current_word.length] != ".") ||
         (!isLetter(key) && key != ".")
     ) {
         return;
@@ -462,33 +435,5 @@ function input(key) {
     element_completed.innerHTML = completed;
     update_next_inp_front();
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
-    return;
-}
-
-// контроллер ¯\_(ツ)_/¯
-window.addEventListener("keydown", controller);
-
-function controller(e) {
-    const key = e.key.toLowerCase();
-
-    if (!is_started) {
-        if (key == " ") {
-            start();
-        }
-        return;
-    }
-
-    input(key);
-
-    if (key == " ") {
-        key_space(key);
-        return;
-    }
-
-    if (e.code == "Backspace") {
-        key_backspace();
-        return;
-    }
-
     return;
 }
