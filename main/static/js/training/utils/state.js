@@ -1,10 +1,7 @@
-// этот код не будет работает для н и нн ((((
-
 import { end_times, end_time_ind } from "../interactive.js";
 
 // инициализация констант и переменных
 
-// получаемые данные
 export let is_sub = false; // куплена ли подписка
 
 let task = window.location.href.slice(-2, -1) - 0;
@@ -12,7 +9,6 @@ if (task != 9) {
     task += 10;
 }
 console.log(task);
-
 
 // init
 const char_amount_const = 500;
@@ -49,7 +45,6 @@ init_words_queue().then(() => {
     });
 });
 
-
 let mistake_counter = 0;
 let success_counter = 0;
 let timer = 0; // seconds
@@ -61,24 +56,25 @@ function redirect() {
     const select = document.getElementById("numbers-select");
     const val = select.value;
 
-    console.log(val)
+    console.log(val);
 
     window.location.href = "../" + val;
 }
-window.onload = function() {
+window.onload = function () {
     const select = document.getElementById("numbers-select");
     select.value = "task" + task;
-}
-window.onbeforeunload = function() {
+};
+window.onbeforeunload = function () {
     if (timer == 0 || success_counter + mistake_counter == 0) {
         return;
     }
     post_statistics();
-}
-
+};
 
 function getCSRFToken() {
-    return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    return document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
 }
 
 function plus_next_inp(w) {
@@ -137,7 +133,6 @@ String.prototype.toHHMMSS = function () {
     return hours + ":" + minutes + ":" + seconds;
 };
 
-
 async function post_statistics() {
     try {
         const apiUrl =
@@ -146,35 +141,32 @@ async function post_statistics() {
             window.location.host +
             "/api/save_statistics";
 
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCSRFToken()
-                },
-                body: JSON.stringify(
-                    {
-                        "time": timer,
-                        "successes": success_counter,
-                        "mistakes": mistake_counter,
-                        "mistake_words": mistake_words
-                    }
-                )
-            });
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCSRFToken(),
+            },
+            body: JSON.stringify({
+                time: timer,
+                successes: success_counter,
+                mistakes: mistake_counter,
+                mistake_words: mistake_words,
+            }),
+        });
 
         if (!response.ok) {
-            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+            throw new Error("Сеть ответила с ошибкой: " + response.status);
         }
 
         const responseData = await response.json();
         return responseData;
     } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
         throw error;
     }
 }
-
 
 function get_next_word_api() {
     return new Promise((resolve, reject) => {
@@ -242,17 +234,16 @@ async function init_words_queue() {
             "//" +
             window.location.host +
             "/api/get_random_words/" +
-            task + "/" + 20;
+            task +
+            "/" +
+            20;
 
-        const response = await fetch(
-            apiUrl,
-            {
-                method: "GET",
-                credentials: "include"
-            }
-        );
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            credentials: "include",
+        });
         if (!response.ok) {
-            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+            throw new Error("Сеть ответила с ошибкой: " + response.status);
         }
         const data = await response.json();
 
@@ -263,34 +254,30 @@ async function init_words_queue() {
             console.error('Ключ "words" отсутствует или не является массивом');
         }
     } catch (error) {
-        console.error('Ошибка при получении данных:', error);
+        console.error("Ошибка при получении данных:", error);
     }
 }
 
-async function get_user_sub(){
+async function get_user_sub() {
     try {
         const apiUrl =
             window.location.protocol +
             "//" +
             window.location.host +
-            "/api/get_user_sub"
+            "/api/get_user_sub";
 
-        const response = await fetch(
-            apiUrl,
-            {
-                method: "GET",
-                credentials: "include"
-            }
-        );
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            credentials: "include",
+        });
         if (!response.ok) {
-            throw new Error('Сеть ответила с ошибкой: ' + response.status);
+            throw new Error("Сеть ответила с ошибкой: " + response.status);
         }
         const data = await response.json();
 
         is_sub = data.sub;
-
     } catch (error) {
-        console.error('Ошибка при получении данных:', error);
+        console.error("Ошибка при получении данных:", error);
     }
 }
 
@@ -445,7 +432,7 @@ export function key_space(key) {
 export function input(key) {
     if (
         (key != words_queue[0]["Pass"][current_word.length] &&
-        words_queue[0]["Pass"][current_word.length] != ".") ||
+            words_queue[0]["Pass"][current_word.length] != ".") ||
         (!isLetter(key) && key != ".")
     ) {
         return;
@@ -459,5 +446,3 @@ export function input(key) {
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
     return;
 }
-
-
