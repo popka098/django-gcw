@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -10,11 +9,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Далее полученное значение подставляется в соответствующую переменную
 
-load_dotenv(f"{BASE_DIR}/.env")
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
-
+SECRET_KEY = "o*bv(y6)dnj0fh20)d3=@naku0n5&)-+(^$u$^zck0kmfoixc1"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -25,9 +21,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
-
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "487307331145-ck95tdae6qiu1lqemj3r8qkeed22mf4j.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
 LOGIN_URL = '/auth/login/google-oauth2/'
 
 LOGIN_REDIRECT_URL = '/'
