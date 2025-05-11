@@ -10,7 +10,6 @@ if (task != 9) {
 }
 console.log(task);
 
-// init
 const char_amount_const = 500;
 
 let element_completed = document.getElementById("completed"); // элемент с пройденными словами
@@ -52,14 +51,6 @@ let timerID = 0;
 
 // вспомогательные функции
 
-function redirect() {
-    const select = document.getElementById("numbers-select");
-    const val = select.value;
-
-    console.log(val);
-
-    window.location.href = "../" + val;
-}
 window.onload = function () {
     const select = document.getElementById("numbers-select");
     select.value = "task" + task;

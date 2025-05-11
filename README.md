@@ -3,39 +3,56 @@
 ### Проект доступен по ссылке https://goose-cycle.ru
 
 ### Инструкция по начальной настройке проекта:
+
 1. Обновить pip и установить все необходимое:
-   ```bash
-   pip install --upgrade pip
-   pip install -r requirements.txt
-   ```
+    ```bash
+    pip install --upgrade pip
+    pip install -r requirements.txt
+    ```
 2. Синхронизировать проект:
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   python manage.py collectstatic
-   ```
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py collectstatic
+    ```
 3. Создать суперпользователя
-   ```bash
-   python manage.py createsuperuser
-   ```
+    ```bash
+    python manage.py createsuperuser
+    ```
+4. Создать .env файл в корне проекта со следующим содержимым:
+    ```
+    SECRET_KEY=o*bv(y6)dnj0fh20)d3=@naku0n5&)-+(^$u$^zck0kmfoixc1
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=487307331145-ck95tdae6qiu1lqemj3r8qkeed22mf4j.apps.googleusercontent.com
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=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
+    ```
 
 ### Добавление слов в базу данных:
+
 1. Пройти по [ссылке](https://docs.google.com/spreadsheets/d/1YbYf7SLtEpUzzKlDy3BGpTMENcaaVtO6DuReRQio6NU/edit?usp=sharing)
-и скачать таблицы *Task9*, *Task10*, *Task11*, *Task12* в формате **csv**
+   и скачать таблицы _Task9_, _Task10_, _Task11_, _Task12_ в формате **csv**
+
 ---
+
 ![tables](.readme_media/tables.png)
 ![files](.readme_media/files.png)
 ![download_csv](.readme_media/download_csv.png)
+
 ---
-2. Зайти в админ-панель */admin* под аккаунтом, который был создан командой createsuperuser
+
+2. Зайти в админ-панель _/admin_ под аккаунтом, который был создан командой createsuperuser
+
 ---
-![admin](.readme_media/admin.png)
----
+
+## ![admin](.readme_media/admin.png)
+
 3. Загрузить таблицы соответственно моделям
+
 ---
+
 ![models](.readme_media/models.png)
 ![import](.readme_media/import.png)
 ![import2](.readme_media/import2.png)
 ![import3](.readme_media/import3.png)
 ![confirm](.readme_media/confirm.png)
+
 ---
