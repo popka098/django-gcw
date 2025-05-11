@@ -19,12 +19,6 @@
     ```bash
     python manage.py createsuperuser
     ```
-4. Создать .env файл в корне проекта со следующим содержимым:
-    ```
-    SECRET_KEY=o*bv(y6)dnj0fh20)d3=@naku0n5&)-+(^$u$^zck0kmfoixc1
-    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=487307331145-ck95tdae6qiu1lqemj3r8qkeed22mf4j.apps.googleusercontent.com
-    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=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
-    ```
 
 ### Добавление слов в базу данных:
 
