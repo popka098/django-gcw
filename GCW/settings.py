@@ -15,12 +15,7 @@ SECRET_KEY = "o*bv(y6)dnj0fh20)d3=@naku0n5&)-+(^$u$^zck0kmfoixc1"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'goose-cycle.ru',
-    'www.goose-cycle.ru',
-    '95.163.223.131',
-    '192.168.0.100',
-]
+ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',

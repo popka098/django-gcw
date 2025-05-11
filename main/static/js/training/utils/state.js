@@ -1,73 +1,11 @@
-
-// === Command Pattern Implementation ===
-
-// Базовый класс команды
-class Command {
-    execute() {}
-}
-
-// Команда запуска
-class StartCommand extends Command {
-    execute() {
-        start();
-    }
-}
-
-// Команда пробела
-class SpaceCommand extends Command {
-    execute() {
-        key_space(" ");
-    }
-}
-
-// Команда backspace
-class BackspaceCommand extends Command {
-    execute() {
-        key_backspace();
-    }
-}
-
-// Команда ввода (по умолчанию)
-class InputCommand extends Command {
-    constructor(key) {
-        super();
-        this.key = key;
-    }
-
-    execute() {
-        input(this.key);
-    }
-}
-
-// Менеджер команд
-class CommandManager {
-    constructor() {
-        this.commands = new Map();
-    }
-
-    register(key, command) {
-        this.commands.set(key, command);
-    }
-
-    execute(key, fallback) {
-        if (this.commands.has(key)) {
-            this.commands.get(key).execute();
-        } else if (fallback) {
-            fallback();
-        }
-    }
-}
-
-const commandManager = new CommandManager();
-
-// === End of Command Pattern Setup ===
-
 // этот код не будет работает для н и нн ((((
+
+import { end_times, end_time_ind } from "../interactive.js";
 
 // инициализация констант и переменных
 
 // получаемые данные
-let is_sub = false; // куплена ли подписка
+export let is_sub = false; // куплена ли подписка
 
 let task = window.location.href.slice(-2, -1) - 0;
 if (task != 9) {
@@ -83,12 +21,10 @@ let element_completed = document.getElementById("completed"); // элемент 
 let element_next = document.getElementById("next"); // элемент с предстоящими словами
 let element_start = document.getElementById("start"); // элемент с надписью Press space to start
 let element_timer = document.getElementById("timer");
-let element_choose_time_button = document.getElementById("choose_time_button");
-
 element_completed.style.display = "none";
 element_next.style.display = "none";
 
-let is_started = false;
+export let is_started = false;
 
 let words_queue = []; // очередь слов
 let completed = ""; // все напечатанное
@@ -118,14 +54,14 @@ let mistake_counter = 0;
 let success_counter = 0;
 let timer = 0; // seconds
 let timerID = 0;
-let end_times = [120, 180, 300, 600];
-let end_time_ind = 0;
 
 // вспомогательные функции
 
 function redirect() {
     const select = document.getElementById("numbers-select");
     const val = select.value;
+
+    console.log(val)
 
     window.location.href = "../" + val;
 }
@@ -143,25 +79,6 @@ window.onbeforeunload = function() {
 
 function getCSRFToken() {
     return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-}
-
-
-function change_time_end() {
-    if (is_started) {
-        return
-    }
-
-    if (!is_sub) {
-        window.location.href = "../../subscribe/choose";
-        return;
-    }
-
-    end_time_ind++;
-    if (end_time_ind >= end_times.length) {
-        end_time_ind = 0;
-    }
-
-    element_choose_time_button.innerHTML = end_times[end_time_ind];
 }
 
 function plus_next_inp(w) {
@@ -444,7 +361,7 @@ function highlight_incorrect() {
         completed.slice(-(len - ind) + 1);
 }
 
-function start() {
+export function start() {
     element_start.style.display = "none";
 
     element_completed.style.display = "block";
@@ -467,7 +384,7 @@ function timer_tick() {
 }
 
 // основные функции при вводе
-function key_backspace() {
+export function key_backspace() {
     if (current_word.length < 1) {
         console.log("BF");
         return;
@@ -483,7 +400,7 @@ function key_backspace() {
     return;
 }
 
-function key_space(key) {
+export function key_space(key) {
     if (current_word.length < words_queue[0]["Word"].length) {
         console.log("space_barrier"); // не дает перейти на следующее слово пока не написано текущее
         return;
@@ -525,7 +442,7 @@ function key_space(key) {
     return;
 }
 
-function input(key) {
+export function input(key) {
     if (
         (key != words_queue[0]["Pass"][current_word.length] &&
         words_queue[0]["Pass"][current_word.length] != ".") ||
@@ -543,35 +460,4 @@ function input(key) {
     return;
 }
 
-// контроллер ¯\_(ツ)_/¯
-window.addEventListener("keydown", controller);
 
-function controller(e) {
-    const key = e.key.toLowerCase();
-
-    if (!is_started) {
-        if (key === " ") {
-            commandManager.execute("start");
-        }
-        return;
-    }
-
-    if (key === " ") {
-        commandManager.execute("space");
-        return;
-    }
-
-    if (e.code === "Backspace") {
-        commandManager.execute("backspace");
-        return;
-    }
-
-    // По умолчанию — передаём в InputCommand
-    const inputCmd = new InputCommand(key);
-    inputCmd.execute();
-}
-
-// === Регистрация команд ===
-commandManager.register("start", new StartCommand());
-commandManager.register("space", new SpaceCommand());
-commandManager.register("backspace", new BackspaceCommand());
