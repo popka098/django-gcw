@@ -1,3 +1,67 @@
+
+// === Command Pattern Implementation ===
+
+// Базовый класс команды
+class Command {
+    execute() {}
+}
+
+// Команда запуска
+class StartCommand extends Command {
+    execute() {
+        start();
+    }
+}
+
+// Команда пробела
+class SpaceCommand extends Command {
+    execute() {
+        key_space(" ");
+    }
+}
+
+// Команда backspace
+class BackspaceCommand extends Command {
+    execute() {
+        key_backspace();
+    }
+}
+
+// Команда ввода (по умолчанию)
+class InputCommand extends Command {
+    constructor(key) {
+        super();
+        this.key = key;
+    }
+
+    execute() {
+        input(this.key);
+    }
+}
+
+// Менеджер команд
+class CommandManager {
+    constructor() {
+        this.commands = new Map();
+    }
+
+    register(key, command) {
+        this.commands.set(key, command);
+    }
+
+    execute(key, fallback) {
+        if (this.commands.has(key)) {
+            this.commands.get(key).execute();
+        } else if (fallback) {
+            fallback();
+        }
+    }
+}
+
+const commandManager = new CommandManager();
+
+// === End of Command Pattern Setup ===
+
 // этот код не будет работает для н и нн ((((
 
 // инициализация констант и переменных
@@ -43,12 +107,12 @@ init_words_queue().then(() => {
     }
     element_next.innerHTML = next_input_view.slice(0, char_amount_const);
     element_completed.innerHTML = completed;
+
+    get_user_sub().then(() => {
+        console.log(is_sub);
+    });
 });
 
-
-get_user_sub().then(() => {
-    console.log(is_sub);
-});
 
 let mistake_counter = 0;
 let success_counter = 0;
@@ -486,23 +550,28 @@ function controller(e) {
     const key = e.key.toLowerCase();
 
     if (!is_started) {
-        if (key == " ") {
-            start();
+        if (key === " ") {
+            commandManager.execute("start");
         }
         return;
     }
 
-    input(key);
-
-    if (key == " ") {
-        key_space(key);
+    if (key === " ") {
+        commandManager.execute("space");
         return;
     }
 
-    if (e.code == "Backspace") {
-        key_backspace();
+    if (e.code === "Backspace") {
+        commandManager.execute("backspace");
         return;
     }
 
-    return;
+    // По умолчанию — передаём в InputCommand
+    const inputCmd = new InputCommand(key);
+    inputCmd.execute();
 }
+
+// === Регистрация команд ===
+commandManager.register("start", new StartCommand());
+commandManager.register("space", new SpaceCommand());
+commandManager.register("backspace", new BackspaceCommand());
