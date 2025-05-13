@@ -5,7 +5,8 @@
 {% block content %}
 <div class="profile-container">
     <h1 class="profile-title">Ваш профиль</h1>
-    
+    <a href="{% url 'edit_profile' %}" class="edit-profile-btn">Редактировать</a>
+
     <div class="profile-info">
         <div class="info-item">
             <span class="info-label">Логин:</span>
@@ -84,6 +85,19 @@
     .description-block .info-value {
         margin-top: 0.5rem;
         white-space: pre-wrap;
+    }
+
+    .edit-profile-btn {
+        padding: 0.5rem 1rem;
+        background: #4CAF50;
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    .edit-profile-btn:hover {
+        background: #45a049;
     }
 </style>
 {% endblock %}

@@ -28,4 +28,16 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Пароли не совпадают')
         return cd['password2']
 
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
 
+class ProfileExtraForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['description']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4}),
+        }
+        labels = {'description': 'Описание'}

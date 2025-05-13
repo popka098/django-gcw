@@ -6,7 +6,7 @@ from main.models import Profile
 from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.models import User
 
-from main.forms import LoginForm, UserRegistrationForm
+from main.forms import LoginForm, UserRegistrationForm, ProfileEditForm, ProfileExtraForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -85,6 +85,30 @@ def profile_page(request):
     context = gen_base_context(request, 'profile')
     return render(request, 'pages/accounts/profile.html', context)
 
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        user_form = ProfileEditForm(request.POST, instance=request.user)
+        profile_form = ProfileExtraForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.profile
+        )
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Профиль успешно обновлен')
+            return redirect('profile')
+    else:
+        user_form = ProfileEditForm(instance=request.user)
+        profile_form = ProfileExtraForm(instance=request.user.profile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+    return render(request, 'pages/accounts/edit_profile.html', context)
 
 def logout_view(request):
     logout(request)
