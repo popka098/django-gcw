@@ -1,5 +1,89 @@
 {% extends "base/base.html" %}
-{% block title %}Profile{% endblock %}
+
+{% block title %}Профиль{% endblock %}
+
 {% block content %}
-    <p> Привет, {{user.first_name}} {{user.last_name}}</p>
+<div class="profile-container">
+    <h1 class="profile-title">Ваш профиль</h1>
+    
+    <div class="profile-info">
+        <div class="info-item">
+            <span class="info-label">Логин:</span>
+            <span class="info-value">{{ user.username }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="info-label">Имя:</span>
+            <span class="info-value">{{ user.first_name|default:"Не указано" }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="info-label">Фамилия:</span>
+            <span class="info-value">{{ user.last_name|default:"Не указана" }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="info-label">Email:</span>
+            <span class="info-value">{{ user.email|default:"Не указан" }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="info-label">Дата регистрации:</span>
+            <span class="info-value">{{ user.profile.registration_date|date:"d.m.Y H:i" }}</span>
+        </div>
+
+        <div class="info-item description-block">
+            <span class="info-label">Описание:</span>
+            <div class="info-value">
+                {{ user.profile.description|default:"Пока нет описания"|linebreaks }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .profile-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .profile-title {
+        text-align: center;
+        color: #333;
+        margin-bottom: 1.5rem;
+    }
+
+    .info-item {
+        margin: 1rem 0;
+        padding: 0.8rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .info-label {
+        font-weight: 500;
+        color: #666;
+    }
+
+    .info-value {
+        color: #222;
+    }
+
+    .description-block {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .description-block .info-value {
+        margin-top: 0.5rem;
+        white-space: pre-wrap;
+    }
+</style>
 {% endblock %}

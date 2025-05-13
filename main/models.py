@@ -4,16 +4,15 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from django.core.validators import RegexValidator
-
-import PIL
-import os
-import uuid
 
 class Profile(models.Model):
-    """
-    Доп. таблица к пользователю
-    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    email = models.EmailField(blank=True)
+    registration_date = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True)
+
     def path_file(instance, filename):
         """
         Функция, которая переименовываает файл на уникальный индентификатор
@@ -26,24 +25,11 @@ class Profile(models.Model):
         new_filename = f"{uniqe_id}.{ext}"
         return os.path.join("avatars/", new_filename)
 
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
-    icon = models.ImageField(null=True,
-                             blank=True, 
-                             upload_to=path_file
-                            )
-
-    telegram = models.CharField(null=True, 
-                                blank=True, 
-                                #unique=True,
-                                max_length=64
-                               )
-    
-    phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
-    phone = models.CharField(validators=[phoneNumberRegex], 
-                             max_length=16, 
-                             #unique=True, 
-                             null=True, 
-                             blank=True, 
-                            )
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    instance.profile.save()
