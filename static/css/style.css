@@ -48,6 +48,8 @@
     transform: translate(-50%, -50%);
     font-weight: 600;
     font-size: 17px;
+    color: #262626;
+    text-decoration: none;
 }
 .keyboard-text {
     position: absolute;
@@ -56,6 +58,8 @@
     transform: translate(-50%, -50%);
     font-weight: 600;
     font-size: 17px;
+    color: #262626;
+    text-decoration: none;
 }
 .statistic-text {
     position: absolute;
@@ -64,6 +68,8 @@
     transform: translate(-50%, -50%);
     font-weight: 600;
     font-size: 17px;
+    color: #262626;
+    text-decoration: none;
 }
 .theory-text {
     position: absolute;
@@ -72,6 +78,8 @@
     transform: translate(-50%, -50%);
     font-weight: 600;
     font-size: 17px;
+    color: #262626;
+    text-decoration: none;
 }
 .main-body {
     width: 100%;
