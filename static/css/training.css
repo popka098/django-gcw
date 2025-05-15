@@ -1,0 +1,174 @@
+/*
+
+
+
+*/
+body {
+    overflow-x: hidden;
+    background-color: #f2eee5;
+}
+
+
+.container {
+    display: flex;
+    width: 100%; /* Ширина контейнера на весь экран */
+    position: relative;
+    font-weight: 600;
+    font-size: 38px;
+    height: 300px;
+}
+.space {
+    top: 0%;
+    left: -57.049%;
+    display: flex;
+    width: 1%;
+    position: relative;
+    font-weight: 600;
+    font-size: 38px;
+    height: 200px;
+    color: #F79A23;
+}
+#completed {
+    position: absolute;
+    left: 50%; /* Сдвигаем влево на 50% ширины контейнера */
+    transform: translateX(-100%); /* Сдвигаем влево на ширину элемента */
+    white-space: pre; /* Запрещаем перенос текста */
+
+}
+#next {
+    position: absolute;
+    right: 50%; /* Сдвигаем вправо на 50% ширины контейнера */
+    transform: translateX(100%); /* Сдвигаем вправо на ширину элемента */
+    white-space: pre; /* Запрещаем перенос текста */
+}
+
+#start {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.time-button-text {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(38, 38, 38, 0);
+    font-weight: 600;
+    border: 0;
+    color: #F79A23;
+}
+
+.icon-time-button {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(38, 38, 38, 0);
+    border: 0;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.main-settings {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background-color: rgba(38, 38, 38, 0.14);
+    width: 500px;
+    height: 56px;
+    font-size: 28px;
+
+}
+.line-settings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background-color: #262626;
+    width: 5px;
+    height: 45px;
+
+}
+.timer {
+    position: absolute;
+    top: 60%;
+    left: 44.4%;
+    color: #262626;
+    font-size: 38px;
+}
+
+.number-list {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(38, 38, 38, 0);
+    border-radius: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    border: 0;
+    text-color: #262626;
+    cursor: pointer;
+}
+
+.icon-number {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(38, 38, 38, 0);
+    border: 0;
+    width: 45px;
+    height: 45px;
+}
+
+.number-select {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(38, 38, 38, 0.14);
+    border-radius: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    border: 1;
+    text-color: #262626;
+    color: #262626;
+    cursor: pointer;
+}
+
+.icon-retry-button {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(38, 38, 38, 0);
+    border: 0;
+    width: 60px;
+    height: 50px;
+    cursor: pointer;
+}
+.statistic-button {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F79A23;
+    border: 0;
+    border-radius: 10px;
+    width: 300px;
+    height: 60px;
+    font-size: 38px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#choose_time_button {
+    margin: auto;
+}
