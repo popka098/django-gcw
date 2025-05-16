@@ -10,6 +10,12 @@
     <div class="main-body">
         <div class="main-subcribe">Подписки</div>
         <form method="POST" class="period-form">
+            <div class="about-subcribe"><span class="span"> Преимущества подписки</span><br>
+                <span class="span">1. </span>Доступ к теории по всем заданиям<br><br>
+                <span class="span">2. </span>Возможность выбирать время тренировки<br><br>
+                <span class="span">3. </span>Доступ к просмотру ошибок в попытке<br><br>
+                <span class="span">4. </span>Неограниченное количество сохраняемой статистики</div>
+            <div class="period-data-form"></div>
         {% csrf_token %}
             <input class="radio-button-one-m" type="radio" name="period" id="one" value="month" checked>
             <label class="radio-button-one-m-text" for="one">Ежемесячно</label>
