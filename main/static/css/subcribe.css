@@ -16,8 +16,8 @@
 }
 .subcribe-button {
     position: absolute;
-    top: 90%;
-    left: 50%;
+    top: 85%;
+    left: 30%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     background-color: #f79a23;
@@ -29,7 +29,7 @@
 .radio-button-one-m {
     position: absolute;
     top: 10%;
-    left: 25%;
+    left: 15%;
     width: 35px;
     height: 35px;
     accent-color: #f79a23;
@@ -37,48 +37,64 @@
 .radio-button-one-m-text {
     position: absolute;
     top: 9.5%;
-    left: 35%;
+    left: 25%;
 }
 .radio-button-three-m {
     position: absolute;
-    top: 30%;
-    left: 25%;
+    top: 25%;
+    left: 15%;
     width: 35px;
     height: 35px;
     accent-color: #f79a23;
 }
 .radio-button-three-m-text {
     position: absolute;
-    top: 29.5%;
-    left: 35%;
+    top: 24.5%;
+    left: 25%;
 }
 .radio-button-year {
     position: absolute;
-    top: 50%;
-    left: 25%;
+    top: 40%;
+    left: 15%;
     width: 35px;
     height: 35px;
     accent-color: #f79a23;
 }
 .radio-button-year-text {
     position: absolute;
-    top: 49.5%;
-    left: 35%;
+    top: 39.5%;
+    left: 25%;
 }
 .price-text {
     position: absolute;
-    top: 69.5%;
-    left: 20%;
+    top: 60%;
+    left: 15%;
+}
+.about-subcribe {
+    position: absolute;
+    top: 5%;
+    left: 55%;
 }
 .period-form {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     background-color: rgba(38, 38, 38, 0.14);
-    width: 400px;
-    height: 500px;
+    width: 900px;
+    height: 600px;
+    font-weight: 600;
+}
+.period-data-form {
+    position: absolute;
+    top: 39%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background-color: rgba(38, 38, 38, 0.14);
+    width: 300px;
+    height: 400px;
     font-weight: 600;
 }
 .span {
