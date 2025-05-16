@@ -3,39 +3,31 @@
 
     <header class="header">
     <a href="{% url 'index' %}"><img class="logo-icon" alt="" src="{% static 'img/login/Frame 2 1.png' %}"></a>
-    <div class="profile-text">профиль</div>
-    <div class="keyboard-text">тренировка</div>
-    <div class="statistic-text">статистика</div>
-    <div class="theory-text">учебник</div>
+    <a class="keyboard-text" href="{% url 'task9' %}">тренировка</a>
+    <a class="statistic-text" href="{% url 'statistics' %}">статистика</a>
+    <a class="theory-text" href="{% url 'theory' %}">учебник</a>
     <a href="{% url 'theory' %}"><img class="layers-icon" alt="" src="{% static 'img/login/Layers.svg' %}"></a>
     <a href="{% url 'statistics' %}"><img class="award-icon" alt="" src="{% static 'img/login/Award.svg' %}"></a>
     <a href="{% url 'task9' %}"><img class="keyboard-icon" alt="" src="{% static 'img/login/keyboard.svg' %}"></a>
 
 
-    <ul>
-        {% block menu %}
-            {% for item in menu %}
-                <li>
-                    <a href="{% url item.url_name %}">{{ item.name }}</a>
-                </li>
-            {% endfor %}
-        {% endblock %}
-    </ul>
 
 
-    <ul>
+
+
         {% block usermenu %}
 
-            <li>
                 {% if request.user.is_authenticated %}
+                <a class="profile-text" href="{% url 'profile' %}">профиль</a>
                 <a href="{% url 'profile' %}"><img class="account-circle-icon" alt="" src="{% static 'img/login/account_circle.svg' %}" id="accountCircleIcon"></a>
                  {% else %}
+                <a class="profile-text" href="{% url 'login' %}">профиль</a>
                 <a href="{% url 'login' %}"><img class="account-circle-icon" alt="" src="{% static 'img/login/account_circle.svg' %}" id="accountCirclecon"></a>
                  {% endif %}
 
-            </li>
+
         {% endblock %}
-    </ul>
+
     </header>
 
 </nav>

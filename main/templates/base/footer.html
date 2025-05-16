@@ -1,0 +1,12 @@
+{% load static %}
+<nav>
+<footer class="footer">
+    {% block footer %}
+        <span class="footer-data-text">&copy; ШП, {% now "Y" %}</span>
+        <span class="footer-name-text">GOOSE CYCLE WORDS</span>
+        <span class="footer-gmail-text">Помощь: ankar.058.89@gmail.com</span>
+        <a class="footer-pc-text" href="{% static 'policy/GCW-policy.txt' %}" download>Политика конфиденциальности</a>
+    {% endblock %}
+</footer>
+
+</nav>
