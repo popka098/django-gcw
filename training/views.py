@@ -50,6 +50,7 @@ def statistics_page(request: WSGIRequest):
     context = {}
     stat = Stats.objects.get(user=request.user)
     attempts = Atts.objects.filter(user=request.user)
+    attempts = attempts.order_by("id").reverse()
     context = {
         "time_all" : stat.time,
         "success_all" : stat.successes,
