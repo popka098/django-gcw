@@ -215,6 +215,7 @@ body{
     background-color: #F2EEE5;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 .header {
     position: fixed;
@@ -226,12 +227,12 @@ body{
 }
 .footer {
     background-color: D5D1CA;
-    position:relative;
-    left:0px;
-    bottom:0px;
-    height:100px;
-    width:100%;
-    z-index: 3;
+    position: absolute;
+    top: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
 }
 .footer-data-text {
     position:absolute;
