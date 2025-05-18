@@ -19,7 +19,7 @@ if [ -d "docs/build/html" ]; then
     ls -la docs/build/html/
 
     # Перемещаем всё (включая скрытые файлы) с помощью rsync
-    rsync -a docs/build/html/ public/documentation/
+    rsync -a docs/build/html/ public/
 
     echo "Moved files to public directory"
     ls -la public/
