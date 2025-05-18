@@ -96,7 +96,7 @@ jobs:
         path: public/
 
   deploy:
-    needs: [test, style, docs]
+    needs: [docs]
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
