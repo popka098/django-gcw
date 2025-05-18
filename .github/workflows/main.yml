@@ -93,7 +93,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: documentation
-        path: public/
+        path: docs/_build/html/
 
   deploy:
     needs: [test, style, docs]
