@@ -45,7 +45,7 @@ cat <<EOF > public/index.html
   <div class="links">
     <a href="documentation/index.html" target="_blank">📄 Документация</a>
     <a href="coverage-report/index.html" target="_blank">✅ Покрытие кода (Coverage)</a>
-    <a href="pylint-report/index.html" target="_blank">🧪 Статический анализ (Pylint)</a>
+    <a href="pylint-report/pylint.html" target="_blank">🧪 Статический анализ (Pylint)</a>
   </div>
 </body>
 </html>
