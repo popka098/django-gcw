@@ -1,6 +1,7 @@
 # Проект "GooseCycleWords"
 
 ### Проект доступен по ссылке https://goose-cycle.ru
+### Так же можно посмотреть pages по ссылке https://popka098.github.io/django-gcw/
 
 ### Инструкция по начальной настройке проекта:
 
