@@ -89,6 +89,11 @@ jobs:
         chmod u+x ./ci/sphinx_runner.sh
         ./ci/sphinx_runner.sh
 
+    - name: Generate index page
+      run: |
+        chmod u+x ./ci/generate_index.sh
+        ./ci/generate_index.sh
+
     - name: Upload documentation
       uses: actions/upload-artifact@v4
       with:
