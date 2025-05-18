@@ -1,0 +1,32 @@
+name: Style Check
+
+on:
+  workflow_call:
+
+jobs:
+  style:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install pylint dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ci/pylint_requirements.txt
+
+    - name: Run pylint
+      run: |
+        chmod u+x ./ci/pylint_runner.sh
+        ./ci/pylint_runner.sh
+
+    - name: Upload pylint artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: pylint-report
+        path: public/ 

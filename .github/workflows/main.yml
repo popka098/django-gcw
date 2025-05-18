@@ -8,116 +8,15 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run migrations
-      run: |
-        python manage.py makemigrations
-        python manage.py migrate
-
-    - name: Run tests with coverage
-      run: |
-        pip install coverage
-        coverage run manage.py test
-        coverage report --omit=manage.py
-        coverage html --omit=manage.py
-
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-report
-        path: htmlcov/
+    uses: ./.github/workflows/test.yml
 
   style:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-
-    - name: Install pylint dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r ci/pylint_requirements.txt
-
-    - name: Run pylint
-      run: |
-        chmod u+x ./ci/pylint_runner.sh
-        ./ci/pylint_runner.sh
-
-    - name: Upload pylint artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: pylint-report
-        path: public/
+    uses: ./.github/workflows/style.yml
 
   docs:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-
-    - name: Install sphinx dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r ci/sphinx_requirements.txt
-
-    - name: Build documentation
-      run: |
-        chmod u+x ./ci/sphinx_runner.sh
-        ./ci/sphinx_runner.sh
-
-    - name: Upload documentation
-      uses: actions/upload-artifact@v4
-      with:
-        name: documentation
-        path: public/
+    uses: ./.github/workflows/docs.yml
 
   deploy:
     needs: [test, style, docs]
     if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Download all artifacts
-      uses: actions/download-artifact@v4
-      with:
-        path: public
-
-    - name: Generate index page
-      run: |
-        chmod u+x ./ci/generate_index.sh
-        ./ci/generate_index.sh
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
-        commit_message: "Deploy documentation and reports"
-        force_orphan: true
+    uses: ./.github/workflows/deploy.yml
