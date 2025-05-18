@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Главные модели &#8212; документация sv </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Главная админка" href="main_admin.html" />
+    <link rel="prev" title="API" href="main_views_api.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>Главные модели<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<blockquote>
+<div><p>Основные модели</p>
+</div></blockquote>
+<p id="module-main.models">main models</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.models.Payments">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.models.</span></span><span class="sig-name descname"><span class="pre">Payments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.models.Payments" title="Ссылка на это определение">¶</a></dt>
+<dd><p>База данных для хранения платежей</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number</strong> – номер платежа</p></li>
+<li><p><strong>date</strong> – дата платежа</p></li>
+<li><p><strong>amount</strong> – сумма платежа</p></li>
+<li><p><strong>status</strong> – статус платежа</p></li>
+<li><p><strong>user</strong> – пользователь, совершающий платеж</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="main.models.Payments.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#main.models.Payments.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="main.models.Payments.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#main.models.Payments.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="main.models.Profile">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.models.</span></span><span class="sig-name descname"><span class="pre">Profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.models.Profile" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Доп. таблица к пользователю</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> – Пользователь</p></li>
+<li><p><strong>icon</strong> – Аватрка</p></li>
+<li><p><strong>telegram</strong> – Телеграм (без &#64;)</p></li>
+<li><p><strong>phone</strong> – Номер телефона</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="main.models.Profile.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#main.models.Profile.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="main.models.Profile.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#main.models.Profile.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.models.Profile.path_file">
+<span class="sig-name descname"><span class="pre">path_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.models.Profile.path_file" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Функция, которая переименовывает файл на уникальный идентификатор</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance</strong> – модель</p></li>
+<li><p><strong>filename</strong> – имя получаемого файла</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">sv</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main_views.html">Главные view</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main_views_api.html">API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Главные модели</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main.models.Payments"><code class="docutils literal notranslate"><span class="pre">Payments</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.models.Profile"><code class="docutils literal notranslate"><span class="pre">Profile</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main_admin.html">Главная админка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_views.html">views тренировки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_serializers.html">сериализаторы training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_models.html">модели training</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="main_views_api.html" title="предыдущая глава">API</a></li>
+      <li>Next: <a href="main_admin.html" title="следующая глава">Главная админка</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, KriptYashka.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/main_models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

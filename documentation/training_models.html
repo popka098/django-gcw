@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>модели training &#8212; документация sv </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="prev" title="сериализаторы training" href="training_serializers.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="training">
+<h1>модели training<a class="headerlink" href="#training" title="Ссылка на этот заголовок">¶</a></h1>
+<blockquote>
+<div><p>модели в training</p>
+</div></blockquote>
+<p id="module-training.models">training models</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.Atts">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">Atts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.Atts" title="Ссылка на это определение">¶</a></dt>
+<dd><p>попытка</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> – затраченное проведенное время (в секундах)</p></li>
+<li><p><strong>successes</strong> – количество правильных ответов</p></li>
+<li><p><strong>mistakes</strong> – количество ошибок</p></li>
+<li><p><strong>user</strong> – пользователь</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Atts.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#training.models.Atts.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Atts.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#training.models.Atts.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.MistakesAnswers">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">MistakesAnswers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.MistakesAnswers" title="Ссылка на это определение">¶</a></dt>
+<dd><p>ошибки</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_answer</strong> – введенный ответ</p></li>
+<li><p><strong>correct_answer</strong> – правильный ответ</p></li>
+<li><p><strong>att</strong> – попытка</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.MistakesAnswers.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#training.models.MistakesAnswers.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.MistakesAnswers.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#training.models.MistakesAnswers.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.Stats">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">Stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.Stats" title="Ссылка на это определение">¶</a></dt>
+<dd><p>статистика тренировок пользователя</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> – все проведенное время (в секундах)</p></li>
+<li><p><strong>successes</strong> – количество правильных ответов</p></li>
+<li><p><strong>mistakes</strong> – количество ошибок</p></li>
+<li><p><strong>user</strong> – пользователь</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Stats.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#training.models.Stats.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Stats.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#training.models.Stats.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.Task">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.Task" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Абстрактная модель слова для задания</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Word</strong> – Слово</p></li>
+<li><p><strong>Context_Before</strong> – Контекст перед словом</p></li>
+<li><p><strong>Pass</strong> – Слово с пропуском в формате Сл.во где . это пропуск</p></li>
+<li><p><strong>Context_After</strong> – Контекст после слова</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.Task10">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">Task10</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.Task10" title="Ссылка на это определение">¶</a></dt>
+<dd><p>слова задания 10</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task10.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#training.models.Task10.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task10.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#training.models.Task10.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.Task11">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">Task11</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.Task11" title="Ссылка на это определение">¶</a></dt>
+<dd><p>слова задания 11</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task11.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#training.models.Task11.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task11.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#training.models.Task11.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.Task12">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">Task12</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.Task12" title="Ссылка на это определение">¶</a></dt>
+<dd><p>слова задания 12</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task12.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#training.models.Task12.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task12.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#training.models.Task12.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.Task15">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">Task15</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.Task15" title="Ссылка на это определение">¶</a></dt>
+<dd><p>слова задания 15</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task15.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#training.models.Task15.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task15.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#training.models.Task15.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="training.models.Task9">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">training.models.</span></span><span class="sig-name descname"><span class="pre">Task9</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#training.models.Task9" title="Ссылка на это определение">¶</a></dt>
+<dd><p>слова задания 9</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task9.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#training.models.Task9.DoesNotExist" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="training.models.Task9.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#training.models.Task9.MultipleObjectsReturned" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">sv</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main_views.html">Главные view</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main_views_api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main_models.html">Главные модели</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main_admin.html">Главная админка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_views.html">views тренировки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_serializers.html">сериализаторы training</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">модели training</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.Atts"><code class="docutils literal notranslate"><span class="pre">Atts</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.MistakesAnswers"><code class="docutils literal notranslate"><span class="pre">MistakesAnswers</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.Stats"><code class="docutils literal notranslate"><span class="pre">Stats</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.Task10"><code class="docutils literal notranslate"><span class="pre">Task10</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.Task11"><code class="docutils literal notranslate"><span class="pre">Task11</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.Task12"><code class="docutils literal notranslate"><span class="pre">Task12</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.Task15"><code class="docutils literal notranslate"><span class="pre">Task15</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training.models.Task9"><code class="docutils literal notranslate"><span class="pre">Task9</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="training_serializers.html" title="предыдущая глава">сериализаторы training</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, KriptYashka.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/training_models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

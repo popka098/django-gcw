@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API &#8212; документация sv </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Главные модели" href="main_models.html" />
+    <link rel="prev" title="Главные view" href="main_views.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="api">
+<h1>API<a class="headerlink" href="#api" title="Ссылка на этот заголовок">¶</a></h1>
+<blockquote>
+<div><p>api для взаимодействия с js</p>
+</div></blockquote>
+<p id="module-main.views_api">main vews_api</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="main.views_api.get_all_words">
+<span class="sig-prename descclassname"><span class="pre">main.views_api.</span></span><span class="sig-name descname"><span class="pre">get_all_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WSGIRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.views_api.get_all_words" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получение всех слов</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>WSGIRequest</em>) – реквест</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – количество получемых слов (если 0 то все), defaults to 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.views_api.get_random_word">
+<span class="sig-prename descclassname"><span class="pre">main.views_api.</span></span><span class="sig-name descname"><span class="pre">get_random_word</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WSGIRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.views_api.get_random_word" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получение одного случанойго слова из задания</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>WSGIRequest</em>) – реквест</p></li>
+<li><p><strong>task</strong> (<em>int</em><em>, </em><em>optional</em>) – задание, defaults to 9</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.views_api.get_random_words">
+<span class="sig-prename descclassname"><span class="pre">main.views_api.</span></span><span class="sig-name descname"><span class="pre">get_random_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WSGIRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.views_api.get_random_words" title="Ссылка на это определение">¶</a></dt>
+<dd><p>получение нескольких случайных слов из определенного задания</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>WSGIRequest</em>) – реквест</p></li>
+<li><p><strong>task</strong> (<em>int</em><em>, </em><em>optional</em>) – задание, defaults to 9</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – количество получаемых слов (если 0 то все), defaults to 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.views_api.get_user_sub">
+<span class="sig-prename descclassname"><span class="pre">main.views_api.</span></span><span class="sig-name descname"><span class="pre">get_user_sub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WSGIRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.views_api.get_user_sub" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получение подписки пользователя</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>WSGIRequest</em>) – реквест</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.views_api.save_statistics">
+<span class="sig-prename descclassname"><span class="pre">main.views_api.</span></span><span class="sig-name descname"><span class="pre">save_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WSGIRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.views_api.save_statistics" title="Ссылка на это определение">¶</a></dt>
+<dd><p>сохранение статистики</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>WSGIRequest</em>) – реквест</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">sv</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main_views.html">Главные view</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main.views_api.get_all_words"><code class="docutils literal notranslate"><span class="pre">get_all_words()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.views_api.get_random_word"><code class="docutils literal notranslate"><span class="pre">get_random_word()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.views_api.get_random_words"><code class="docutils literal notranslate"><span class="pre">get_random_words()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.views_api.get_user_sub"><code class="docutils literal notranslate"><span class="pre">get_user_sub()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.views_api.save_statistics"><code class="docutils literal notranslate"><span class="pre">save_statistics()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main_models.html">Главные модели</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main_admin.html">Главная админка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_views.html">views тренировки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_serializers.html">сериализаторы training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_models.html">модели training</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="main_views.html" title="предыдущая глава">Главные view</a></li>
+      <li>Next: <a href="main_models.html" title="следующая глава">Главные модели</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, KriptYashka.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/main_views_api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
