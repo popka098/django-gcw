@@ -14,17 +14,16 @@ mkdir -p public
 
 echo "Created public directory"
 
-# Проверяем существование исходной директории
 if [ -d "docs/build/html" ]; then
     echo "Found docs/build/html directory"
     ls -la docs/build/html/
-    
-    # Перемещаем собранную документацию в public
-    mv docs/build/html/* public/
+
+    # Перемещаем всё (включая скрытые файлы) с помощью rsync
+    rsync -a docs/build/html/ public/
+
     echo "Moved files to public directory"
     ls -la public/
 else
     echo "Error: docs/build/html directory not found!"
     ls -la docs/build/
 fi
-
