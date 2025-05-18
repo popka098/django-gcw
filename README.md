@@ -1,5 +1,10 @@
 # Проект "GooseCycleWords"
 
+![CI](https://github.com/popka098/django-gcw/actions/workflows/main.yml/badge.svg)
+![Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen)
+![Pylint](https://img.shields.io/badge/pylint-9.4-green)
+[![Docs](https://img.shields.io/badge/docs-published-blue)](https://popka098.github.io/django-gcw/)
+
 ### Проект доступен по ссылке https://goose-cycle.ru
 ### Так же можно посмотреть pages по ссылке https://popka098.github.io/django-gcw/
 
