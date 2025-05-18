@@ -76,3 +76,5 @@ cat <<EOF > public/index.html
 </body>
 </html>
 EOF
+echo "Создали index.html:"
+ls -la public/index.html
